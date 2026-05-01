@@ -119,9 +119,9 @@
        GLASS CARD UTILITY
        ======================================== */
     .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: rgba(13, 17, 23, 0.75);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
       border: 1px solid var(--glass-border);
       border-radius: var(--border-radius);
       transition: box-shadow 0.3s ease, transform 0.3s ease;
@@ -169,6 +169,19 @@
       font-size: 2.5rem;
       font-weight: 600;
       margin-bottom: var(--space-lg);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-primary), transparent);
+      border-radius: 2px;
     }
 
     /* ========================================
@@ -219,7 +232,8 @@
       transition: color 0.3s ease;
     }
 
-    .nav__links a:hover { color: var(--green-primary); opacity: 1; }
+    .nav__links a:hover,
+    .nav__links a.active { color: var(--green-primary); opacity: 1; }
 
     .nav__hamburger {
       display: none;
@@ -597,6 +611,7 @@
     .github-graph__cell {
       aspect-ratio: 1;
       background: var(--bg-elevated);
+      border-radius: 3px;
       position: relative;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -649,6 +664,11 @@
 
     .contact__title {
       font-size: 3rem;
+    }
+
+    .contact__title::after {
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .contact__text {
@@ -730,7 +750,7 @@
        HERO SPOTLIGHT
        ======================================== */
     .hero {
-      overflow: hidden;
+      overflow: visible;
     }
 
     .hero__name {
@@ -790,7 +810,7 @@
     }
 
     .hero__glow {
-      position: absolute;
+      position: fixed;
       width: 500px;
       height: 500px;
       border-radius: 50%;
@@ -799,6 +819,7 @@
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: opacity 0.4s ease;
+      z-index: 0;
     }
 
     .hero:hover .hero__glow { opacity: 1; }
@@ -866,9 +887,32 @@
       pointer-events: none;
     }
 
-    body > *:not(.flow-canvas) {
+    body > *:not(.flow-canvas):not(.github-tooltip) {
       position: relative;
       z-index: 1;
+    }
+
+    .expertise__card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expertise__card::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, 50%);
+      left: var(--mouse-x, 50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 210, 106, 0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .expertise__card:hover::before {
+      opacity: 1;
     }
 
     .glass-pill {
@@ -878,6 +922,26 @@
     .glass-pill:hover {
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0, 210, 106, 0.15);
+    }
+
+    .contact__btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact__btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .contact__btn:hover::before {
+      left: 100%;
     }
 
     /* ========================================
@@ -931,7 +995,7 @@
 
   <!-- About -->
   <section class="section about parallax-section" id="about">
-    <div class="container about__grid reveal">
+    <div class="container about__grid glass-card reveal" style="padding: var(--space-lg);">
       <div class="about__text">
         <h2 class="section-title">About Me</h2>
         <p>I'm a Fullstack Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
@@ -1221,9 +1285,8 @@
       if (!hero || !glow) return;
 
       hero.addEventListener('mousemove', function(e) {
-        var rect = hero.getBoundingClientRect();
-        glow.style.left = (e.clientX - rect.left) + 'px';
-        glow.style.top = (e.clientY - rect.top) + 'px';
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
       });
     })();
 
@@ -1250,14 +1313,16 @@
       var canvas = document.getElementById('flowCanvas');
       if (!canvas) return;
       var ctx = canvas.getContext('2d');
-      var w, h, cols, rows;
+      var w, h;
       var scale = 20;
       var particles = [];
-      var particleCount = 280;
+      var particleCount = 180;
+      var trailLength = 24;
       var noiseZ = 0;
       var scrollInfluence = 0;
+      var mouseX = -9999, mouseY = -9999;
+      var mouseRadius = 180;
 
-      // Simplex-inspired noise via layered sine harmonics
       function noise3d(x, y, z) {
         var v = Math.sin(x * 1.2 + z * 0.3) * Math.cos(y * 0.9 + z * 0.7)
               + Math.sin(x * 0.7 - y * 1.1 + z * 0.5) * 0.5
@@ -1269,80 +1334,105 @@
       function resize() {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
-        cols = Math.ceil(w / scale) + 1;
-        rows = Math.ceil(h / scale) + 1;
+      }
+
+      function spawnParticle() {
+        var x = Math.random() * w;
+        var y = Math.random() * h;
+        return {
+          x: x,
+          y: y,
+          trail: [{x: x, y: y}],
+          speed: 0.3 + Math.random() * 0.9,
+          life: 0,
+          maxLife: 140 + Math.random() * 180,
+          hue: 145 + Math.random() * 25,
+          lightness: 30 + Math.random() * 15
+        };
       }
 
       function initParticles() {
         particles = [];
         for (var i = 0; i < particleCount; i++) {
-          particles.push({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            prevX: 0,
-            prevY: 0,
-            speed: 0.3 + Math.random() * 1.2,
-            life: Math.random() * 300,
-            maxLife: 200 + Math.random() * 200,
-            hue: 145 + Math.random() * 25,
-            lightness: 35 + Math.random() * 20
-          });
+          var p = spawnParticle();
+          p.life = Math.random() * p.maxLife * 0.5;
+          particles.push(p);
         }
       }
 
       resize();
       initParticles();
 
-      window.addEventListener('resize', function() {
-        resize();
-        initParticles();
-      });
+      window.addEventListener('resize', function() { resize(); initParticles(); });
 
       window.addEventListener('scroll', function() {
         var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         scrollInfluence = maxScroll > 0 ? (window.scrollY / maxScroll) * Math.PI * 2 : 0;
       });
 
-      function draw() {
-        ctx.fillStyle = 'rgba(13, 17, 23, 0.06)';
-        ctx.fillRect(0, 0, w, h);
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
 
-        noiseZ += 0.002;
+      document.addEventListener('mouseleave', function() {
+        mouseX = -9999;
+        mouseY = -9999;
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        noiseZ += 0.0018;
 
         for (var i = 0; i < particles.length; i++) {
           var p = particles[i];
-          p.prevX = p.x;
-          p.prevY = p.y;
 
           var nx = p.x / scale * 0.04;
           var ny = p.y / scale * 0.04;
           var angle = noise3d(nx, ny, noiseZ) * Math.PI * 4 + scrollInfluence;
 
-          p.x += Math.cos(angle) * p.speed;
-          p.y += Math.sin(angle) * p.speed;
-          p.life++;
+          var moveX = Math.cos(angle) * p.speed;
+          var moveY = Math.sin(angle) * p.speed;
 
-          var lifeFrac = p.life / p.maxLife;
-          var fadeIn = Math.min(lifeFrac * 5, 1);
-          var fadeOut = lifeFrac > 0.8 ? 1 - (lifeFrac - 0.8) / 0.2 : 1;
-          var alpha = fadeIn * fadeOut * 0.35;
-
-          if (alpha > 0.01) {
-            ctx.beginPath();
-            ctx.moveTo(p.prevX, p.prevY);
-            ctx.lineTo(p.x, p.y);
-            ctx.strokeStyle = 'hsla(' + p.hue + ', 80%, ' + p.lightness + '%, ' + alpha + ')';
-            ctx.lineWidth = 1.2;
-            ctx.stroke();
+          var dx = p.x - mouseX;
+          var dy = p.y - mouseY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseRadius && dist > 0) {
+            var force = (1 - dist / mouseRadius) * 3;
+            moveX += (dx / dist) * force;
+            moveY += (dy / dist) * force;
           }
 
-          if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20 || p.life > p.maxLife) {
-            p.x = Math.random() * w;
-            p.y = Math.random() * h;
-            p.prevX = p.x;
-            p.prevY = p.y;
-            p.life = 0;
-            p.maxLife = 200 + Math.random() * 200;
+          p.x += moveX;
+          p.y += moveY;
+          p.life++;
+
+          p.trail.push({x: p.x, y: p.y});
+          if (p.trail.length > trailLength) {
+            p.trail.shift();
+          }
+
+          var lifeFrac = p.life / p.maxLife;
+          var fadeIn = Math.min(lifeFrac * 6, 1);
+          var fadeOut = lifeFrac > 0.7 ? 1 - (lifeFrac - 0.7) / 0.3 : 1;
+          var baseAlpha = fadeIn * fadeOut * 0.5;
+
+          if (baseAlpha > 0.01 && p.trail.length > 1) {
+            for (var t = 1; t < p.trail.length; t++) {
+              var segAlpha = baseAlpha * (t / p.trail.length);
+              if (segAlpha < 0.003) continue;
+              ctx.beginPath();
+              ctx.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+              ctx.lineTo(p.trail[t].x, p.trail[t].y);
+              ctx.strokeStyle = 'hsla(' + p.hue + ', 70%, ' + p.lightness + '%, ' + segAlpha + ')';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          }
+
+          if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20 || p.life >= p.maxLife) {
+            particles[i] = spawnParticle();
           }
         }
 
@@ -1384,6 +1474,34 @@
           navLinks.classList.remove('open');
         });
       });
+    })();
+
+    /* ========================================
+       ACTIVE NAV LINK TRACKING
+       ======================================== */
+    (function() {
+      var navLinks = document.querySelectorAll('.nav__links a');
+      var sections = [];
+      navLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var section = document.getElementById(href.slice(1));
+          if (section) sections.push({ el: section, link: link });
+        }
+      });
+
+      var activeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(l) { l.classList.remove('active'); });
+            sections.forEach(function(s) {
+              if (s.el === entry.target) s.link.classList.add('active');
+            });
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+      sections.forEach(function(s) { activeObserver.observe(s.el); });
     })();
 
     /* ========================================
@@ -1439,9 +1557,9 @@
 
       function getLevel(count) {
         if (count === 0) return 0;
-        if (count <= 3) return 1;
-        if (count <= 6) return 2;
-        if (count <= 9) return 3;
+        if (count <= 5) return 1;
+        if (count <= 15) return 2;
+        if (count <= 30) return 3;
         return 4;
       }
 
@@ -1543,6 +1661,18 @@
 
       graph.addEventListener('mouseleave', function() {
         tooltip.classList.remove('show');
+      });
+    })();
+    /* ========================================
+       EXPERTISE CARD GLOW TRACKING
+       ======================================== */
+    (function() {
+      document.querySelectorAll('.expertise__card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+          card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
       });
     })();
   </script>
