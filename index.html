@@ -584,32 +584,16 @@
       gap: var(--space-xs);
     }
 
-    .github-graph {
-      background: var(--bg-elevated);
-      border-top: 1px solid var(--glass-border);
-      border-bottom: 1px solid var(--glass-border);
-      padding: var(--space-lg) var(--space-md);
-    }
-
-    .github-graph__title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: var(--space-sm);
-      padding: 0 var(--space-md);
-    }
-
     .github-graph__grid {
       display: grid;
       grid-template-columns: repeat(52, 1fr);
       grid-template-rows: repeat(7, 1fr);
-      gap: 3px;
+      gap: 0;
     }
 
     .github-graph__cell {
       aspect-ratio: 1;
-      border-radius: 2px;
-      background: var(--bg-base);
+      background: var(--bg-elevated);
     }
 
     .github-graph__cell[data-level="1"] { background: var(--green-github-1); }
@@ -1011,10 +995,7 @@
   </section>
 
   <!-- GitHub Contribution Graph -->
-  <div class="github-graph reveal">
-    <h4 class="github-graph__title">Build Consistency</h4>
-    <div class="github-graph__grid" id="githubGraph"></div>
-  </div>
+  <div class="github-graph__grid reveal" id="githubGraph"></div>
 
   <!-- Contact -->
   <section class="section contact" id="contact">
