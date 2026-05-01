@@ -590,17 +590,44 @@
       grid-template-rows: repeat(7, 1fr);
       gap: 3px;
       background: var(--bg-base);
+      position: relative;
     }
 
     .github-graph__cell {
       aspect-ratio: 1;
       background: var(--bg-elevated);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .github-graph__cell:hover {
+      transform: scale(1.8);
+      z-index: 10;
+      box-shadow: 0 0 8px rgba(0, 210, 106, 0.4);
     }
 
     .github-graph__cell[data-level="1"] { background: var(--green-github-1); }
     .github-graph__cell[data-level="2"] { background: var(--green-github-2); }
     .github-graph__cell[data-level="3"] { background: var(--green-github-3); }
     .github-graph__cell[data-level="4"] { background: var(--green-github-4); }
+
+    .github-tooltip {
+      position: fixed;
+      background: var(--bg-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-sm);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      pointer-events: none;
+      z-index: 100;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .github-tooltip.show { opacity: 1; }
 
     @media (max-width: 1024px) {
       .skills__grid { grid-template-columns: repeat(2, 1fr); }
@@ -699,6 +726,95 @@
     }
 
     /* ========================================
+       CURSOR GLOW
+       ======================================== */
+    .cursor-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 210, 106, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* ========================================
+       HERO ANIMATIONS
+       ======================================== */
+    .hero__name,
+    .hero__tagline,
+    .hero__subtitle,
+    .hero__scroll-indicator {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeIn 0.8s ease forwards;
+    }
+
+    .hero__name { animation-delay: 0.2s; }
+    .hero__tagline { animation-delay: 0.5s; }
+    .hero__subtitle { animation-delay: 0.8s; }
+    .hero__scroll-indicator { animation-delay: 1.2s; }
+
+    @keyframes heroFadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================
+       STAGGERED REVEALS
+       ======================================== */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
+
+    .reveal-stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       ENHANCED INTERACTIONS
+       ======================================== */
+    .glass-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, -100%);
+      left: var(--mouse-x, -100%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 210, 106, 0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .glass-card:hover::before { opacity: 1; }
+
+    .glass-pill {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .glass-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 210, 106, 0.15);
+    }
+
+    /* ========================================
        GLOBAL RESPONSIVE
        ======================================== */
     @media (max-width: 768px) {
@@ -716,6 +832,9 @@
   </style>
 </head>
 <body>
+  <div class="cursor-glow" id="cursorGlow"></div>
+  <div class="github-tooltip" id="githubTooltip"></div>
+
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav__inner container">
@@ -751,7 +870,7 @@
         <p>I'm a Fullstack Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
         <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
         <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
-        <div class="about__pills">
+        <div class="about__pills reveal reveal-stagger">
           <span class="glass-pill">100+ Sites Built</span>
           <span class="glass-pill">WordPress Expert</span>
           <span class="glass-pill">Claude Code Engineer</span>
@@ -938,7 +1057,7 @@
   <section class="section skills" id="skills">
     <div class="container">
       <h2 class="section-title reveal">What I Work With</h2>
-      <div class="skills__grid reveal">
+      <div class="skills__grid reveal reveal-stagger">
 
         <div class="skills__group">
           <h4 class="skills__group-title">Frontend</h4>
@@ -1027,15 +1146,42 @@
 
   <script>
     /* ========================================
+       CURSOR GLOW
+       ======================================== */
+    (function() {
+      var glow = document.getElementById('cursorGlow');
+      var isTouch = 'ontouchstart' in window;
+      if (isTouch) { glow.style.display = 'none'; return; }
+
+      document.addEventListener('mousemove', function(e) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    })();
+
+    /* ========================================
+       GLASS CARD MOUSE TRACKING
+       ======================================== */
+    (function() {
+      document.querySelectorAll('.glass-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+          card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
+      });
+    })();
+
+    /* ========================================
        NAVIGATION
        ======================================== */
     (function() {
-      const nav = document.getElementById('nav');
-      const hamburger = document.getElementById('navHamburger');
-      const navLinks = document.getElementById('navLinks');
-      const heroSection = document.getElementById('hero');
+      var nav = document.getElementById('nav');
+      var hamburger = document.getElementById('navHamburger');
+      var navLinks = document.getElementById('navLinks');
+      var heroSection = document.getElementById('hero');
 
-      const navObserver = new IntersectionObserver(function(entries) {
+      var navObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             nav.classList.remove('visible');
@@ -1102,25 +1248,109 @@
     })();
 
     /* ========================================
-       GITHUB CONTRIBUTION GRAPH
+       GITHUB CONTRIBUTION GRAPH (LIVE DATA)
        ======================================== */
     (function() {
       var graph = document.getElementById('githubGraph');
+      var tooltip = document.getElementById('githubTooltip');
       if (!graph) return;
 
-      var totalCells = 52 * 7;
-      for (var i = 0; i < totalCells; i++) {
-        var cell = document.createElement('div');
-        cell.className = 'github-graph__cell';
-        var rand = Math.random();
-        var level = 0;
-        if (rand > 0.4) level = 1;
-        if (rand > 0.6) level = 2;
-        if (rand > 0.78) level = 3;
-        if (rand > 0.9) level = 4;
-        if (level > 0) cell.setAttribute('data-level', level);
-        graph.appendChild(cell);
+      var username = 'mariomiralles';
+
+      function getLevel(count) {
+        if (count === 0) return 0;
+        if (count <= 3) return 1;
+        if (count <= 6) return 2;
+        if (count <= 9) return 3;
+        return 4;
       }
+
+      function buildGraph(contributions) {
+        graph.innerHTML = '';
+
+        var today = new Date();
+        var startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - (52 * 7 - 1) - startDate.getDay());
+
+        for (var col = 0; col < 52; col++) {
+          for (var row = 0; row < 7; row++) {
+            var cellDate = new Date(startDate);
+            cellDate.setDate(cellDate.getDate() + col * 7 + row);
+
+            var dateStr = cellDate.toISOString().split('T')[0];
+            var count = contributions[dateStr] || 0;
+            var level = getLevel(count);
+
+            var cell = document.createElement('div');
+            cell.className = 'github-graph__cell';
+            if (level > 0) cell.setAttribute('data-level', level);
+            cell.setAttribute('data-date', dateStr);
+            cell.setAttribute('data-count', count);
+            graph.appendChild(cell);
+          }
+        }
+      }
+
+      function buildFallback() {
+        graph.innerHTML = '';
+        var totalCells = 52 * 7;
+        var today = new Date();
+        var startDate = new Date(today);
+        startDate.setDate(startDate.getDate() - (52 * 7 - 1) - startDate.getDay());
+
+        for (var i = 0; i < totalCells; i++) {
+          var cellDate = new Date(startDate);
+          cellDate.setDate(cellDate.getDate() + i);
+
+          var cell = document.createElement('div');
+          cell.className = 'github-graph__cell';
+          var rand = Math.random();
+          var level = 0;
+          if (rand > 0.4) level = 1;
+          if (rand > 0.6) level = 2;
+          if (rand > 0.78) level = 3;
+          if (rand > 0.9) level = 4;
+          if (level > 0) cell.setAttribute('data-level', level);
+          cell.setAttribute('data-date', cellDate.toISOString().split('T')[0]);
+          cell.setAttribute('data-count', level > 0 ? Math.ceil(rand * 12) : 0);
+          graph.appendChild(cell);
+        }
+      }
+
+      fetch('https://github-contributions-api.jogruber.de/v4/' + username + '?y=last')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var contributions = {};
+          if (data.contributions) {
+            data.contributions.forEach(function(day) {
+              contributions[day.date] = day.count;
+            });
+          }
+          buildGraph(contributions);
+        })
+        .catch(function() {
+          buildFallback();
+        });
+
+      graph.addEventListener('mousemove', function(e) {
+        var cell = e.target;
+        if (!cell.classList.contains('github-graph__cell')) {
+          tooltip.classList.remove('show');
+          return;
+        }
+        var count = cell.getAttribute('data-count') || '0';
+        var date = cell.getAttribute('data-date') || '';
+        var dateObj = new Date(date + 'T12:00:00');
+        var formatted = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        tooltip.textContent = count + ' contribution' + (count === '1' ? '' : 's') + ' on ' + formatted;
+        tooltip.style.left = (e.clientX + 12) + 'px';
+        tooltip.style.top = (e.clientY - 36) + 'px';
+        tooltip.classList.add('show');
+      });
+
+      graph.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+      });
     })();
   </script>
 </body>
