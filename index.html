@@ -591,16 +591,12 @@
       padding: var(--space-lg) var(--space-md);
     }
 
-    .github-graph__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
     .github-graph__title {
       font-size: 1rem;
       font-weight: 600;
       color: var(--text-secondary);
       margin-bottom: var(--space-sm);
+      padding: 0 var(--space-md);
     }
 
     .github-graph__grid {
@@ -1016,10 +1012,8 @@
 
   <!-- GitHub Contribution Graph -->
   <div class="github-graph reveal">
-    <div class="github-graph__inner">
-      <h4 class="github-graph__title">Build Consistency</h4>
-      <div class="github-graph__grid" id="githubGraph"></div>
-    </div>
+    <h4 class="github-graph__title">Build Consistency</h4>
+    <div class="github-graph__grid" id="githubGraph"></div>
   </div>
 
   <!-- Contact -->
