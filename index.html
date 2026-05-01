@@ -83,6 +83,7 @@
       scroll-behavior: smooth;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
     }
 
     body {
@@ -289,7 +290,7 @@
        ======================================== */
     .hero {
       position: relative;
-      height: 100vh;
+      min-height: 80vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -887,7 +888,7 @@
       pointer-events: none;
     }
 
-    body > *:not(.flow-canvas):not(.github-tooltip) {
+    body > *:not(.flow-canvas):not(.github-tooltip):not(.nav) {
       position: relative;
       z-index: 1;
     }
@@ -948,16 +949,31 @@
        GLOBAL RESPONSIVE
        ======================================== */
     @media (max-width: 768px) {
-      .section { padding: var(--space-xl) 0; }
+      .section { padding: var(--space-lg) 0; }
       .section-title { font-size: 2rem; }
       .contact__title { font-size: 2.2rem; }
+      .container { padding: 0 var(--space-sm); }
+      .hero { min-height: 60vh; }
+      .expertise__card { padding: var(--space-md); }
+      .featured__project { padding: var(--space-md); }
+      .about__grid.glass-card { padding: var(--space-md) !important; }
+      .github-graph__grid {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        min-width: 0;
+      }
     }
 
     @media (max-width: 480px) {
-      .section { padding: var(--space-lg) 0; }
+      .section { padding: var(--space-md) 0; }
       .section-title { font-size: 1.6rem; }
       .hero__name { font-size: 2rem; }
       .contact__title { font-size: 1.8rem; }
+      .container { padding: 0 0.75rem; }
+      .hero { min-height: 50vh; padding: 0 0.75rem; }
+      .expertise__card { padding: var(--space-sm); }
+      .featured__project { padding: var(--space-sm); }
+      .about__grid.glass-card { padding: var(--space-sm) !important; }
     }
   </style>
 </head>
