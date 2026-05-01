@@ -275,38 +275,14 @@
        ======================================== */
     .hero {
       position: relative;
-      height: 300vh;
-    }
-
-    .hero__canvas {
-      position: sticky;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      display: block;
-      background: var(--bg-base);
-    }
-
-    .hero__overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
       height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      pointer-events: none;
-      z-index: 10;
-      opacity: 0;
-      transition: opacity 0.6s ease;
       padding: 0 var(--space-md);
     }
-
-    .hero__overlay.visible { opacity: 1; }
 
     .hero__name {
       font-size: clamp(2.5rem, 8vw, 5rem);
@@ -329,12 +305,10 @@
     }
 
     .hero__scroll-indicator {
-      position: fixed;
+      position: absolute;
       bottom: 2rem;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 10;
-      transition: opacity 0.4s ease;
     }
 
     .hero__scroll-indicator span {
@@ -611,7 +585,15 @@
     }
 
     .github-graph {
-      margin-top: var(--space-lg);
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .github-graph__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
     }
 
     .github-graph__title {
@@ -631,7 +613,7 @@
     .github-graph__cell {
       aspect-ratio: 1;
       border-radius: 2px;
-      background: var(--bg-elevated);
+      background: var(--bg-base);
     }
 
     .github-graph__cell[data-level="1"] { background: var(--green-github-1); }
@@ -772,13 +754,10 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <canvas class="hero__canvas" id="heroCanvas"></canvas>
-    <div class="hero__overlay" id="heroOverlay">
-      <h1 class="hero__name">Mario Miralles</h1>
-      <p class="hero__tagline">Your Connection to the Digital World</p>
-      <p class="hero__subtitle">Fullstack Engineer | WordPress Developer | Claude Code Engineer</p>
-    </div>
-    <div class="hero__scroll-indicator" id="scrollIndicator">
+    <h1 class="hero__name">Mario Miralles</h1>
+    <p class="hero__tagline">Your Connection to the Digital World</p>
+    <p class="hero__subtitle">Fullstack Engineer | WordPress Developer | Claude Code Engineer</p>
+    <div class="hero__scroll-indicator">
       <span></span>
     </div>
   </section>
@@ -1032,14 +1011,16 @@
 
       </div>
 
-      <!-- GitHub Contribution Graph -->
-      <div class="github-graph reveal">
-        <h4 class="github-graph__title">Build Consistency</h4>
-        <div class="github-graph__grid" id="githubGraph"></div>
-      </div>
-
     </div>
   </section>
+
+  <!-- GitHub Contribution Graph -->
+  <div class="github-graph reveal">
+    <div class="github-graph__inner">
+      <h4 class="github-graph__title">Build Consistency</h4>
+      <div class="github-graph__grid" id="githubGraph"></div>
+    </div>
+  </div>
 
   <!-- Contact -->
   <section class="section contact" id="contact">
@@ -1101,90 +1082,6 @@
           navLinks.classList.remove('open');
         });
       });
-    })();
-
-    /* ========================================
-       HERO SCROLL-FRAME ANIMATION
-       ======================================== */
-    (function() {
-      var canvas = document.getElementById('heroCanvas');
-      var ctx = canvas.getContext('2d');
-      var heroSection = document.getElementById('hero');
-      var overlay = document.getElementById('heroOverlay');
-      var scrollIndicator = document.getElementById('scrollIndicator');
-      var frameCount = 150;
-      var frames = [];
-      var framesLoaded = 0;
-      var framesAvailable = false;
-      var currentFrame = 0;
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
-
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      function framePath(index) {
-        var num = String(index + 1).padStart(4, '0');
-        return 'frames/frame_' + num + '.webp';
-      }
-
-      function preloadFrames() {
-        for (var i = 0; i < frameCount; i++) {
-          var img = new Image();
-          img.src = framePath(i);
-          img.onload = function() {
-            framesLoaded++;
-            if (framesLoaded === frameCount) framesAvailable = true;
-          };
-          frames.push(img);
-        }
-      }
-
-      function drawFrame(index) {
-        if (!framesAvailable || !frames[index] || !frames[index].complete) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        var img = frames[index];
-        var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-        var x = (canvas.width - img.width * scale) / 2;
-        var y = (canvas.height - img.height * scale) / 2;
-        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-      }
-
-      function onScroll() {
-        var rect = heroSection.getBoundingClientRect();
-        var scrollableHeight = heroSection.offsetHeight - window.innerHeight;
-        var scrolled = -rect.top;
-        var progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
-
-        if (framesAvailable) {
-          var frameIndex = Math.min(frameCount - 1, Math.floor(progress * frameCount));
-          if (frameIndex !== currentFrame) {
-            currentFrame = frameIndex;
-            requestAnimationFrame(function() { drawFrame(currentFrame); });
-          }
-        }
-
-        var pastHero = rect.bottom <= 0;
-
-        if (progress > 0.7 && !pastHero) {
-          overlay.classList.add('visible');
-        } else {
-          overlay.classList.remove('visible');
-        }
-
-        if (progress > 0.3 || pastHero) {
-          scrollIndicator.style.opacity = '0';
-        } else {
-          scrollIndicator.style.opacity = '1';
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      preloadFrames();
-      onScroll();
     })();
 
     /* ========================================
