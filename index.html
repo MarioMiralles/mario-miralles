@@ -1167,13 +1167,15 @@
           }
         }
 
-        if (progress > 0.7) {
+        var pastHero = rect.bottom <= 0;
+
+        if (progress > 0.7 && !pastHero) {
           overlay.classList.add('visible');
         } else {
           overlay.classList.remove('visible');
         }
 
-        if (progress > 0.3) {
+        if (progress > 0.3 || pastHero) {
           scrollIndicator.style.opacity = '0';
         } else {
           scrollIndicator.style.opacity = '1';
