@@ -62,4 +62,4 @@ Industries served: Healthcare, Legal, Home Services, Towing & Recovery, Construc
 
 ---
 
-Built with [Claude Code](https://claude.ai/claude-code)
+Built with [Claude Code](https://claude.ai/claude-code), HTML, CSS, JavaScript, and GitHub Pages
