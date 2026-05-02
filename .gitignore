@@ -1,0 +1,5 @@
+node_modules/
+.claude/
+capture-screenshots.js
+wire-screenshots.js
+package-lock.json
