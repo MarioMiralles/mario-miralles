@@ -321,25 +321,122 @@
       font-weight: 400;
     }
 
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+      padding: 0.9rem 2.2rem;
+      background: rgba(0, 210, 106, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--green-primary);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      border-radius: var(--border-radius-pill);
+      border: 1px solid rgba(0, 210, 106, 0.35);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow:
+        0 0 15px rgba(0, 210, 106, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1.6s forwards;
+    }
+
+    .hero__cta:hover {
+      transform: translateY(-3px);
+      background: rgba(0, 210, 106, 0.14);
+      border-color: rgba(0, 210, 106, 0.6);
+      box-shadow:
+        0 0 30px rgba(0, 210, 106, 0.2),
+        0 0 60px rgba(0, 210, 106, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      color: #fff;
+      opacity: 1;
+    }
+
+    .hero__cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 210, 106, 0.15),
+        rgba(255, 255, 255, 0.08),
+        transparent
+      );
+      transform: skewX(-15deg);
+      transition: none;
+      animation: ctaSweep 4s ease-in-out 2.5s infinite;
+    }
+
+    @keyframes ctaSweep {
+      0% { left: -100%; }
+      40% { left: 150%; }
+      100% { left: 150%; }
+    }
+
+    .hero__cta-arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-size: 1.1em;
+    }
+
+    .hero__cta:hover .hero__cta-arrow {
+      transform: translateX(4px);
+    }
+
     .hero__scroll-indicator {
       position: absolute;
-      bottom: 2rem;
+      bottom: 2.5rem;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
     }
 
-    .hero__scroll-indicator span {
-      display: block;
-      width: 2px;
-      height: 40px;
+    .hero__scroll-mouse {
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(0, 210, 106, 0.4);
+      border-radius: 14px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero__scroll-dot {
+      width: 3px;
+      height: 8px;
       background: var(--green-primary);
-      opacity: 0.6;
-      animation: scrollPulse 2s ease-in-out infinite;
+      border-radius: 3px;
+      margin-top: 8px;
+      animation: scrollDot 2s ease-in-out infinite;
     }
 
-    @keyframes scrollPulse {
-      0%, 100% { transform: scaleY(1); opacity: 0.6; }
-      50% { transform: scaleY(0.5); opacity: 0.2; }
+    @keyframes scrollDot {
+      0% { opacity: 1; transform: translateY(0); }
+      50% { opacity: 0.3; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__scroll-text {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(0, 210, 106, 0.4);
     }
 
     /* ========================================
@@ -803,7 +900,12 @@
 
     .hero__scroll-indicator {
       opacity: 0;
-      animation: heroFadeIn 0.8s ease 1.8s forwards;
+      animation: scrollIndicatorIn 0.8s ease 2.1s forwards;
+    }
+
+    @keyframes scrollIndicatorIn {
+      0% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
     }
 
     @keyframes heroFadeIn {
@@ -1006,8 +1108,12 @@
     <h1 class="hero__name">Mario Miralles</h1>
     <p class="hero__tagline">Your Connection to the Digital World</p>
     <p class="hero__subtitle">Fullstack Engineer | WordPress Developer | Claude Code Engineer</p>
+    <a href="#featured-projects" class="hero__cta">View My Work <span class="hero__cta-arrow">&rarr;</span></a>
     <div class="hero__scroll-indicator">
-      <span></span>
+      <div class="hero__scroll-mouse">
+        <div class="hero__scroll-dot"></div>
+      </div>
+      <span class="hero__scroll-text">Scroll</span>
     </div>
   </section>
 
