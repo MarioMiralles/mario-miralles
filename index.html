@@ -102,6 +102,10 @@
       line-height: 1.2;
     }
 
+    h2 { letter-spacing: -0.03em; }
+    h3 { letter-spacing: -0.01em; }
+    h4 { letter-spacing: 0.01em; }
+
     a {
       color: var(--green-primary);
       text-decoration: none;
@@ -170,10 +174,11 @@
 
     .section-title {
       font-size: 2.5rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: var(--space-lg);
       position: relative;
       display: inline-block;
+      letter-spacing: -0.04em;
     }
 
     .section-title::after {
@@ -370,7 +375,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 var(--space-md);
+      padding: 0 var(--space-md) 22vh;
     }
 
     .hero__name {
@@ -389,8 +394,11 @@
 
     .hero__subtitle {
       font-size: clamp(0.85rem, 1.5vw, 1.1rem);
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
     }
 
     /* ========================================
@@ -606,9 +614,10 @@
 
     .expertise__card-title {
       font-size: 1.5rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: var(--space-md);
       color: var(--green-primary);
+      letter-spacing: -0.02em;
     }
 
     .expertise__card p {
@@ -641,12 +650,12 @@
       align-items: center;
     }
 
-    .featured__project--reverse {
-      direction: rtl;
+    .featured__project--reverse .featured__image {
+      order: 2;
     }
 
-    .featured__project--reverse > * {
-      direction: ltr;
+    .featured__project--reverse .featured__info {
+      order: 1;
     }
 
     .featured__image img {
@@ -667,8 +676,9 @@
 
     .featured__name {
       font-size: 1.8rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
     }
 
     .featured__info p {
@@ -694,7 +704,11 @@
       .featured__project,
       .featured__project--reverse {
         grid-template-columns: 1fr;
-        direction: ltr;
+      }
+
+      .featured__project--reverse .featured__image,
+      .featured__project--reverse .featured__info {
+        order: unset;
       }
     }
 
@@ -777,6 +791,29 @@
       line-height: 1.6;
     }
 
+    .industry__card-visit {
+      display: inline-block;
+      margin-top: var(--space-xs);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .industry__card:hover .industry__card-visit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .industry__card-visit {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
     @media (max-width: 1024px) {
       .industry__grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -854,6 +891,10 @@
     }
 
     .github-tooltip.show { opacity: 1; }
+
+    .skills.section {
+      padding-bottom: var(--space-sm);
+    }
 
     @media (max-width: 1024px) {
       .skills__grid { grid-template-columns: repeat(2, 1fr); }
@@ -1157,7 +1198,7 @@
       .section-title { font-size: 2rem; }
       .contact__title { font-size: 2.2rem; }
       .container { padding: 0 var(--space-sm); }
-      .hero { min-height: 100vh; }
+      .hero { min-height: 100vh; padding: 0 var(--space-sm) 18vh; }
       .expertise__card { padding: var(--space-md); }
       .featured__project { padding: var(--space-md); }
       .about__grid.glass-card { padding: var(--space-md) !important; }
@@ -1174,7 +1215,7 @@
       .hero__name { font-size: 2rem; }
       .contact__title { font-size: 1.8rem; }
       .container { padding: 0 0.75rem; }
-      .hero { min-height: 100vh; padding: 0 0.75rem; }
+      .hero { min-height: 100vh; padding: 0 0.75rem 16vh; }
       .expertise__card { padding: var(--space-sm); }
       .featured__project { padding: var(--space-sm); }
       .about__grid.glass-card { padding: var(--space-sm) !important; }
@@ -1391,6 +1432,7 @@
             <span class="industry__card-tag glass-pill">Construction</span>
             <h4 class="industry__card-name">Nobi Design Build</h4>
             <p class="industry__card-desc">Custom carpentry and general contracting in Sonoma and Napa Counties</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1400,6 +1442,7 @@
             <span class="industry__card-tag glass-pill">Automotive</span>
             <h4 class="industry__card-name">JDOON Mobile Tires</h4>
             <p class="industry__card-desc">Mobile tire shop serving Palm Beach County with on-location tire services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1409,6 +1452,7 @@
             <span class="industry__card-tag glass-pill">Towing &amp; Recovery</span>
             <h4 class="industry__card-name">Harrison's Towing</h4>
             <p class="industry__card-desc">24/7 towing and roadside assistance serving the DMV region</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1418,6 +1462,7 @@
             <span class="industry__card-tag glass-pill">Home Services</span>
             <h4 class="industry__card-name">Solutions ECO Cleaning</h4>
             <p class="industry__card-desc">Eco-friendly residential and commercial cleaning services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1427,6 +1472,7 @@
             <span class="industry__card-tag glass-pill">Home Services</span>
             <h4 class="industry__card-name">Crossroads Softwash</h4>
             <p class="industry__card-desc">Professional soft washing and exterior cleaning services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1436,6 +1482,7 @@
             <span class="industry__card-tag glass-pill">Healthcare</span>
             <h4 class="industry__card-name">Balanced Therapy Center</h4>
             <p class="industry__card-desc">Physical therapy and wellness center focused on holistic patient care</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
           </div>
         </a>
 
@@ -1508,13 +1555,14 @@
   </section>
 
   <!-- GitHub Contribution Graph -->
-  <div class="github-graph__grid reveal" id="githubGraph"></div>
+  <p class="github-graph__label reveal" style="text-align: center; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 var(--space-sm) 0; padding-top: var(--space-sm);">GitHub Activity</p>
+  <div class="github-graph__grid reveal" id="githubGraph" style="margin-bottom: var(--space-2xl);"></div>
 
   <!-- Contact -->
   <section class="section contact parallax-section" id="contact">
     <div class="container contact__content reveal">
-      <h2 class="section-title contact__title">Let's Build Something</h2>
-      <p class="contact__text">Whether you need a website for your business or a developer for your team — let's talk.</p>
+      <h2 class="section-title contact__title">Let's Build Something Together</h2>
+      <p class="contact__text">Need a custom WordPress site, a plugin that solves a real problem, or a developer who ships fast with AI-powered tools? I'd love to hear about your project.</p>
       <div class="contact__links">
         <a href="mailto:miralles.mario@gmail.com" class="contact__btn glass-card">Get in Touch</a>
         <div class="contact__socials">
