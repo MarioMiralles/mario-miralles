@@ -370,12 +370,13 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 0 var(--space-md) 22vh;
+      padding: 0 var(--space-md) 12vh;
     }
 
     .hero__name {
@@ -561,11 +562,20 @@
     /* ========================================
        ABOUT
        ======================================== */
-    .about__grid {
+    .about__wrapper {
+      position: relative;
+    }
+
+    .about__card {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-xl);
-      align-items: center;
+      grid-template-columns: 1fr 320px;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .about__text {
+      padding: var(--space-lg);
     }
 
     .about__text p {
@@ -581,22 +591,82 @@
       margin-top: var(--space-md);
     }
 
-    .about__photo img {
+    .about__avatar-wrap {
+      display: none;
+    }
+
+    .about__avatar-wrap--desktop {
+      display: block;
+      overflow: hidden;
+    }
+
+    .about__avatar-wrap--desktop img {
       width: 100%;
-      aspect-ratio: 3 / 4;
+      height: 100%;
       object-fit: cover;
       object-position: top center;
-      border-radius: var(--border-radius);
-      border: 1px solid var(--glass-border);
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    .about__avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 3px solid rgba(0, 210, 106, 0.3);
+      box-shadow: 0 0 24px rgba(0, 210, 106, 0.1);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .about__avatar:hover {
+      border-color: var(--green-primary);
+      box-shadow: 0 0 30px rgba(0, 210, 106, 0.2);
     }
 
     @media (max-width: 768px) {
-      .about__grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-lg);
+      .about__wrapper {
+        padding-top: 50px;
       }
 
-      .about__photo { order: -1; }
+      .about__card {
+        display: block;
+        padding: 0;
+        border-top-right-radius: 0;
+      }
+
+      .about__text {
+        padding: var(--space-md);
+      }
+
+      .about__avatar-wrap {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -4px;
+        z-index: 2;
+      }
+
+      .about__avatar-wrap.about__avatar-wrap--desktop {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about__wrapper {
+        padding-top: 44px;
+      }
+
+      .about__text {
+        padding: var(--space-sm);
+      }
+
+      .about__avatar {
+        width: 88px;
+        height: 88px;
+      }
     }
 
     /* ========================================
@@ -820,6 +890,59 @@
 
     @media (max-width: 768px) {
       .industry__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========================================
+       INLINE CTA
+       ======================================== */
+    .inline-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: var(--space-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      transition: gap 0.3s ease, opacity 0.3s ease;
+    }
+
+    .inline-cta:hover {
+      gap: 0.7rem;
+      opacity: 1;
+    }
+
+    .inline-cta span {
+      transition: transform 0.3s ease;
+    }
+
+    .inline-cta:hover span {
+      transform: translateX(2px);
+    }
+
+    /* ========================================
+       VIEW ALL PROJECTS CTA
+       ======================================== */
+    .view-all-btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      border: 1.5px solid rgba(0, 210, 106, 0.35);
+      border-radius: var(--border-radius-pill);
+      background: rgba(0, 210, 106, 0.06);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .view-all-btn:hover {
+      background: var(--green-primary);
+      color: var(--bg-base);
+      border-color: var(--green-primary);
+      box-shadow: 0 0 24px rgba(0, 210, 106, 0.2);
+      transform: translateY(-2px);
+      opacity: 1;
     }
 
     /* ========================================
@@ -1198,10 +1321,9 @@
       .section-title { font-size: 2rem; }
       .contact__title { font-size: 2.2rem; }
       .container { padding: 0 var(--space-sm); }
-      .hero { min-height: 100vh; padding: 0 var(--space-sm) 18vh; }
+      .hero { min-height: 100vh; min-height: 100svh; padding: 0 var(--space-sm) 10vh; }
       .expertise__card { padding: var(--space-md); }
       .featured__project { padding: var(--space-md); }
-      .about__grid.glass-card { padding: var(--space-md) !important; }
       .github-graph__grid {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
@@ -1215,10 +1337,9 @@
       .hero__name { font-size: 2rem; }
       .contact__title { font-size: 1.8rem; }
       .container { padding: 0 0.75rem; }
-      .hero { min-height: 100vh; padding: 0 0.75rem 16vh; }
+      .hero { min-height: 100vh; min-height: 100svh; padding: 0 0.75rem 8vh; }
       .expertise__card { padding: var(--space-sm); }
       .featured__project { padding: var(--space-sm); }
-      .about__grid.glass-card { padding: var(--space-sm) !important; }
     }
   </style>
 </head>
@@ -1248,10 +1369,10 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav__links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#expertise">Expertise</a></li>
         <li><a href="#featured-projects">Projects</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
         <li class="nav__mobile-extras">
@@ -1283,67 +1404,12 @@
     <p class="hero__tagline">Your Connection to the Digital World</p>
     <p class="hero__subtitle">Fullstack Engineer | WordPress Developer | Claude Code Engineer</p>
     <nav class="hero__nav">
+      <a href="#featured-projects" class="hero__nav-link">Projects</a>
       <a href="#about" class="hero__nav-link">About</a>
       <a href="#expertise" class="hero__nav-link">Expertise</a>
-      <a href="#featured-projects" class="hero__nav-link">Projects</a>
       <a href="#skills" class="hero__nav-link">Skills</a>
       <a href="#contact" class="hero__nav-link">Contact</a>
     </nav>
-  </section>
-
-  <!-- About -->
-  <section class="section about parallax-section" id="about">
-    <div class="container about__grid glass-card reveal" style="padding: var(--space-lg);">
-      <div class="about__text">
-        <h2 class="section-title">About Me</h2>
-        <p>I'm a Fullstack Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
-        <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
-        <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
-        <div class="about__pills reveal reveal-stagger">
-          <span class="glass-pill">100+ Sites Built</span>
-          <span class="glass-pill">WordPress Expert</span>
-          <span class="glass-pill">Claude Code Engineer</span>
-          <span class="glass-pill">Bilingual EN/ES</span>
-          <span class="glass-pill">AI-Powered Development</span>
-        </div>
-      </div>
-      <div class="about__photo">
-        <img src="assets/headshot.jpg" alt="Mario Miralles — Fullstack Engineer and WordPress Developer" loading="lazy">
-      </div>
-    </div>
-  </section>
-
-  <!-- Expertise -->
-  <section class="section expertise parallax-section" id="expertise">
-    <div class="container">
-      <h2 class="section-title reveal">What I Do Best</h2>
-      <div class="expertise__grid">
-        <div class="glass-card expertise__card reveal">
-          <h3 class="expertise__card-title">WordPress Developer &amp; Plugin Builder</h3>
-          <p>As an experienced WordPress Developer, I build custom WordPress themes and sites tailored to each business. From responsive web design with Elementor to fully custom PHP solutions, every project is crafted with a mobile-first approach that ensures seamless performance across all devices.</p>
-          <p>My WordPress plugin development work includes SiteStaffr — an AI-powered voice agent that transforms how businesses capture leads on their websites. I handle the full spectrum: custom builds, performance optimization, SEO integration, and third-party plugin management.</p>
-          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more, I bring deep expertise in turning business goals into high-performing digital experiences.</p>
-          <div class="expertise__icons">
-            <span class="glass-pill">WordPress</span>
-            <span class="glass-pill">Elementor</span>
-            <span class="glass-pill">PHP</span>
-            <span class="glass-pill">Custom Themes</span>
-          </div>
-        </div>
-        <div class="glass-card expertise__card reveal">
-          <h3 class="expertise__card-title">Claude Code Engineer</h3>
-          <p>I leverage Claude Code as my AI-powered engineering partner to accelerate fullstack development without sacrificing quality. This AI-powered development approach lets me architect, build, and ship products faster — from WordPress plugins to complex automation systems.</p>
-          <p>As a Claude Code Engineer, I use AI coding tools to handle everything from scaffolding new projects to debugging complex integrations. The result is faster delivery, cleaner code, and more time spent on what matters: solving real problems for real businesses.</p>
-          <p>My AI-powered workflow extends beyond Claude Code. I've built automated content pipelines with OpenAI, integrated AI voice agents with SiteStaffr, and use AI tools daily to push the boundaries of what a solo developer can accomplish.</p>
-          <div class="expertise__icons">
-            <span class="glass-pill">Claude Code</span>
-            <span class="glass-pill">AI Development</span>
-            <span class="glass-pill">OpenAI</span>
-            <span class="glass-pill">Automation</span>
-          </div>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- Featured Projects -->
@@ -1488,7 +1554,71 @@
 
       </div>
       <div style="text-align: center; margin-top: var(--space-lg);" class="reveal">
-        <a href="portfolio.html" class="featured__link" style="font-size: 1.1rem;">View All Projects &rarr;</a>
+        <a href="portfolio.html" class="view-all-btn">View All Projects &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about parallax-section" id="about">
+    <div class="container">
+      <div class="about__wrapper reveal">
+        <div class="about__avatar-wrap">
+          <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
+        </div>
+        <div class="about__card glass-card">
+          <div class="about__text">
+            <h2 class="section-title">About Me</h2>
+            <p>I'm a Fullstack Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
+            <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
+            <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
+            <div class="about__pills reveal reveal-stagger">
+              <span class="glass-pill">100+ Sites Built</span>
+              <span class="glass-pill">WordPress Expert</span>
+              <span class="glass-pill">Claude Code Engineer</span>
+              <span class="glass-pill">Bilingual EN/ES</span>
+              <span class="glass-pill">AI-Powered Development</span>
+            </div>
+            <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Let's talk about your project <span>&rarr;</span></a>
+          </div>
+          <div class="about__avatar-wrap about__avatar-wrap--desktop">
+            <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise -->
+  <section class="section expertise parallax-section" id="expertise">
+    <div class="container">
+      <h2 class="section-title reveal">What I Do Best</h2>
+      <div class="expertise__grid">
+        <div class="glass-card expertise__card reveal">
+          <h3 class="expertise__card-title">WordPress Developer &amp; Plugin Builder</h3>
+          <p>As an experienced WordPress Developer, I build custom WordPress themes and sites tailored to each business. From responsive web design with Elementor to fully custom PHP solutions, every project is crafted with a mobile-first approach that ensures seamless performance across all devices.</p>
+          <p>My WordPress plugin development work includes SiteStaffr — an AI-powered voice agent that transforms how businesses capture leads on their websites. I handle the full spectrum: custom builds, performance optimization, SEO integration, and third-party plugin management.</p>
+          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more, I bring deep expertise in turning business goals into high-performing digital experiences.</p>
+          <div class="expertise__icons">
+            <span class="glass-pill">WordPress</span>
+            <span class="glass-pill">Elementor</span>
+            <span class="glass-pill">PHP</span>
+            <span class="glass-pill">Custom Themes</span>
+          </div>
+          <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Need a WordPress site? <span>&rarr;</span></a>
+        </div>
+        <div class="glass-card expertise__card reveal">
+          <h3 class="expertise__card-title">Claude Code Engineer</h3>
+          <p>I leverage Claude Code as my AI-powered engineering partner to accelerate fullstack development without sacrificing quality. This AI-powered development approach lets me architect, build, and ship products faster — from WordPress plugins to complex automation systems.</p>
+          <p>As a Claude Code Engineer, I use AI coding tools to handle everything from scaffolding new projects to debugging complex integrations. The result is faster delivery, cleaner code, and more time spent on what matters: solving real problems for real businesses.</p>
+          <p>My AI-powered workflow extends beyond Claude Code. I've built automated content pipelines with OpenAI, integrated AI voice agents with SiteStaffr, and use AI tools daily to push the boundaries of what a solo developer can accomplish.</p>
+          <div class="expertise__icons">
+            <span class="glass-pill">Claude Code</span>
+            <span class="glass-pill">AI Development</span>
+            <span class="glass-pill">Automation</span>
+          </div>
+          <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Let's build something with AI <span>&rarr;</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -1605,15 +1735,27 @@
        ======================================== */
     (function() {
       var sections = document.querySelectorAll('.parallax-section');
+      var firstSection = sections[0];
+
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
           }
         });
-      }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+      }, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
 
       sections.forEach(function(el) { observer.observe(el); });
+
+      if (firstSection) {
+        var triggered = false;
+        window.addEventListener('scroll', function() {
+          if (!triggered && window.scrollY > 30) {
+            triggered = true;
+            firstSection.classList.add('in-view');
+          }
+        }, { passive: true });
+      }
     })();
 
     /* ========================================

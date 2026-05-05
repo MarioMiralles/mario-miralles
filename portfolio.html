@@ -340,7 +340,7 @@
     /* ALSO BUILT NOTE */
     .also-built {
       text-align: center;
-      padding: 0 0 var(--space-xl);
+      padding-bottom: var(--space-xl);
       max-width: 640px;
       margin: 0 auto;
     }
@@ -362,6 +362,10 @@
       text-align: center;
       font-size: 0.85rem;
       color: var(--text-muted);
+    }
+
+    .footer p + p {
+      margin-top: var(--space-xs);
     }
 
     .footer a { color: var(--green-primary); }
@@ -1071,7 +1075,7 @@
   </section>
 
   <!-- Also Built Note -->
-  <section class="also-built">
+  <section class="also-built container">
     <h3>Beyond Public Websites</h3>
     <p>In addition to the sites shown here, I've built private client portals, e-commerce stores with WooCommerce, HIPAA-conscious medical platforms, internal business tools, and many other projects that aren't public-facing. The work shown above represents a fraction of the 100+ sites I've delivered.</p>
   </section>
@@ -1079,7 +1083,8 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 Mario Miralles. All rights reserved. | <a href="index.html">Back to Home</a></p>
+      <p>&copy; 2026 Mario Miralles. All rights reserved.</p>
+      <p><a href="index.html">Back to Home</a></p>
     </div>
   </footer>
 
