@@ -718,6 +718,9 @@
       padding: var(--space-lg);
       margin-bottom: var(--space-lg);
       align-items: center;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
     .featured__project--reverse .featured__image {
@@ -815,6 +818,8 @@
       padding: 0;
       overflow: hidden;
       color: var(--text-secondary);
+      text-decoration: none;
+      cursor: pointer;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
     }
 
@@ -1418,7 +1423,7 @@
       <h2 class="section-title reveal">Featured Work</h2>
 
       <!-- Project 1: SiteStaffr -->
-      <div class="featured__project glass-card reveal">
+      <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="featured__project glass-card reveal">
         <div class="featured__image">
           <img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr homepage screenshot" loading="lazy">
         </div>
@@ -1433,12 +1438,12 @@
             <span class="glass-pill">PHP</span>
             <span class="glass-pill">JavaScript</span>
           </div>
-          <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="featured__link">View Project &rarr;</a>
+          <span class="featured__link">View Project &rarr;</span>
         </div>
-      </div>
+      </a>
 
       <!-- Project 2: Loria Medical -->
-      <div class="featured__project featured__project--reverse glass-card reveal">
+      <a href="https://loriamedical.com" target="_blank" rel="noopener" class="featured__project featured__project--reverse glass-card reveal">
         <div class="featured__image">
           <img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical homepage screenshot" loading="lazy">
         </div>
@@ -1453,12 +1458,12 @@
             <span class="glass-pill">SEO</span>
             <span class="glass-pill">Responsive Design</span>
           </div>
-          <a href="https://loriamedical.com" target="_blank" rel="noopener" class="featured__link">View Project &rarr;</a>
+          <span class="featured__link">View Project &rarr;</span>
         </div>
-      </div>
+      </a>
 
       <!-- Project 3: Kitty Puppy Alliance -->
-      <div class="featured__project glass-card reveal">
+      <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="featured__project glass-card reveal">
         <div class="featured__image">
           <img src="assets/screenshots/kittypuppy.org.jpg" alt="Kitty Puppy Alliance homepage screenshot" loading="lazy">
         </div>
@@ -1472,9 +1477,9 @@
             <span class="glass-pill">Nonprofit</span>
             <span class="glass-pill">Responsive Design</span>
           </div>
-          <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="featured__link">View Project &rarr;</a>
+          <span class="featured__link">View Project &rarr;</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </section>
