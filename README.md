@@ -1,6 +1,6 @@
 # Mario Miralles
 
-**Fullstack Engineer | WordPress Developer | Claude Code Engineer**
+**Web Engineer | WordPress Developer | Claude Code Engineer**
 South Florida | Bilingual (English / Spanish)
 
 [LinkedIn](https://www.linkedin.com/in/mariofmiralles) | [GitHub](https://github.com/mariomiralles) | [Email](mailto:miralles.mario@gmail.com)
@@ -9,7 +9,7 @@ South Florida | Bilingual (English / Spanish)
 
 ## Summary
 
-Fullstack Engineer and WordPress Developer with 100+ websites built across healthcare, legal, home services, towing, and tech. I combine hands-on development expertise with AI-powered workflows using Claude Code to deliver high-performing digital experiences — from custom WordPress themes and plugins to full SaaS products.
+Web Engineer and WordPress Developer with 100+ websites built across healthcare, legal, home services, towing, and tech. I combine hands-on development expertise with AI-powered workflows using Claude Code to deliver high-performing digital experiences — from custom WordPress themes and plugins to full SaaS products.
 
 Currently building [SiteStaffr](https://sitestaffr.com), an AI voice agent WordPress plugin that captures leads through natural conversation in 57+ languages.
 
