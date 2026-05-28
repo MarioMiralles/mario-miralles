@@ -5,38 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio | Mario Miralles — 100+ Websites Built</title>
   <meta name="description" content="Browse 50+ client websites built by Mario Miralles across healthcare, legal, home services, towing, construction, beauty, and more.">
-
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg-base: #0d1117;
-      --bg-elevated: #161b22;
-      --green-primary: #00d26a;
-      --green-glow: rgba(0, 210, 106, 0.12);
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0a0;
-      --text-muted: #6e7681;
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --glass-blur: blur(12px);
-      --font-heading: 'Sora', 'Segoe UI', sans-serif;
-      --font-body: 'DM Sans', 'Segoe UI', sans-serif;
-      --space-xs: 0.5rem;
-      --space-sm: 1rem;
-      --space-md: 1.5rem;
-      --space-lg: 3rem;
-      --space-xl: 5rem;
-      --max-width: 1200px;
-      --border-radius: 16px;
-      --border-radius-sm: 8px;
-      --border-radius-pill: 100px;
+      --bg-deep: #080c0a;
+      --bg-base: #0d110f;
+      --bg-surface: #141a17;
+      --bg-elevated: #1c2420;
+      --bg-code: #0f1412;
+
+      --green: #6b9e7e;
+      --green-dim: rgba(107, 158, 126, 0.12);
+      --green-border: rgba(107, 158, 126, 0.25);
+      --green-glow: rgba(107, 158, 126, 0.06);
+
+      --cream: #e6e1d6;
+      --text-primary: #c4bfb2;
+      --text-secondary: #8a8477;
+      --text-muted: #555049;
+
+      --border: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(107, 158, 126, 0.3);
+
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-body: 'Outfit', 'Helvetica Neue', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --max-w: 1080px;
+      --radius: 8px;
     }
 
     html {
@@ -47,381 +49,760 @@
 
     body {
       font-family: var(--font-body);
-      background-color: var(--bg-base);
-      color: var(--text-secondary);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    h1, h2, h3, h4 {
-      font-family: var(--font-heading);
+      background: var(--bg-deep);
       color: var(--text-primary);
-      line-height: 1.2;
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    a {
-      color: var(--green-primary);
-      text-decoration: none;
-      transition: opacity 0.3s ease;
+    ::selection {
+      background: var(--green);
+      color: var(--bg-deep);
     }
 
-    a:hover { opacity: 0.8; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
 
-    .container {
-      max-width: var(--max-width);
+    .wrap {
+      max-width: var(--max-w);
       margin: 0 auto;
-      padding: 0 var(--space-md);
+      padding: 0 2.5rem;
     }
 
-    .glass-card {
-      background: rgba(13, 17, 23, 0.75);
-      backdrop-filter: blur(16px) saturate(1.1);
-      -webkit-backdrop-filter: blur(16px) saturate(1.1);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--border-radius);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    .glass-card:hover {
-      box-shadow: 0 0 20px var(--green-glow);
-    }
-
-    .glass-pill {
-      display: inline-block;
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--border-radius-pill);
-      padding: 0.4rem 1rem;
-      font-size: 0.85rem;
-      color: var(--green-primary);
-      font-family: var(--font-body);
-    }
-
-    /* NAV BAR */
-    .nav {
-      position: sticky;
+    /* ── FLOW CANVAS BACKGROUND ── */
+    .flow-canvas {
+      position: fixed;
       top: 0;
-      z-index: 1000;
-      background: rgba(13, 17, 23, 0.9);
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body > *:not(.flow-canvas):not(.nav) {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 12, 10, 0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+      height: 56px;
     }
 
     .nav__logo {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-primary);
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
     }
 
-    .nav__logo:hover { opacity: 1; color: var(--green-primary); }
-
-    .nav__back {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 500;
+    .nav__center {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 2.5rem;
+      list-style: none;
     }
 
-    .nav__back:hover { color: var(--green-primary); opacity: 1; }
-
-    /* PAGE HEADER */
-    .page-header {
-      padding: var(--space-xl) 0 var(--space-lg);
-      text-align: center;
+    .nav__center a {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
 
-    .page-header h1 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      margin-bottom: var(--space-sm);
-    }
+    .nav__center a:hover { color: var(--cream); }
+    .nav__center a.active { color: var(--cream); }
 
-    .page-header p {
-      font-size: 1.1rem;
-      max-width: 640px;
-      margin: 0 auto var(--space-md);
-    }
-
-    .page-header .stats {
+    .nav__right {
       display: flex;
-      justify-content: center;
-      gap: var(--space-lg);
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
     }
 
-    .page-header .stat {
+    .nav__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .nav__icon svg { width: 15px; height: 15px; }
+    .nav__icon:hover { color: var(--green); }
+
+    .nav__cta {
+      width: auto !important;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: color 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .nav__cta:hover {
+      color: var(--cream);
+      background: var(--green-dim);
+      border-color: var(--green-border);
+      box-shadow: 0 0 18px rgba(107, 158, 126, 0.15);
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav__hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav__hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    @media (max-width: 960px) {
+      .nav__hamburger { display: flex; }
+      .nav__right { display: none; }
+      .nav__center {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: calc(100vh - 56px);
+        height: calc(100svh - 56px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-deep);
+        padding: 2rem;
+        gap: 2rem;
+      }
+      .nav__center a {
+        font-size: 0.9rem;
+        letter-spacing: 0.18em;
+      }
+      .nav__center.open { display: flex; }
+      .nav__mobile-extras {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        margin-top: 0.5rem;
+      }
+      .nav__mobile-extras .nav__cta {
+        margin-left: auto;
+      }
+    }
+
+    @media (min-width: 961px) {
+      .nav__mobile-extras { display: none; }
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 8rem 0 3rem;
       text-align: center;
     }
 
-    .page-header .stat-number {
-      font-family: var(--font-heading);
+    .page-header__label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-header__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .page-header__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.88rem, 1.5vw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .page-header__stats {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .page-header__stat {
+      padding: 1.2rem 2.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      margin-left: -1px;
+    }
+
+    .page-header__stat:first-child {
+      border-radius: var(--radius) 0 0 var(--radius);
+      margin-left: 0;
+    }
+
+    .page-header__stat:last-child {
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .page-header__stat-num {
+      font-family: var(--font-serif);
       font-size: 2rem;
-      font-weight: 700;
-      color: var(--green-primary);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 0.3rem;
     }
 
-    .page-header .stat-label {
-      font-size: 0.85rem;
+    .page-header__stat-label {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 400;
       color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    /* SEARCH & FILTERS */
-    .controls {
-      padding: 0 0 var(--space-lg);
+    @media (max-width: 640px) {
+      .page-header__stats { flex-direction: column; align-items: center; }
+      .page-header__stat { margin-left: 0; margin-top: -1px; min-width: 200px; }
+      .page-header__stat:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+      .page-header__stat:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 3rem 0 5rem;
+    }
+
+    .section__label {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      max-width: 420px;
+      margin: 0 auto 2rem;
+      position: relative;
     }
 
     .search-bar {
       width: 100%;
-      max-width: 480px;
-      margin: 0 auto var(--space-md);
-      display: block;
-      padding: 0.75rem 1.25rem;
-      background: var(--bg-elevated);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--border-radius-pill);
-      color: var(--text-primary);
+      padding: 0.6rem 1.1rem 0.6rem 2.5rem;
+      background: rgba(20, 26, 23, 0.55);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--cream);
       font-family: var(--font-body);
-      font-size: 0.95rem;
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
       outline: none;
-      transition: border-color 0.3s ease;
+      transition: border-color 0.3s;
     }
 
     .search-bar::placeholder { color: var(--text-muted); }
-    .search-bar:focus { border-color: var(--green-primary); }
+    .search-bar:focus { border-color: var(--green-border); }
 
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-icon svg { width: 14px; height: 14px; }
+
+    /* ── FILTERS ── */
     .filters {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-xs);
-      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
     }
 
     .filter-btn {
-      cursor: pointer;
       font-family: var(--font-body);
-      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid var(--glass-border);
-      background: var(--glass-bg);
-      color: var(--green-primary);
-      border-radius: var(--border-radius-pill);
-      padding: 0.4rem 1rem;
-      font-size: 0.85rem;
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s;
     }
 
-    .filter-btn:hover,
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
     .filter-btn.active {
-      background: var(--green-primary);
-      color: var(--bg-base);
-      border-color: var(--green-primary);
+      background: var(--green);
+      color: var(--bg-deep);
+      border-color: var(--green);
     }
 
-    .filter-count {
-      margin-left: 0.35rem;
-      opacity: 0.7;
-    }
-
-    /* GRID */
+    /* ── PORTFOLIO GRID ── */
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-md);
-      padding-bottom: var(--space-xl);
+      gap: 1.25rem;
     }
 
-    .project-card {
-      padding: 0;
+    .p-card {
+      background: rgba(20, 26, 23, 0.55);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius);
+      color: inherit;
+      transition: background 0.3s, box-shadow 0.3s, border-color 0.35s;
       overflow: hidden;
-      color: var(--text-secondary);
       display: flex;
       flex-direction: column;
     }
 
-    .project-card:hover {
-      transform: translateY(-4px);
-      opacity: 1;
+    .p-card:hover {
+      background: rgba(28, 36, 32, 0.7);
+      box-shadow: 0 0 24px var(--green-glow);
+      border-color: var(--border-hover);
     }
 
-    .project-card.hidden {
-      display: none;
-    }
+    .p-card.hidden { display: none; }
 
-    .project-card__thumb {
+
+    .p-card__thumb {
       width: 100%;
-      aspect-ratio: 16 / 10;
-      background: var(--bg-elevated);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      border-bottom: 1px solid var(--glass-border);
-      position: relative;
+      aspect-ratio: 16/10;
       overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
 
-    .project-card__thumb-name {
-      font-family: var(--font-heading);
-      font-weight: 500;
-    }
-
-    .project-card__thumb img {
+    .p-card__thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
+      transition: transform 0.5s;
     }
 
-    .project-card__dev-label {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: auto;
-      padding-top: var(--space-xs);
-    }
+    .p-card:hover .p-card__thumb img { transform: scale(1.04); }
 
-
-    .project-card__info {
-      padding: var(--space-md);
+    .p-card__body {
+      padding: 1.25rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
 
-    .project-card__tag {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.75rem;
-      margin-bottom: var(--space-xs);
-      align-self: flex-start;
+    .p-card__cat {
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
     }
 
-    .project-card__name {
-      font-size: 1.1rem;
+    .p-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-top: var(--space-xs);
-      margin-bottom: var(--space-xs);
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
     }
 
-    .project-card__desc {
-      font-size: 0.9rem;
-      line-height: 1.6;
+    .p-card__desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.55;
       flex: 1;
     }
 
-    .project-card__link {
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-top: var(--space-sm);
-      display: inline-block;
-    }
-
-    /* NO RESULTS */
-    .no-results {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: var(--space-xl) 0;
+    .p-card__dev-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 300;
       color: var(--text-muted);
-      font-size: 1.1rem;
-      display: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
     }
 
-    /* ALSO BUILT NOTE */
-    .also-built {
-      text-align: center;
-      padding-bottom: var(--space-xl);
-      max-width: 640px;
-      margin: 0 auto;
+    .p-card__visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s, transform 0.3s;
     }
 
-    .also-built h3 {
-      font-size: 1.3rem;
-      margin-bottom: var(--space-sm);
+    .p-card:hover .p-card__visit {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .also-built p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    /* FOOTER */
-    .footer {
-      border-top: 1px solid var(--glass-border);
-      padding: var(--space-md) 0;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .footer p + p {
-      margin-top: var(--space-xs);
-    }
-
-    .footer a { color: var(--green-primary); }
-
-    /* RESPONSIVE */
     @media (max-width: 1024px) {
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .portfolio-grid { grid-template-columns: 1fr; }
-      .page-header h1 { font-size: 1.8rem; }
-      .page-header .stats { gap: var(--space-md); }
+      .p-card__visit { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SHOW MORE ── */
+    .show-more-wrap {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .show-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: transparent;
+      padding: 0.7rem 2rem;
+      border: 1px solid var(--green-border);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .show-more-btn:hover {
+      background: var(--green-dim);
+      border-color: var(--green);
+      box-shadow: 0 0 18px rgba(107, 158, 126, 0.15);
+    }
+
+    .show-more-btn .show-more-count {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      opacity: 0.6;
+    }
+
+    .p-card.paged-hidden { display: none; }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      display: none;
+    }
+
+    /* ── RESULT COUNT ── */
+    .result-count {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ALSO BUILT ── */
+    .also-built {
+      text-align: center;
+      padding: 4rem 0;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .also-built__title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .also-built p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .also-built__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--bg-deep);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--green);
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+
+    .also-built__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--green-dim);
+    }
+
+    /* ── PILL ── */
+    .pill {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.25s;
+    }
+
+    .pill:hover {
+      border-color: var(--green-border);
+      color: var(--green);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer__link {
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+
+    .footer__link:hover { color: var(--green); }
+
+    @media (max-width: 640px) {
+      .footer__inner {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.07s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.14s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.21s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.28s; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.35s; }
+
+    .reveal-stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .wrap { padding: 0 1.25rem; }
+      .section { padding: 2.5rem 0 3.5rem; }
+      .page-header { padding: 6.5rem 0 2rem; }
     }
   </style>
 </head>
 <body>
+  <canvas class="flow-canvas" id="flowCanvas"></canvas>
 
   <!-- Nav -->
   <nav class="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo">Mario Miralles</a>
-      <a href="index.html" class="nav__back">&larr; Back to Home</a>
+    <div class="nav__inner wrap">
+      <a href="index.html" class="nav__logo">Mario<br>Miralles</a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__center" id="navLinks">
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li class="nav__mobile-extras">
+          <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="mailto:miralles.mario@gmail.com" class="nav__icon nav__cta">Get In Touch</a>
+        </li>
+      </ul>
+      <div class="nav__right">
+        <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <span style="width:1px;height:16px;background:var(--border);margin:0 0.25rem;"></span>
+        <a href="mailto:miralles.mario@gmail.com" class="nav__icon nav__cta">Get In Touch</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Header -->
+  <!-- Page Header -->
   <header class="page-header">
-    <div class="container">
-      <h1>Full Portfolio</h1>
-      <p>A selection of the 100+ websites I've built across industries. Filter by category or search by name.</p>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-number">100+</div>
-          <div class="stat-label">Sites Built</div>
+    <div class="wrap reveal">
+      <p class="page-header__label">Web Engineer &bull; 100+ Websites Delivered</p>
+      <h1 class="page-header__title">Full Portfolio</h1>
+      <p class="page-header__subtitle">A selection of the 100+ websites I've built across industries. Filter by category or search by name.</p>
+      <div class="page-header__stats">
+        <div class="page-header__stat">
+          <div class="page-header__stat-num">100+</div>
+          <div class="page-header__stat-label">Sites Built</div>
         </div>
-        <div class="stat">
-          <div class="stat-number">34+</div>
-          <div class="stat-label">Industries</div>
+        <div class="page-header__stat">
+          <div class="page-header__stat-num">34+</div>
+          <div class="page-header__stat-label">Industries</div>
         </div>
-        <div class="stat">
-          <div class="stat-number">~50</div>
-          <div class="stat-label">Shown Here</div>
+        <div class="page-header__stat">
+          <div class="page-header__stat-num">~50</div>
+          <div class="page-header__stat-label">Shown Here</div>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Controls -->
-  <section class="controls">
-    <div class="container">
-      <input type="text" class="search-bar" id="searchBar" placeholder="Search projects by name...">
-      <div class="filters" id="filters">
+  <!-- Controls & Grid -->
+  <section class="section">
+    <div class="wrap">
+      <div class="search-wrap reveal">
+        <span class="search-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search projects by name...">
+      </div>
+
+      <div class="filters reveal" id="filters">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="automotive">Automotive</button>
-        <button class="filter-btn" data-filter="beauty">Beauty & Salon</button>
+        <button class="filter-btn" data-filter="beauty">Beauty &amp; Salon</button>
         <button class="filter-btn" data-filter="cleaning">Cleaning</button>
         <button class="filter-btn" data-filter="construction">Construction</button>
         <button class="filter-btn" data-filter="healthcare">Healthcare</button>
@@ -432,702 +813,832 @@
         <button class="filter-btn" data-filter="nonprofit">Nonprofit</button>
         <button class="filter-btn" data-filter="security">Security</button>
         <button class="filter-btn" data-filter="tech">Tech / SaaS</button>
-        <button class="filter-btn" data-filter="towing">Towing & Recovery</button>
+        <button class="filter-btn" data-filter="towing">Towing &amp; Recovery</button>
+      </div>
+
+      <p class="result-count reveal" id="resultCount"></p>
+
+      <div class="portfolio-grid" id="portfolioGrid">
+
+        <!-- ── IN DEVELOPMENT ── -->
+
+        <div class="p-card" data-industry="towing" data-name="Southern Saviors">
+          <div class="p-card__thumb"><img src="assets/screenshots/southernsaviors.jpg" alt="Southern Saviors"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Southern Saviors LLC</h4>
+            <p class="p-card__desc">Professional towing, roadside assistance, and wrecker services in Pembroke, GA and the Low Country region.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="construction" data-name="Fineline Fencing">
+          <div class="p-card__thumb"><img src="assets/screenshots/finelinefencing.jpg" alt="Fineline Fencing"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Fineline Fencing</h4>
+            <p class="p-card__desc">Vinyl, wood, chain link, and aluminum fence installation engineered for Northern Michigan's climate.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="towing" data-name="Summit View Towing">
+          <div class="p-card__thumb"><img src="assets/screenshots/summitviewtowing.jpg" alt="Summit View Towing"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Summit View Towing</h4>
+            <p class="p-card__desc">Professional towing, recovery, and roadside services throughout Hamburg, PA and surrounding counties.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="construction" data-name="Good Fences">
+          <div class="p-card__thumb"><img src="assets/screenshots/goodfences.jpg" alt="Good Fences"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Good Fences</h4>
+            <p class="p-card__desc">Custom vinyl, wood, aluminum, and chain link fence installation for residential and commercial properties.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="home-services" data-name="Quality Home Services">
+          <div class="p-card__thumb"><img src="assets/screenshots/qualityhomeservices.jpg" alt="Quality Home Services"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Quality Home Services</h4>
+            <p class="p-card__desc">Solar energy, water treatment, generators, and EV charger installation across Central California.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="home-services" data-name="Loyalty Gutters">
+          <div class="p-card__thumb"><img src="assets/screenshots/loyaltygutters.jpg" alt="Loyalty Gutters"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Loyalty Gutters</h4>
+            <p class="p-card__desc">Professional gutter installation, repair, and seamless gutters in Charleston, SC and surrounding areas.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="legal" data-name="Monks Law Firm">
+          <div class="p-card__thumb"><img src="assets/screenshots/monkslawfirm.jpg" alt="Monks Law Firm"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Legal</p>
+            <h4 class="p-card__name">Monks Law Firm</h4>
+            <p class="p-card__desc">Criminal defense and traffic defense services in Houston, TX with 43+ years of combined experience.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="security" data-name="National Safety Shelters">
+          <div class="p-card__thumb"><img src="assets/screenshots/nationalsafetyshelters.jpg" alt="National Safety Shelters"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Security</p>
+            <h4 class="p-card__name">National Safety Shelters</h4>
+            <p class="p-card__desc">Protective shelter systems for schools, government facilities, and businesses against active threats and natural disasters.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="security" data-name="Maxximm Security Group">
+          <div class="p-card__thumb"><img src="assets/screenshots/maxximmsecurity.jpg" alt="Maxximm Security Group"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Security</p>
+            <h4 class="p-card__name">Maxximm Security Group</h4>
+            <p class="p-card__desc">Licensed armed and unarmed officers, mobile patrol, and camera installation serving Missouri, California, and nationwide.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="construction" data-name="George T. Kenney Inc">
+          <div class="p-card__thumb"><img src="assets/screenshots/georgetkenney.jpg" alt="George T. Kenney Inc"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">George T. Kenney, Inc.</h4>
+            <p class="p-card__desc">Custom kitchen and bathroom remodeling with 3D design visualization in Sarasota, FL.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="local-business" data-name="A Plus Rooter">
+          <div class="p-card__thumb"><img src="assets/screenshots/aplusrooter.jpg" alt="A Plus Rooter"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">A Plus Rooter Sewer &amp; Drain</h4>
+            <p class="p-card__desc">Drain cleaning, sewer repair, water heater service, and emergency plumbing in Jupiter and Palm Beach County.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="towing" data-name="Tow Guard America">
+          <div class="p-card__thumb"><img src="assets/screenshots/towguardamerica.jpg" alt="Tow Guard America"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Tow Guard America</h4>
+            <p class="p-card__desc">Fast emergency towing, roadside assistance, and equipment transport across the Chicago area.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="local-business" data-name="OPACHS HVAC">
+          <div class="p-card__thumb"><img src="assets/screenshots/opachshvac.jpg" alt="OPACHS HVAC" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">OPACHS HVAC Services</h4>
+            <p class="p-card__desc">Heating, cooling, and AC repair, installation, and maintenance for Memphis area homeowners.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <div class="p-card" data-industry="home-services" data-name="Ivy Chimney">
+          <div class="p-card__thumb"><img src="assets/screenshots/ivychimney.jpg" alt="Ivy Chimney" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Ivy Chimney</h4>
+            <p class="p-card__desc">Professional chimney cleaning and repairs in Minneapolis, MN and throughout Minnesota and Wisconsin.</p>
+            <span class="p-card__dev-label">In Development</span>
+          </div>
+        </div>
+
+        <!-- ── LIVE PROJECTS ── -->
+
+        <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="p-card" data-industry="tech" data-name="SiteStaffr">
+          <div class="p-card__thumb"><img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Tech / SaaS</p>
+            <h4 class="p-card__name">SiteStaffr</h4>
+            <p class="p-card__desc">AI voice and chat agents for WordPress websites, handling visitor inquiries 24/7 in 57+ languages.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="p-card" data-industry="nonprofit" data-name="Kitty Puppy Alliance">
+          <div class="p-card__thumb"><img src="assets/screenshots/kittypuppy.org.jpg" alt="Kitty Puppy Alliance" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Nonprofit</p>
+            <h4 class="p-card__name">Kitty Puppy Alliance</h4>
+            <p class="p-card__desc">Miami-based 501(c)(3) nonprofit rescuing, fostering, and rehoming cats, dogs, and rabbits.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://loriamedical.com" target="_blank" rel="noopener" class="p-card" data-industry="healthcare" data-name="Loria Medical">
+          <div class="p-card__thumb"><img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Healthcare</p>
+            <h4 class="p-card__name">Loria Medical</h4>
+            <p class="p-card__desc">Permanent male enhancement procedures performed by Dr. Victor Loria in Miami, FL.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://urohard.com" target="_blank" rel="noopener" class="p-card" data-industry="healthcare" data-name="UroHard">
+          <div class="p-card__thumb"><img src="assets/screenshots/urohard.com.jpg" alt="UroHard" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Healthcare</p>
+            <h4 class="p-card__name">UroHard</h4>
+            <p class="p-card__desc">Non-surgical male enhancement procedures by Dr. Melvin Fussell in Warner Robins, GA.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://synergyscribes.com" target="_blank" rel="noopener" class="p-card" data-industry="healthcare" data-name="SynergyScribes">
+          <div class="p-card__thumb"><img src="assets/screenshots/synergyscribes.com.jpg" alt="SynergyScribes" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Healthcare</p>
+            <h4 class="p-card__name">SynergyScribes</h4>
+            <p class="p-card__desc">Medical scribes reducing EMR documentation burden for South Florida healthcare providers.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://loriaphysiciansgroup.com" target="_blank" rel="noopener" class="p-card" data-industry="healthcare" data-name="Loria Physicians Group">
+          <div class="p-card__thumb"><img src="assets/screenshots/loriaphysiciansgroup.com.jpg" alt="Loria Physicians Group" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Healthcare</p>
+            <h4 class="p-card__name">Loria Physicians Group</h4>
+            <p class="p-card__desc">Male enhancement cosmetic procedures and medical devices led by Dr. Victor Loria.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://bobsgaragedoorsllc.com" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Bobs Garage Doors">
+          <div class="p-card__thumb"><img src="assets/screenshots/bobsgaragedoorsllc.com.jpg" alt="Bob's Garage Doors" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Bob's Garage Doors LLC</h4>
+            <p class="p-card__desc">Garage door installation, repair, and opener services in Central New York.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://amgtow.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="AMG Tow">
+          <div class="p-card__thumb"><img src="assets/screenshots/amgtow.com.jpg" alt="AMG Tow" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">AMG Tow</h4>
+            <p class="p-card__desc">24/7 towing, roadside assistance, and wrecker service in Spartanburg County.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://dwdtowing.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="DWD Towing">
+          <div class="p-card__thumb"><img src="assets/screenshots/dwdtowing.com.jpg" alt="DWD Towing" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">DWD Towing</h4>
+            <p class="p-card__desc">Fast, family-owned towing and wrecker service with junk car buying, available 24/7.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://elitepressuresolutions.net" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Elite Pressure Solutions">
+          <div class="p-card__thumb"><img src="assets/screenshots/elitepressuresolutions.net.jpg" alt="Elite Pressure Solutions" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Elite Pressure Solutions</h4>
+            <p class="p-card__desc">Eco-friendly pressure washing and exterior cleaning in Jacksonville, FL.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://insaneperformancetx.com" target="_blank" rel="noopener" class="p-card" data-industry="landscaping" data-name="Insane Performance TX">
+          <div class="p-card__thumb"><img src="assets/screenshots/insaneperformancetx.com.jpg" alt="Insane Performance TX" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Landscaping</p>
+            <h4 class="p-card__name">Insane Performance TX</h4>
+            <p class="p-card__desc">Lawn care, landscaping, and junk removal in Cameron County, Texas.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://ralphselectricservicenc.com" target="_blank" rel="noopener" class="p-card" data-industry="home-services" data-name="Ralphs Electric Service NC">
+          <div class="p-card__thumb"><img src="assets/screenshots/ralphselectricservicenc.com.jpg" alt="Ralph's Electric Service" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Ralph's Electric Service NC</h4>
+            <p class="p-card__desc">Electrical repairs, installations, and maintenance in Wake County, NC.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://ecocleaningcollective.com" target="_blank" rel="noopener" class="p-card" data-industry="cleaning" data-name="Eco Cleaning Collective">
+          <div class="p-card__thumb"><img src="assets/screenshots/ecocleaningcollective.com.jpg" alt="Eco Cleaning Collective" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Cleaning</p>
+            <h4 class="p-card__name">Eco Cleaning Collective</h4>
+            <p class="p-card__desc">Professional house and commercial cleaning throughout Santa Cruz County.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://tkacandheating.com" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="TK AC and Heating">
+          <div class="p-card__thumb"><img src="assets/screenshots/tkacandheating.com.jpg" alt="TK AC &amp; Heating" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">TK AC &amp; Heating</h4>
+            <p class="p-card__desc">HVAC repair, installation, and maintenance for residential and commercial properties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://handydandyhauling.com" target="_blank" rel="noopener" class="p-card" data-industry="home-services" data-name="Handy Dandy Hauling">
+          <div class="p-card__thumb"><img src="assets/screenshots/handydandyhauling.com.jpg" alt="Handy Dandy Hauling" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Handy Dandy Hauling</h4>
+            <p class="p-card__desc">Junk removal, landscaping, and residential moving services in Nashville.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://hcrexcavating.com" target="_blank" rel="noopener" class="p-card" data-industry="construction" data-name="HCR Excavating">
+          <div class="p-card__thumb"><img src="assets/screenshots/hcrexcavating.com.jpg" alt="HCR Excavating" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">HCR Excavating</h4>
+            <p class="p-card__desc">Expert excavation and land clearing services for East Tennessee properties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://nobidesignbuild.com" target="_blank" rel="noopener" class="p-card" data-industry="construction" data-name="Nobi Design Build">
+          <div class="p-card__thumb"><img src="assets/screenshots/nobidesignbuild.com.jpg" alt="Nobi Design Build" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Nobi Design Build</h4>
+            <p class="p-card__desc">Custom carpentry and general contracting in Sonoma and Napa Counties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://allfresno-locksmith.com" target="_blank" rel="noopener" class="p-card" data-industry="automotive" data-name="All Fresno Locksmith">
+          <div class="p-card__thumb"><img src="assets/screenshots/allfresno-locksmith.com.jpg" alt="All Fresno Locksmith" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Automotive</p>
+            <h4 class="p-card__name">All Fresno Locksmith</h4>
+            <p class="p-card__desc">Automotive locksmith specializing in car keys, ignition repair, and programming in Fresno.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://toddwrecker.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="Todd Wrecker">
+          <div class="p-card__thumb"><img src="assets/screenshots/toddwrecker.com.jpg" alt="Todd Wrecker" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Todd Wrecker</h4>
+            <p class="p-card__desc">Heavy duty towing and full-service auto repair in Ripley County, Indiana.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://jdoonmobiletires.com" target="_blank" rel="noopener" class="p-card" data-industry="automotive" data-name="JDOON Mobile Tires">
+          <div class="p-card__thumb"><img src="assets/screenshots/jdoonmobiletires.com.jpg" alt="JDOON Mobile Tires" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Automotive</p>
+            <h4 class="p-card__name">JDOON Mobile Tires</h4>
+            <p class="p-card__desc">Mobile tire shop with new and used tires delivered throughout Palm Beach County.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://solutionsecocleaningllc.com" target="_blank" rel="noopener" class="p-card" data-industry="cleaning" data-name="Solutions Eco Cleaning">
+          <div class="p-card__thumb"><img src="assets/screenshots/solutionsecocleaningllc.com.jpg" alt="Solutions Eco Cleaning" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Cleaning</p>
+            <h4 class="p-card__name">Solutions Eco Cleaning LLC</h4>
+            <p class="p-card__desc">Residential, commercial, and Airbnb cleaning across Raleigh and surrounding NC counties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://davidsalonhowardbeach.com" target="_blank" rel="noopener" class="p-card" data-industry="beauty" data-name="David Salon Howard Beach">
+          <div class="p-card__thumb"><img src="assets/screenshots/davidsalonhowardbeach.com.jpg" alt="David Salon Howard Beach" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Beauty &amp; Salon</p>
+            <h4 class="p-card__name">David Salon Howard Beach</h4>
+            <p class="p-card__desc">Full-service salon and spa with cuts, laser hair removal, and cosmetic treatments.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://crownhairandbrowssalon.com" target="_blank" rel="noopener" class="p-card" data-industry="beauty" data-name="Crown Hair and Brows Salon">
+          <div class="p-card__thumb"><img src="assets/screenshots/crownhairandbrowssalon.com.jpg" alt="Crown Hair &amp; Brows Salon" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Beauty &amp; Salon</p>
+            <h4 class="p-card__name">Crown Hair &amp; Brows Salon</h4>
+            <p class="p-card__desc">Full-service beauty salon with hair, nails, brows, and styling in Vista, CA.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://crossroadssoftwash.com" target="_blank" rel="noopener" class="p-card" data-industry="home-services" data-name="Crossroads Softwash">
+          <div class="p-card__thumb"><img src="assets/screenshots/crossroadssoftwash.com.jpg" alt="Crossroads Softwash" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Crossroads Softwash</h4>
+            <p class="p-card__desc">Professional pressure washing and exterior cleaning in Lexington and Aiken County.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://mightymonkeycarpets.com" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Mighty Monkey Carpets">
+          <div class="p-card__thumb"><img src="assets/screenshots/mightymonkeycarpets.com.jpg" alt="Mighty Monkey Carpets" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Mighty Monkey Carpets</h4>
+            <p class="p-card__desc">Professional carpet and floor cleaning for homes and businesses in Twin Lakes, WI.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://fastmobilelocksmith808.com" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Fast Mobile Locksmith 808">
+          <div class="p-card__thumb"><img src="assets/screenshots/fastmobilelocksmith808.com.jpg" alt="Fast Mobile Locksmith 808" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Fast Mobile Locksmith 808</h4>
+            <p class="p-card__desc">24-hour emergency locksmith for homes, businesses, and vehicles in Rialto, CA.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://osoriolandscaping.net" target="_blank" rel="noopener" class="p-card" data-industry="landscaping" data-name="Osorio Landscaping">
+          <div class="p-card__thumb"><img src="assets/screenshots/osoriolandscaping.net.jpg" alt="Osorio Landscaping" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Landscaping</p>
+            <h4 class="p-card__name">Osorio Landscaping</h4>
+            <p class="p-card__desc">Expert landscaping and tree services for residential and commercial properties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://fastlanetowingllc.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="Fast Lane Towing">
+          <div class="p-card__thumb"><img src="assets/screenshots/fastlanetowingllc.com.jpg" alt="Fast Lane Towing" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Fast Lane Towing</h4>
+            <p class="p-card__desc">24/7 towing and roadside assistance in Franklin, WI and surrounding areas.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://edatow.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="EDA Tow">
+          <div class="p-card__thumb"><img src="assets/screenshots/edatow.com.jpg" alt="EDA Tow" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">EDA Tow</h4>
+            <p class="p-card__desc">24-hour towing and roadside assistance serving Royse City, Dallas, and surrounding TX areas.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://harrisonstowing.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="Harrisons Towing">
+          <div class="p-card__thumb"><img src="assets/screenshots/harrisonstowing.com.jpg" alt="Harrison's Towing" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Harrison's Towing</h4>
+            <p class="p-card__desc">24/7 towing and roadside assistance serving the DMV and surrounding states.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://kellyskreationsin.com" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Kellys Kreations">
+          <div class="p-card__thumb"><img src="assets/screenshots/kellyskreationsin.com.jpg" alt="Kelly's Kreations" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Kelly's Kreations</h4>
+            <p class="p-card__desc">Custom floral designs for weddings, events, and special occasions in Lafayette, IN.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://balancedtherapycenter.com" target="_blank" rel="noopener" class="p-card" data-industry="healthcare" data-name="Balanced Therapy Center">
+          <div class="p-card__thumb"><img src="assets/screenshots/balancedtherapycenter.com.jpg" alt="Balanced Therapy Center" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Healthcare</p>
+            <h4 class="p-card__name">Balanced Therapy Center</h4>
+            <p class="p-card__desc">Trauma and mental health counseling for adults, children, and teens in El Paso, TX.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://mbtowingandrecovery.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="MB Towing and Recovery">
+          <div class="p-card__thumb"><img src="assets/screenshots/mbtowingandrecovery.com.jpg" alt="MB Towing &amp; Recovery" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">MB Towing &amp; Recovery</h4>
+            <p class="p-card__desc">24/7 towing and roadside assistance serving Palos Hills, IL with lockouts and jumpstarts.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://stormban.com" target="_blank" rel="noopener" class="p-card" data-industry="home-services" data-name="Stormban">
+          <div class="p-card__thumb"><img src="assets/screenshots/stormban.com.jpg" alt="Stormban" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Stormban</h4>
+            <p class="p-card__desc">Roofing, siding, and storm damage restoration services in Tinley Park, IL.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://recoveryservice1.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="Recovery Service 1">
+          <div class="p-card__thumb"><img src="assets/screenshots/recoveryservice1.com.jpg" alt="Recovery Service 1" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Recovery Service 1</h4>
+            <p class="p-card__desc">24/7 towing, wrecker service, and roadside assistance in Texarkana, AR.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://precisionpressurewashing.net" target="_blank" rel="noopener" class="p-card" data-industry="local-business" data-name="Precision Pressure Washing">
+          <div class="p-card__thumb"><img src="assets/screenshots/precisionpressurewashing.net.jpg" alt="Precision Pressure Washing" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Local Business</p>
+            <h4 class="p-card__name">Precision Pressure Washing</h4>
+            <p class="p-card__desc">Pressure washing and exterior cleaning for homes and businesses in Phoenix metro.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://grantandgrantdevelopmentgroup.com" target="_blank" rel="noopener" class="p-card" data-industry="construction" data-name="Grant and Grant Development Group">
+          <div class="p-card__thumb"><img src="assets/screenshots/grantandgrantdevelopmentgroup.com.jpg" alt="Grant &amp; Grant Development" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Grant &amp; Grant Development Group</h4>
+            <p class="p-card__desc">Demolition, land clearing, and forestry mulching for residential and commercial properties.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://wellswreckerservice.com" target="_blank" rel="noopener" class="p-card" data-industry="towing" data-name="Wells Wrecker Service">
+          <div class="p-card__thumb"><img src="assets/screenshots/wellswreckerservice.com.jpg" alt="Wells Wrecker Service" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Towing &amp; Recovery</p>
+            <h4 class="p-card__name">Wells Wrecker Service</h4>
+            <p class="p-card__desc">24/7 towing and roadside assistance serving Azle, TX and surrounding areas.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://pennybarkerpressurewashing.com" target="_blank" rel="noopener" class="p-card" data-industry="home-services" data-name="Penny Barker Pressure Washing">
+          <div class="p-card__thumb"><img src="assets/screenshots/pennybarkerpressurewashing.com.jpg" alt="Penny Barker Pressure Washing" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Home Services</p>
+            <h4 class="p-card__name">Penny Barker Pressure Washing</h4>
+            <p class="p-card__desc">Pressure washing and power washing for homes, driveways, and decks in Pennsylvania.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://qualityprocontractorsllc.com" target="_blank" rel="noopener" class="p-card" data-industry="construction" data-name="Quality Pro Contractors">
+          <div class="p-card__thumb"><img src="assets/screenshots/qualityprocontractorsllc.com.jpg" alt="Quality Pro Contractors" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Quality Pro Contractors</h4>
+            <p class="p-card__desc">Drywall, painting, remodeling, and construction services in Kenner, LA.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://burkeconstructionstl.com" target="_blank" rel="noopener" class="p-card" data-industry="construction" data-name="Burke Construction STL">
+          <div class="p-card__thumb"><img src="assets/screenshots/burkeconstructionstl.com.jpg" alt="Burke Construction STL" loading="lazy"></div>
+          <div class="p-card__body">
+            <p class="p-card__cat">Construction</p>
+            <h4 class="p-card__name">Burke Construction STL</h4>
+            <p class="p-card__desc">Backyard construction &mdash; pools, concrete, fencing, and landscaping completed in-house.</p>
+            <span class="p-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">No projects match your search. Try a different filter or keyword.</div>
+
+      </div>
+
+      <div class="show-more-wrap" id="showMoreWrap">
+        <button class="show-more-btn" id="showMoreBtn">
+          Show More <span class="show-more-count" id="showMoreCount"></span>
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio Grid -->
-  <section class="container">
-    <div class="portfolio-grid" id="portfolioGrid">
-
-      <!-- ============================================
-           IN DEVELOPMENT — Newest first
-           ============================================ -->
-
-      <div class="glass-card project-card" data-industry="towing" data-name="Southern Saviors">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/southernsaviors.jpg" alt="Southern Saviors homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Southern Saviors LLC</h4>
-          <p class="project-card__desc">Professional towing, roadside assistance, and wrecker services in Pembroke, GA and the Low Country region.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
+  <!-- Also Built -->
+  <section class="section">
+    <div class="wrap">
+      <div class="also-built reveal">
+        <h3 class="also-built__title">Beyond Public Websites</h3>
+        <p>In addition to the sites shown here, I've built private client portals, e-commerce stores with WooCommerce, HIPAA-conscious medical platforms, internal business tools, and many other projects that aren't public-facing. The work shown above represents a fraction of the 100+ sites I've delivered.</p>
+        <a href="mailto:miralles.mario@gmail.com" class="also-built__btn">Let's Discuss Your Project &rarr;</a>
       </div>
-
-      <div class="glass-card project-card" data-industry="construction" data-name="Fineline Fencing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/finelinefencing.jpg" alt="Fineline Fencing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Fineline Fencing</h4>
-          <p class="project-card__desc">Vinyl, wood, chain link, and aluminum fence installation engineered for Northern Michigan's climate.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="towing" data-name="Summit View Towing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/summitviewtowing.jpg" alt="Summit View Towing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Summit View Towing</h4>
-          <p class="project-card__desc">Professional towing, recovery, and roadside services throughout Hamburg, PA and surrounding counties.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="construction" data-name="Good Fences">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/goodfences.jpg" alt="Good Fences homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Good Fences</h4>
-          <p class="project-card__desc">Custom vinyl, wood, aluminum, and chain link fence installation for residential and commercial properties.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="home-services" data-name="Quality Home Services">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/qualityhomeservices.jpg" alt="Quality Home Services homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Quality Home Services</h4>
-          <p class="project-card__desc">Solar energy, water treatment, generators, and EV charger installation across Central California.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="home-services" data-name="Loyalty Gutters">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/loyaltygutters.jpg" alt="Loyalty Gutters homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Loyalty Gutters</h4>
-          <p class="project-card__desc">Professional gutter installation, repair, and seamless gutters in Charleston, SC and surrounding areas.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="legal" data-name="Monks Law Firm">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/monkslawfirm.jpg" alt="Monks Law Firm homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Legal</span>
-          <h4 class="project-card__name">Monks Law Firm</h4>
-          <p class="project-card__desc">Criminal defense and traffic defense services in Houston, TX with 43+ years of combined experience.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="security" data-name="National Safety Shelters">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/nationalsafetyshelters.jpg" alt="National Safety Shelters homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Security</span>
-          <h4 class="project-card__name">National Safety Shelters</h4>
-          <p class="project-card__desc">Protective shelter systems for schools, government facilities, and businesses against active threats and natural disasters.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="security" data-name="Maxximm Security Group">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/maxximmsecurity.jpg" alt="Maxximm Security Group homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Security</span>
-          <h4 class="project-card__name">Maxximm Security Group</h4>
-          <p class="project-card__desc">Licensed armed and unarmed officers, mobile patrol, and camera installation serving Missouri, California, and nationwide.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="construction" data-name="George T. Kenney Inc">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/georgetkenney.jpg" alt="George T. Kenney Inc homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">George T. Kenney, Inc.</h4>
-          <p class="project-card__desc">Custom kitchen and bathroom remodeling with 3D design visualization in Sarasota, FL.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="local-business" data-name="A Plus Rooter">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/aplusrooter.jpg" alt="A Plus Rooter homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">A Plus Rooter Sewer & Drain</h4>
-          <p class="project-card__desc">Drain cleaning, sewer repair, water heater service, and emergency plumbing in Jupiter and Palm Beach County.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="towing" data-name="Tow Guard America">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/towguardamerica.jpg" alt="Tow Guard America homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Tow Guard America</h4>
-          <p class="project-card__desc">Fast emergency towing, roadside assistance, and equipment transport across the Chicago area.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="local-business" data-name="OPACHS HVAC">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/opachshvac.jpg" alt="OPACHS HVAC homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">OPACHS HVAC Services</h4>
-          <p class="project-card__desc">Heating, cooling, and AC repair, installation, and maintenance for Memphis area homeowners.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" data-industry="home-services" data-name="Ivy Chimney">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/ivychimney.jpg" alt="Ivy Chimney homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Ivy Chimney</h4>
-          <p class="project-card__desc">Professional chimney cleaning and repairs in Minneapolis, MN and throughout Minnesota and Wisconsin.</p>
-          <span class="project-card__dev-label">In Development</span>
-        </div>
-      </div>
-
-      <!-- ============================================
-           LIVE — Newest first (reverse of original list)
-           ============================================ -->
-
-      <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="tech" data-name="SiteStaffr">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Tech / SaaS</span>
-          <h4 class="project-card__name">SiteStaffr</h4>
-          <p class="project-card__desc">AI voice and chat agents for WordPress websites, handling visitor inquiries 24/7 in 57+ languages.</p>
-        </div>
-      </a>
-
-      <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="glass-card project-card" data-industry="nonprofit" data-name="Kitty Puppy Alliance">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/kittypuppy.org.jpg" alt="Kitty Puppy Alliance homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Nonprofit</span>
-          <h4 class="project-card__name">Kitty Puppy Alliance</h4>
-          <p class="project-card__desc">Miami-based 501(c)(3) nonprofit rescuing, fostering, and rehoming cats, dogs, and rabbits.</p>
-        </div>
-      </a>
-
-      <a href="https://loriamedical.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="healthcare" data-name="Loria Medical">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Healthcare</span>
-          <h4 class="project-card__name">Loria Medical</h4>
-          <p class="project-card__desc">Permanent male enhancement procedures performed by Dr. Victor Loria in Miami, FL.</p>
-        </div>
-      </a>
-
-      <a href="https://urohard.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="healthcare" data-name="UroHard">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/urohard.com.jpg" alt="UroHard homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Healthcare</span>
-          <h4 class="project-card__name">UroHard</h4>
-          <p class="project-card__desc">Non-surgical male enhancement procedures by Dr. Melvin Fussell in Warner Robins, GA.</p>
-        </div>
-      </a>
-
-      <a href="https://synergyscribes.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="healthcare" data-name="SynergyScribes">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/synergyscribes.com.jpg" alt="SynergyScribes homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Healthcare</span>
-          <h4 class="project-card__name">SynergyScribes</h4>
-          <p class="project-card__desc">Medical scribes reducing EMR documentation burden for South Florida healthcare providers.</p>
-        </div>
-      </a>
-
-      <a href="https://loriaphysiciansgroup.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="healthcare" data-name="Loria Physicians Group">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/loriaphysiciansgroup.com.jpg" alt="Loria Physicians Group homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Healthcare</span>
-          <h4 class="project-card__name">Loria Physicians Group</h4>
-          <p class="project-card__desc">Male enhancement cosmetic procedures and medical devices led by Dr. Victor Loria.</p>
-        </div>
-      </a>
-
-      <a href="https://bobsgaragedoorsllc.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Bobs Garage Doors">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/bobsgaragedoorsllc.com.jpg" alt="Bob's Garage Doors homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Bob's Garage Doors LLC</h4>
-          <p class="project-card__desc">Garage door installation, repair, and opener services in Central New York.</p>
-        </div>
-      </a>
-
-      <a href="https://amgtow.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="AMG Tow">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/amgtow.com.jpg" alt="AMG Tow homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">AMG Tow</h4>
-          <p class="project-card__desc">24/7 towing, roadside assistance, and wrecker service in Spartanburg County.</p>
-        </div>
-      </a>
-
-      <a href="https://dwdtowing.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="DWD Towing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/dwdtowing.com.jpg" alt="DWD Towing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">DWD Towing</h4>
-          <p class="project-card__desc">Fast, family-owned towing and wrecker service with junk car buying, available 24/7.</p>
-        </div>
-      </a>
-
-      <a href="https://elitepressuresolutions.net" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Elite Pressure Solutions">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/elitepressuresolutions.net.jpg" alt="Elite Pressure Solutions homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Elite Pressure Solutions</h4>
-          <p class="project-card__desc">Eco-friendly pressure washing and exterior cleaning in Jacksonville, FL.</p>
-        </div>
-      </a>
-
-      <a href="https://insaneperformancetx.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="landscaping" data-name="Insane Performance TX">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/insaneperformancetx.com.jpg" alt="Insane Performance TX homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Landscaping</span>
-          <h4 class="project-card__name">Insane Performance TX</h4>
-          <p class="project-card__desc">Lawn care, landscaping, and junk removal in Cameron County, Texas.</p>
-        </div>
-      </a>
-
-      <a href="https://ralphselectricservicenc.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="home-services" data-name="Ralphs Electric Service NC">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/ralphselectricservicenc.com.jpg" alt="Ralph's Electric Service homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Ralph's Electric Service NC</h4>
-          <p class="project-card__desc">Electrical repairs, installations, and maintenance in Wake County, NC.</p>
-        </div>
-      </a>
-
-      <a href="https://ecocleaningcollective.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="cleaning" data-name="Eco Cleaning Collective">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/ecocleaningcollective.com.jpg" alt="Eco Cleaning Collective homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Cleaning</span>
-          <h4 class="project-card__name">Eco Cleaning Collective</h4>
-          <p class="project-card__desc">Professional house and commercial cleaning throughout Santa Cruz County.</p>
-        </div>
-      </a>
-
-      <a href="https://tkacandheating.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="TK AC and Heating">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/tkacandheating.com.jpg" alt="TK AC &amp; Heating homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">TK AC & Heating</h4>
-          <p class="project-card__desc">HVAC repair, installation, and maintenance for residential and commercial properties.</p>
-        </div>
-      </a>
-
-      <a href="https://handydandyhauling.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="home-services" data-name="Handy Dandy Hauling">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/handydandyhauling.com.jpg" alt="Handy Dandy Hauling homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Handy Dandy Hauling</h4>
-          <p class="project-card__desc">Junk removal, landscaping, and residential moving services in Nashville.</p>
-        </div>
-      </a>
-
-      <a href="https://hcrexcavating.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="construction" data-name="HCR Excavating">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/hcrexcavating.com.jpg" alt="HCR Excavating homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">HCR Excavating</h4>
-          <p class="project-card__desc">Expert excavation and land clearing services for East Tennessee properties.</p>
-        </div>
-      </a>
-
-      <a href="https://nobidesignbuild.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="construction" data-name="Nobi Design Build">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/nobidesignbuild.com.jpg" alt="Nobi Design Build homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Nobi Design Build</h4>
-          <p class="project-card__desc">Custom carpentry and general contracting in Sonoma and Napa Counties.</p>
-        </div>
-      </a>
-
-      <a href="https://allfresno-locksmith.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="automotive" data-name="All Fresno Locksmith">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/allfresno-locksmith.com.jpg" alt="All Fresno Locksmith homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Automotive</span>
-          <h4 class="project-card__name">All Fresno Locksmith</h4>
-          <p class="project-card__desc">Automotive locksmith specializing in car keys, ignition repair, and programming in Fresno.</p>
-        </div>
-      </a>
-
-      <a href="https://toddwrecker.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="Todd Wrecker">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/toddwrecker.com.jpg" alt="Todd Wrecker homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Todd Wrecker</h4>
-          <p class="project-card__desc">Heavy duty towing and full-service auto repair in Ripley County, Indiana.</p>
-        </div>
-      </a>
-
-      <a href="https://jdoonmobiletires.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="automotive" data-name="JDOON Mobile Tires">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/jdoonmobiletires.com.jpg" alt="JDOON Mobile Tires homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Automotive</span>
-          <h4 class="project-card__name">JDOON Mobile Tires</h4>
-          <p class="project-card__desc">Mobile tire shop with new and used tires delivered throughout Palm Beach County.</p>
-        </div>
-      </a>
-
-      <a href="https://solutionsecocleaningllc.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="cleaning" data-name="Solutions Eco Cleaning">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/solutionsecocleaningllc.com.jpg" alt="Solutions Eco Cleaning homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Cleaning</span>
-          <h4 class="project-card__name">Solutions Eco Cleaning LLC</h4>
-          <p class="project-card__desc">Residential, commercial, and Airbnb cleaning across Raleigh and surrounding NC counties.</p>
-        </div>
-      </a>
-
-      <a href="https://davidsalonhowardbeach.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="beauty" data-name="David Salon Howard Beach">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/davidsalonhowardbeach.com.jpg" alt="David Salon Howard Beach homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Beauty & Salon</span>
-          <h4 class="project-card__name">David Salon Howard Beach</h4>
-          <p class="project-card__desc">Full-service salon and spa with cuts, laser hair removal, and cosmetic treatments.</p>
-        </div>
-      </a>
-
-      <a href="https://crownhairandbrowssalon.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="beauty" data-name="Crown Hair and Brows Salon">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/crownhairandbrowssalon.com.jpg" alt="Crown Hair &amp; Brows Salon homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Beauty & Salon</span>
-          <h4 class="project-card__name">Crown Hair & Brows Salon</h4>
-          <p class="project-card__desc">Full-service beauty salon with hair, nails, brows, and styling in Vista, CA.</p>
-        </div>
-      </a>
-
-      <a href="https://crossroadssoftwash.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="home-services" data-name="Crossroads Softwash">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/crossroadssoftwash.com.jpg" alt="Crossroads Softwash homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Crossroads Softwash</h4>
-          <p class="project-card__desc">Professional pressure washing and exterior cleaning in Lexington and Aiken County.</p>
-        </div>
-      </a>
-
-      <a href="https://mightymonkeycarpets.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Mighty Monkey Carpets">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/mightymonkeycarpets.com.jpg" alt="Mighty Monkey Carpets homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Mighty Monkey Carpets</h4>
-          <p class="project-card__desc">Professional carpet and floor cleaning for homes and businesses in Twin Lakes, WI.</p>
-        </div>
-      </a>
-
-      <a href="https://fastmobilelocksmith808.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Fast Mobile Locksmith 808">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/fastmobilelocksmith808.com.jpg" alt="Fast Mobile Locksmith 808 homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Fast Mobile Locksmith 808</h4>
-          <p class="project-card__desc">24-hour emergency locksmith for homes, businesses, and vehicles in Rialto, CA.</p>
-        </div>
-      </a>
-
-      <a href="https://osoriolandscaping.net" target="_blank" rel="noopener" class="glass-card project-card" data-industry="landscaping" data-name="Osorio Landscaping">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/osoriolandscaping.net.jpg" alt="Osorio Landscaping homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Landscaping</span>
-          <h4 class="project-card__name">Osorio Landscaping</h4>
-          <p class="project-card__desc">Expert landscaping and tree services for residential and commercial properties.</p>
-        </div>
-      </a>
-
-      <a href="https://fastlanetowingllc.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="Fast Lane Towing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/fastlanetowingllc.com.jpg" alt="Fast Lane Towing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Fast Lane Towing</h4>
-          <p class="project-card__desc">24/7 towing and roadside assistance in Franklin, WI and surrounding areas.</p>
-        </div>
-      </a>
-
-      <a href="https://edatow.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="EDA Tow">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/edatow.com.jpg" alt="EDA Tow homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">EDA Tow</h4>
-          <p class="project-card__desc">24-hour towing and roadside assistance serving Royse City, Dallas, and surrounding TX areas.</p>
-        </div>
-      </a>
-
-      <a href="https://harrisonstowing.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="Harrisons Towing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/harrisonstowing.com.jpg" alt="Harrison's Towing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Harrison's Towing</h4>
-          <p class="project-card__desc">24/7 towing and roadside assistance serving the DMV and surrounding states.</p>
-        </div>
-      </a>
-
-      <a href="https://kellyskreationsin.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Kellys Kreations">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/kellyskreationsin.com.jpg" alt="Kelly's Kreations homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Kelly's Kreations</h4>
-          <p class="project-card__desc">Custom floral designs for weddings, events, and special occasions in Lafayette, IN.</p>
-        </div>
-      </a>
-
-      <a href="https://balancedtherapycenter.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="healthcare" data-name="Balanced Therapy Center">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/balancedtherapycenter.com.jpg" alt="Balanced Therapy Center homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Healthcare</span>
-          <h4 class="project-card__name">Balanced Therapy Center</h4>
-          <p class="project-card__desc">Trauma and mental health counseling for adults, children, and teens in El Paso, TX.</p>
-        </div>
-      </a>
-
-      <a href="https://mbtowingandrecovery.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="MB Towing and Recovery">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/mbtowingandrecovery.com.jpg" alt="MB Towing &amp; Recovery homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">MB Towing & Recovery</h4>
-          <p class="project-card__desc">24/7 towing and roadside assistance serving Palos Hills, IL with lockouts and jumpstarts.</p>
-        </div>
-      </a>
-
-      <a href="https://stormban.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="home-services" data-name="Stormban">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/stormban.com.jpg" alt="Stormban homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Stormban</h4>
-          <p class="project-card__desc">Roofing, siding, and storm damage restoration services in Tinley Park, IL.</p>
-        </div>
-      </a>
-
-      <a href="https://recoveryservice1.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="Recovery Service 1">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/recoveryservice1.com.jpg" alt="Recovery Service 1 homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Recovery Service 1</h4>
-          <p class="project-card__desc">24/7 towing, wrecker service, and roadside assistance in Texarkana, AR.</p>
-        </div>
-      </a>
-
-      <a href="https://precisionpressurewashing.net" target="_blank" rel="noopener" class="glass-card project-card" data-industry="local-business" data-name="Precision Pressure Washing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/precisionpressurewashing.net.jpg" alt="Precision Pressure Washing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Local Business</span>
-          <h4 class="project-card__name">Precision Pressure Washing</h4>
-          <p class="project-card__desc">Pressure washing and exterior cleaning for homes and businesses in Phoenix metro.</p>
-        </div>
-      </a>
-
-      <a href="https://grantandgrantdevelopmentgroup.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="construction" data-name="Grant and Grant Development Group">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/grantandgrantdevelopmentgroup.com.jpg" alt="Grant &amp; Grant Development homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Grant & Grant Development Group</h4>
-          <p class="project-card__desc">Demolition, land clearing, and forestry mulching for residential and commercial properties.</p>
-        </div>
-      </a>
-
-      <a href="https://wellswreckerservice.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="towing" data-name="Wells Wrecker Service">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/wellswreckerservice.com.jpg" alt="Wells Wrecker Service homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Towing & Recovery</span>
-          <h4 class="project-card__name">Wells Wrecker Service</h4>
-          <p class="project-card__desc">24/7 towing and roadside assistance serving Azle, TX and surrounding areas.</p>
-        </div>
-      </a>
-
-      <a href="https://pennybarkerpressurewashing.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="home-services" data-name="Penny Barker Pressure Washing">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/pennybarkerpressurewashing.com.jpg" alt="Penny Barker Pressure Washing homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Home Services</span>
-          <h4 class="project-card__name">Penny Barker Pressure Washing</h4>
-          <p class="project-card__desc">Pressure washing and power washing for homes, driveways, and decks in Pennsylvania.</p>
-        </div>
-      </a>
-
-      <a href="https://qualityprocontractorsllc.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="construction" data-name="Quality Pro Contractors">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/qualityprocontractorsllc.com.jpg" alt="Quality Pro Contractors homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Quality Pro Contractors</h4>
-          <p class="project-card__desc">Drywall, painting, remodeling, and construction services in Kenner, LA.</p>
-        </div>
-      </a>
-
-      <a href="https://burkeconstructionstl.com" target="_blank" rel="noopener" class="glass-card project-card" data-industry="construction" data-name="Burke Construction STL">
-        <div class="project-card__thumb">
-          <img src="assets/screenshots/burkeconstructionstl.com.jpg" alt="Burke Construction STL homepage screenshot" loading="lazy">
-        </div>
-        <div class="project-card__info">
-          <span class="glass-pill project-card__tag">Construction</span>
-          <h4 class="project-card__name">Burke Construction STL</h4>
-          <p class="project-card__desc">Backyard construction — pools, concrete, fencing, and landscaping completed in-house.</p>
-        </div>
-      </a>
-
-      <!-- No Results -->
-      <div class="no-results" id="noResults">No projects match your search. Try a different filter or keyword.</div>
-
     </div>
-  </section>
-
-  <!-- Also Built Note -->
-  <section class="also-built container">
-    <h3>Beyond Public Websites</h3>
-    <p>In addition to the sites shown here, I've built private client portals, e-commerce stores with WooCommerce, HIPAA-conscious medical platforms, internal business tools, and many other projects that aren't public-facing. The work shown above represents a fraction of the 100+ sites I've delivered.</p>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 Mario Miralles. All rights reserved.</p>
-      <p><a href="index.html">Back to Home</a></p>
+    <div class="wrap footer__inner">
+      <span>Mario Miralles &middot; 2026</span>
+      <a href="mailto:miralles.mario@gmail.com" class="footer__link">miralles.mario@gmail.com</a>
+      <span>Built with Claude Code</span>
     </div>
   </footer>
 
   <script>
+    /* ── FLOW FIELD BACKGROUND ── */
     (function() {
-      var cards = document.querySelectorAll('.project-card');
+      var canvas = document.getElementById('flowCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h;
+      var scale = 20;
+      var particles = [];
+      var particleCount = 180;
+      var trailLength = 24;
+      var noiseZ = 0;
+      var scrollInfluence = 0;
+      var mouseX = -9999, mouseY = -9999;
+      var mouseRadius = 180;
+
+      function noise3d(x, y, z) {
+        var v = Math.sin(x * 1.2 + z * 0.3) * Math.cos(y * 0.9 + z * 0.7)
+              + Math.sin(x * 0.7 - y * 1.1 + z * 0.5) * 0.5
+              + Math.cos(x * 2.1 + y * 0.4 + z * 0.2) * 0.3
+              + Math.sin(y * 1.8 - x * 0.6 + z * 0.9) * 0.4;
+        return v / 2.2;
+      }
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function spawnParticle() {
+        var x = Math.random() * w;
+        var y = Math.random() * h;
+        return {
+          x: x, y: y,
+          trail: [{x: x, y: y}],
+          speed: 0.3 + Math.random() * 0.9,
+          life: 0,
+          maxLife: 140 + Math.random() * 180,
+          hue: 140 + Math.random() * 30,
+          lightness: 30 + Math.random() * 15
+        };
+      }
+
+      function initParticles() {
+        particles = [];
+        for (var i = 0; i < particleCount; i++) {
+          var p = spawnParticle();
+          p.life = Math.random() * p.maxLife * 0.5;
+          particles.push(p);
+        }
+      }
+
+      resize();
+      initParticles();
+
+      window.addEventListener('resize', function() { resize(); initParticles(); });
+
+      window.addEventListener('scroll', function() {
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        scrollInfluence = maxScroll > 0 ? (window.scrollY / maxScroll) * Math.PI * 2 : 0;
+      }, { passive: true });
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.addEventListener('mouseleave', function() {
+        mouseX = -9999;
+        mouseY = -9999;
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        noiseZ += 0.0018;
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          var nx = p.x / scale * 0.04;
+          var ny = p.y / scale * 0.04;
+          var angle = noise3d(nx, ny, noiseZ) * Math.PI * 4 + scrollInfluence;
+
+          var moveX = Math.cos(angle) * p.speed;
+          var moveY = Math.sin(angle) * p.speed;
+
+          var dx = p.x - mouseX;
+          var dy = p.y - mouseY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseRadius && dist > 0) {
+            var force = (1 - dist / mouseRadius) * 3;
+            moveX += (dx / dist) * force;
+            moveY += (dy / dist) * force;
+          }
+
+          p.x += moveX;
+          p.y += moveY;
+          p.life++;
+
+          p.trail.push({x: p.x, y: p.y});
+          if (p.trail.length > trailLength) p.trail.shift();
+
+          var lifeFrac = p.life / p.maxLife;
+          var fadeIn = Math.min(lifeFrac * 6, 1);
+          var fadeOut = lifeFrac > 0.7 ? 1 - (lifeFrac - 0.7) / 0.3 : 1;
+          var baseAlpha = fadeIn * fadeOut * 0.5;
+
+          if (baseAlpha > 0.01 && p.trail.length > 1) {
+            for (var t = 1; t < p.trail.length; t++) {
+              var segAlpha = baseAlpha * (t / p.trail.length);
+              if (segAlpha < 0.003) continue;
+              ctx.beginPath();
+              ctx.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+              ctx.lineTo(p.trail[t].x, p.trail[t].y);
+              ctx.strokeStyle = 'hsla(' + p.hue + ', 40%, ' + p.lightness + '%, ' + segAlpha + ')';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          }
+
+          if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20 || p.life >= p.maxLife) {
+            particles[i] = spawnParticle();
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    /* ── HAMBURGER ── */
+    (function() {
+      var hamburger = document.getElementById('navHamburger');
+      var navLinks = document.getElementById('navLinks');
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+        });
+      });
+    })();
+
+    /* ── SCROLL REVEAL ── */
+    (function() {
+      var reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+    /* ── FILTER + SEARCH + PAGINATION ── */
+    (function() {
+      var PAGE_SIZE = 12;
+      var cards = Array.from(document.querySelectorAll('.p-card'));
       var filters = document.querySelectorAll('.filter-btn');
       var searchBar = document.getElementById('searchBar');
       var noResults = document.getElementById('noResults');
+      var resultCount = document.getElementById('resultCount');
+      var showMoreWrap = document.getElementById('showMoreWrap');
+      var showMoreBtn = document.getElementById('showMoreBtn');
+      var showMoreCount = document.getElementById('showMoreCount');
+      var visibleLimit = PAGE_SIZE;
 
-      function applyFilters() {
+      function getMatching() {
         var activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
         var query = searchBar.value.toLowerCase().trim();
-        var visible = 0;
-
-        cards.forEach(function(card) {
+        return cards.filter(function(card) {
           var industry = card.getAttribute('data-industry');
           var name = (card.getAttribute('data-name') || '').toLowerCase();
-          var matchFilter = activeFilter === 'all' || industry === activeFilter;
-          var matchSearch = !query || name.indexOf(query) !== -1;
+          return (activeFilter === 'all' || industry === activeFilter) && (!query || name.indexOf(query) !== -1);
+        });
+      }
 
-          if (matchFilter && matchSearch) {
-            card.classList.remove('hidden');
-            visible++;
-          } else {
+      function render() {
+        var matching = getMatching();
+        var shown = 0;
+
+        cards.forEach(function(card) {
+          var isMatch = matching.indexOf(card) !== -1;
+          if (!isMatch) {
             card.classList.add('hidden');
+            card.classList.remove('paged-hidden');
+          } else {
+            card.classList.remove('hidden');
+            if (shown < visibleLimit) {
+              card.classList.remove('paged-hidden');
+            } else {
+              card.classList.add('paged-hidden');
+            }
+            shown++;
           }
         });
 
-        noResults.style.display = visible === 0 ? 'block' : 'none';
+        noResults.style.display = matching.length === 0 ? 'block' : 'none';
+        var displaying = Math.min(visibleLimit, matching.length);
+        resultCount.textContent = displaying + ' of ' + matching.length + ' project' + (matching.length === 1 ? '' : 's');
+
+        var remaining = matching.length - visibleLimit;
+        if (remaining > 0) {
+          showMoreWrap.style.display = '';
+          showMoreCount.textContent = '(' + remaining + ' more)';
+        } else {
+          showMoreWrap.style.display = 'none';
+        }
       }
+
+      showMoreBtn.addEventListener('click', function() {
+        visibleLimit += PAGE_SIZE;
+        render();
+      });
 
       filters.forEach(function(btn) {
         btn.addEventListener('click', function() {
           filters.forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          applyFilters();
+          visibleLimit = PAGE_SIZE;
+          render();
         });
       });
 
-      searchBar.addEventListener('input', applyFilters);
+      searchBar.addEventListener('input', function() {
+        visibleLimit = PAGE_SIZE;
+        render();
+      });
+
+      render();
     })();
   </script>
-
 </body>
 </html>

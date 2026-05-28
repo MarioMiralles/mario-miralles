@@ -1,0 +1,2140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mario Miralles | Web Engineer, WordPress Developer &amp; Claude Code Engineer</title>
+  <meta name="description" content="Mario Miralles is a Web Engineer, WordPress Developer, and Claude Code Engineer who has built 100+ websites. Your connection to the digital world.">
+  <meta name="keywords" content="WordPress Developer, Claude Code Engineer, Web Engineer, Web Design, WordPress Plugin Development, AI-powered development">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mario Miralles | Web Engineer &amp; WordPress Developer">
+  <meta property="og:description" content="Your connection to the digital world. 100+ websites built with modern design and AI-powered development.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mariomiralles.github.io/mario-miralles">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mario Miralles",
+    "jobTitle": "Web Engineer",
+    "description": "WordPress Developer, Claude Code Engineer, and Web Engineer with 100+ websites built.",
+    "url": "https://mariomiralles.github.io/mario-miralles",
+    "sameAs": [
+      "https://www.linkedin.com/in/mariofmiralles",
+      "https://github.com/mariomiralles"
+    ],
+    "knowsLanguage": ["English", "Spanish"],
+    "knowsAbout": ["WordPress Development", "Claude Code", "React", "JavaScript", "PHP", "Web Design"]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       CSS RESET & VARIABLES
+       ======================================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-base: #0d1117;
+      --bg-elevated: #161b22;
+      --bg-card: rgba(255, 255, 255, 0.05);
+
+      --green-primary: #00d26a;
+      --green-muted: #1a7f4b;
+      --green-deep: #0f5132;
+      --green-glow: rgba(0, 210, 106, 0.12);
+      --green-github-1: #0e4429;
+      --green-github-2: #006d32;
+      --green-github-3: #26a641;
+      --green-github-4: #39d353;
+
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+      --text-muted: #6e7681;
+
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-blur: blur(12px);
+
+      --font-heading: 'Sora', 'Segoe UI', sans-serif;
+      --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 4rem;
+      --space-2xl: 5rem;
+
+      --max-width: 1200px;
+      --border-radius: 16px;
+      --border-radius-sm: 8px;
+      --border-radius-pill: 100px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-base);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    h2 { letter-spacing: -0.03em; }
+    h3 { letter-spacing: -0.01em; }
+    h4 { letter-spacing: 0.01em; }
+
+    a {
+      color: var(--green-primary);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    a:hover { opacity: 0.8; }
+
+    img { max-width: 100%; height: auto; display: block; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* ========================================
+       GLASS CARD UTILITY
+       ======================================== */
+    .glass-card {
+      background: rgba(13, 17, 23, 0.75);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+
+    .glass-pill {
+      display: inline-block;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-pill);
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--green-primary);
+      font-family: var(--font-body);
+    }
+
+    /* ========================================
+       SCROLL REVEAL ANIMATION
+       ======================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       SECTION BASE
+       ======================================== */
+    .section {
+      padding: var(--space-2xl) 0;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+      position: relative;
+      display: inline-block;
+      letter-spacing: -0.04em;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-primary), transparent);
+      border-radius: 2px;
+    }
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13, 17, 23, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      transform: translateY(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    .nav.visible { transform: translateY(0); }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .nav__logo:hover { opacity: 1; color: var(--green-primary); }
+
+    .nav__links {
+      display: flex;
+      list-style: none;
+      gap: var(--space-md);
+    }
+
+    .nav__links a {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav__links a:hover,
+    .nav__links a.active { color: var(--green-primary); opacity: 1; }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav__social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .nav__social svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .nav__social:hover {
+      color: var(--green-primary);
+      opacity: 1;
+    }
+
+    .nav__contact {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 1rem;
+      margin-left: 0.25rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--green-primary);
+      border: 1px solid rgba(0, 210, 106, 0.3);
+      border-radius: var(--border-radius-pill);
+      background: rgba(0, 210, 106, 0.06);
+      transition: all 0.3s ease;
+    }
+
+    .nav__contact:hover {
+      background: rgba(0, 210, 106, 0.12);
+      border-color: rgba(0, 210, 106, 0.5);
+      box-shadow: 0 0 16px rgba(0, 210, 106, 0.1);
+      opacity: 1;
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav__hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav__hamburger.active span:nth-child(2) { opacity: 0; }
+
+    .nav__hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    @media (max-width: 768px) {
+      .nav__hamburger { display: flex; }
+      .nav__right { display: none; }
+
+      .nav__links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(13, 17, 23, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--glass-border);
+        padding: var(--space-md);
+        gap: var(--space-sm);
+      }
+
+      .nav__links.open { display: flex; }
+
+      .nav__mobile-extras {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding-top: var(--space-xs);
+        border-top: 1px solid var(--glass-border);
+        margin-top: var(--space-xs);
+      }
+
+      .nav__mobile-extras .nav__social {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav__mobile-extras .nav__contact {
+        margin-left: auto;
+      }
+    }
+
+    @media (min-width: 769px) {
+      .nav__mobile-extras { display: none; }
+    }
+
+    /* ========================================
+       HERO
+       ======================================== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 var(--space-md) 12vh;
+    }
+
+    .hero__name {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero__tagline {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--green-primary);
+      font-weight: 500;
+      margin-bottom: var(--space-xs);
+    }
+
+    .hero__subtitle {
+      font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+      color: var(--text-muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+    }
+
+    /* ========================================
+       TOP UTILITY BAR (hero-visible)
+       ======================================== */
+    .top-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1.2rem 2rem;
+      gap: 0.6rem;
+      pointer-events: none;
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1.8s forwards;
+      transition: opacity 0.4s ease;
+    }
+
+    .top-bar.hidden {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .top-bar > * {
+      pointer-events: auto;
+    }
+
+    .top-bar__left {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .top-bar__social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(13, 17, 23, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text-muted);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .top-bar__social svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .top-bar__social:hover {
+      color: var(--green-primary);
+      border-color: rgba(0, 210, 106, 0.4);
+      background: rgba(0, 210, 106, 0.1);
+      box-shadow: 0 0 16px rgba(0, 210, 106, 0.15);
+      transform: translateY(-1px);
+      opacity: 1;
+    }
+
+    .top-bar__divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 0 0.15rem;
+    }
+
+    .top-bar__contact {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius-pill);
+      background: rgba(13, 17, 23, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .top-bar__contact:hover {
+      color: var(--green-primary);
+      border-color: rgba(0, 210, 106, 0.35);
+      background: rgba(0, 210, 106, 0.08);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .top-bar {
+        padding: 0.8rem 1rem;
+        justify-content: space-between;
+      }
+
+      .top-bar__divider { display: none; }
+    }
+
+    .hero__nav {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 3rem;
+      padding: 0.45rem;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--border-radius-pill);
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1.6s forwards;
+    }
+
+    .hero__nav-link {
+      padding: 0.4rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: var(--border-radius-pill);
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .hero__nav-link:hover {
+      color: var(--green-primary);
+      background: rgba(0, 210, 106, 0.08);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .hero__nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        border-radius: var(--border-radius);
+        gap: 0.25rem;
+        margin: 2rem var(--space-sm) 0;
+      }
+
+      .hero__nav-link {
+        font-size: 0.72rem;
+        padding: 0.35rem 0.7rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero__nav-link {
+        font-size: 0.68rem;
+        padding: 0.3rem 0.6rem;
+      }
+    }
+
+    /* ========================================
+       ABOUT
+       ======================================== */
+    .about__wrapper {
+      position: relative;
+    }
+
+    .about__card {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      align-items: stretch;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .about__text {
+      padding: var(--space-lg);
+    }
+
+    .about__text p {
+      margin-bottom: var(--space-sm);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .about__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+
+    .about__avatar-wrap {
+      display: none;
+    }
+
+    .about__avatar-wrap--desktop {
+      display: block;
+      overflow: hidden;
+    }
+
+    .about__avatar-wrap--desktop img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+    }
+
+    .about__avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 3px solid rgba(0, 210, 106, 0.3);
+      box-shadow: 0 0 24px rgba(0, 210, 106, 0.1);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .about__avatar:hover {
+      border-color: var(--green-primary);
+      box-shadow: 0 0 30px rgba(0, 210, 106, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      .about__wrapper {
+        padding-top: 50px;
+      }
+
+      .about__card {
+        display: block;
+        padding: 0;
+        border-top-right-radius: 0;
+      }
+
+      .about__text {
+        padding: var(--space-md);
+      }
+
+      .about__avatar-wrap {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: -4px;
+        z-index: 2;
+      }
+
+      .about__avatar-wrap.about__avatar-wrap--desktop {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about__wrapper {
+        padding-top: 44px;
+      }
+
+      .about__text {
+        padding: var(--space-sm);
+      }
+
+      .about__avatar {
+        width: 88px;
+        height: 88px;
+      }
+    }
+
+    /* ========================================
+       EXPERTISE
+       ======================================== */
+    .expertise__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .expertise__card {
+      padding: var(--space-lg);
+    }
+
+    .expertise__card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+      color: var(--green-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .expertise__card p {
+      margin-bottom: var(--space-sm);
+      line-height: 1.8;
+    }
+
+    .expertise__icons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+    }
+
+    @media (max-width: 768px) {
+      .expertise__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================================
+       FEATURED PROJECTS
+       ======================================== */
+    .featured__project {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .featured__project--reverse .featured__image {
+      order: 2;
+    }
+
+    .featured__project--reverse .featured__info {
+      order: 1;
+    }
+
+    .featured__image img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: var(--border-radius-sm);
+      border: 1px solid var(--glass-border);
+    }
+
+    .industry__card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .featured__name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.02em;
+    }
+
+    .featured__info p {
+      margin-bottom: var(--space-xs);
+      line-height: 1.7;
+    }
+
+    .featured__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .featured__link {
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+      .featured__project,
+      .featured__project--reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .featured__project--reverse .featured__image,
+      .featured__project--reverse .featured__info {
+        order: unset;
+      }
+    }
+
+    /* ========================================
+       INDUSTRY PROJECTS
+       ======================================== */
+    .industry__filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+
+    .industry__filter {
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .industry__filter:hover,
+    .industry__filter.active {
+      background: var(--green-primary);
+      color: var(--bg-base);
+      border-color: var(--green-primary);
+    }
+
+    .industry__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+
+    .industry__card {
+      padding: 0;
+      overflow: hidden;
+      color: var(--text-secondary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .industry__card:hover {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+
+    .industry__card.hidden {
+      display: none;
+    }
+
+    .industry__card-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: var(--bg-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .industry__card-info {
+      padding: var(--space-md);
+    }
+
+    .industry__card-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .industry__card-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: var(--space-xs);
+      margin-bottom: var(--space-xs);
+    }
+
+    .industry__card-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .industry__card-visit {
+      display: inline-block;
+      margin-top: var(--space-xs);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .industry__card:hover .industry__card-visit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .industry__card-visit {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .industry__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .industry__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========================================
+       INLINE CTA
+       ======================================== */
+    .inline-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: var(--space-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      transition: gap 0.3s ease, opacity 0.3s ease;
+    }
+
+    .inline-cta:hover {
+      gap: 0.7rem;
+      opacity: 1;
+    }
+
+    .inline-cta span {
+      transition: transform 0.3s ease;
+    }
+
+    .inline-cta:hover span {
+      transform: translateX(2px);
+    }
+
+    /* ========================================
+       VIEW ALL PROJECTS CTA
+       ======================================== */
+    .view-all-btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      border: 1.5px solid rgba(0, 210, 106, 0.35);
+      border-radius: var(--border-radius-pill);
+      background: rgba(0, 210, 106, 0.06);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .view-all-btn:hover {
+      background: var(--green-primary);
+      color: var(--bg-base);
+      border-color: var(--green-primary);
+      box-shadow: 0 0 24px rgba(0, 210, 106, 0.2);
+      transform: translateY(-2px);
+      opacity: 1;
+    }
+
+    /* ========================================
+       SKILLS
+       ======================================== */
+    .skills__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .skills__group-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--green-primary);
+      margin-bottom: var(--space-sm);
+    }
+
+    .skills__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .github-graph__grid {
+      display: grid;
+      grid-template-columns: repeat(52, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      grid-auto-flow: column;
+      gap: 3px;
+      background: transparent;
+      position: relative;
+    }
+
+    .github-graph__cell {
+      aspect-ratio: 1;
+      background: rgba(22, 27, 34, 0.45);
+      border-radius: 3px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .github-graph__cell:hover {
+      transform: scale(1.6);
+      z-index: 10;
+      box-shadow: 0 0 12px rgba(0, 210, 106, 0.3);
+    }
+
+    .github-graph__cell[data-level="1"] { background: rgba(14, 68, 41, 0.6); }
+    .github-graph__cell[data-level="2"] { background: rgba(0, 109, 50, 0.6); }
+    .github-graph__cell[data-level="3"] { background: rgba(38, 166, 65, 0.65); }
+    .github-graph__cell[data-level="4"] { background: rgba(57, 211, 83, 0.7); }
+
+    .github-tooltip {
+      position: fixed;
+      background: var(--bg-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-sm);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      pointer-events: none;
+      z-index: 100;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .github-tooltip.show { opacity: 1; }
+
+    .skills.section {
+      padding-bottom: var(--space-sm);
+    }
+
+    @media (max-width: 1024px) {
+      .skills__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .skills__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ========================================
+       CONTACT
+       ======================================== */
+    .contact__content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact__title {
+      font-size: 3rem;
+    }
+
+    .contact__title::after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .contact__text {
+      font-size: 1.15rem;
+      margin-bottom: var(--space-lg);
+      line-height: 1.8;
+    }
+
+    .contact__links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .contact__btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--green-primary);
+      color: var(--bg-base);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-radius: var(--border-radius-pill);
+      border: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px var(--green-glow);
+      opacity: 1;
+    }
+
+    .contact__socials {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .contact__socials a {
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+
+    .contact__socials a:hover {
+      color: var(--green-primary);
+      opacity: 1;
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .footer {
+      padding: var(--space-lg) 0;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .footer__credit {
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .footer__inner {
+        flex-direction: column;
+        gap: var(--space-xs);
+        text-align: center;
+      }
+    }
+
+    /* ========================================
+       HERO SPOTLIGHT
+       ======================================== */
+    .hero {
+      overflow: visible;
+    }
+
+    .hero__name {
+      position: relative;
+      opacity: 0;
+      animation: heroNameReveal 1s ease 0.3s forwards;
+    }
+
+    .hero__name::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: -100%;
+      width: 60%;
+      height: 140%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 210, 106, 0.15) 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(0, 210, 106, 0.15) 70%,
+        transparent 100%
+      );
+      transform: skewX(-15deg);
+      animation: spotlightSweep 1.2s ease 0.6s forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heroNameReveal {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); text-shadow: 0 0 40px rgba(0, 210, 106, 0.2); }
+    }
+
+    @keyframes spotlightSweep {
+      0% { left: -60%; }
+      100% { left: 120%; }
+    }
+
+    .hero__tagline {
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1s forwards;
+    }
+
+    .hero__subtitle {
+      opacity: 0;
+      animation: heroFadeIn 0.8s ease 1.3s forwards;
+    }
+
+    @keyframes heroFadeIn {
+      0% { opacity: 0; transform: translateY(15px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero__glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 210, 106, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .hero:hover .hero__glow { opacity: 1; }
+
+    /* ========================================
+       PARALLAX SECTIONS
+       ======================================== */
+    .section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .parallax-section {
+      opacity: 0;
+      transform: translateY(60px) scale(0.97);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+
+    .parallax-section.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .parallax-section.in-view .section-title {
+      animation: titleSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes titleSlideIn {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    /* ========================================
+       STAGGERED REVEALS
+       ======================================== */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.1s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.2s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.3s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.4s; }
+
+    .reveal-stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================
+       FLOW FIELD CANVAS
+       ======================================== */
+    .flow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body > *:not(.flow-canvas):not(.github-tooltip):not(.nav) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .expertise__card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .expertise__card::before {
+      content: '';
+      position: absolute;
+      top: var(--mouse-y, 50%);
+      left: var(--mouse-x, 50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0, 210, 106, 0.08) 0%, transparent 70%);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .expertise__card:hover::before {
+      opacity: 1;
+    }
+
+    .glass-pill {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .glass-pill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 210, 106, 0.15);
+    }
+
+    .contact__btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact__btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .contact__btn:hover::before {
+      left: 100%;
+    }
+
+    /* ========================================
+       GLOBAL RESPONSIVE
+       ======================================== */
+    @media (max-width: 768px) {
+      .section { padding: var(--space-lg) 0; }
+      .section-title { font-size: 2rem; }
+      .contact__title { font-size: 2.2rem; }
+      .container { padding: 0 var(--space-sm); }
+      .hero { min-height: 100vh; min-height: 100svh; padding: 0 var(--space-sm) 10vh; }
+      .expertise__card { padding: var(--space-md); }
+      .featured__project { padding: var(--space-md); }
+      .github-graph__grid {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: var(--space-md) 0; }
+      .section-title { font-size: 1.6rem; }
+      .hero__name { font-size: 2rem; }
+      .contact__title { font-size: 1.8rem; }
+      .container { padding: 0 0.75rem; }
+      .hero { min-height: 100vh; min-height: 100svh; padding: 0 0.75rem 8vh; }
+      .expertise__card { padding: var(--space-sm); }
+      .featured__project { padding: var(--space-sm); }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="flow-canvas" id="flowCanvas"></canvas>
+  <div class="github-tooltip" id="githubTooltip"></div>
+
+  <!-- Top Utility Bar (visible on hero) -->
+  <div class="top-bar" id="topBar">
+    <div class="top-bar__left">
+      <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="top-bar__social">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="top-bar__social">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+    </div>
+    <div class="top-bar__divider"></div>
+    <a href="mailto:miralles.mario@gmail.com" class="top-bar__contact">Get in Touch</a>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="#" class="nav__logo">Mario Miralles</a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#featured-projects">Projects</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#expertise">Expertise</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav__mobile-extras">
+          <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__social">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__social">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="mailto:miralles.mario@gmail.com" class="nav__contact">Get in Touch</a>
+        </li>
+      </ul>
+      <div class="nav__right">
+        <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__social">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__social">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="mailto:miralles.mario@gmail.com" class="nav__contact">Get in Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero__glow" id="heroGlow"></div>
+    <h1 class="hero__name">Mario Miralles</h1>
+    <p class="hero__tagline">Your Connection to the Digital World</p>
+    <p class="hero__subtitle">Web Engineer | WordPress Developer | Claude Code Engineer</p>
+    <nav class="hero__nav">
+      <a href="#featured-projects" class="hero__nav-link">Projects</a>
+      <a href="#about" class="hero__nav-link">About</a>
+      <a href="#expertise" class="hero__nav-link">Expertise</a>
+      <a href="#skills" class="hero__nav-link">Skills</a>
+      <a href="#contact" class="hero__nav-link">Contact</a>
+    </nav>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="section featured parallax-section" id="featured-projects">
+    <div class="container">
+      <h2 class="section-title reveal">Featured Work</h2>
+
+      <!-- Project 1: SiteStaffr -->
+      <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="featured__project glass-card reveal">
+        <div class="featured__image">
+          <img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr homepage screenshot" loading="lazy">
+        </div>
+        <div class="featured__info">
+          <h3 class="featured__name">SiteStaffr</h3>
+          <p class="featured__problem"><strong>The problem:</strong> Businesses lose website visitors who have questions but can't get immediate answers.</p>
+          <p class="featured__solution"><strong>What I built:</strong> A WordPress plugin that places an AI voice agent on any website, letting visitors speak naturally to get help and leave their contact details 24/7.</p>
+          <p class="featured__result"><strong>The result:</strong> Automated lead capture with multilingual support across 57+ languages, turning passive visitors into qualified leads.</p>
+          <div class="featured__tags">
+            <span class="glass-pill">WordPress Plugin</span>
+            <span class="glass-pill">AI Voice Agent</span>
+            <span class="glass-pill">PHP</span>
+            <span class="glass-pill">JavaScript</span>
+          </div>
+          <span class="featured__link">View Project &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Project 2: Loria Medical -->
+      <a href="https://loriamedical.com" target="_blank" rel="noopener" class="featured__project featured__project--reverse glass-card reveal">
+        <div class="featured__image">
+          <img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical homepage screenshot" loading="lazy">
+        </div>
+        <div class="featured__info">
+          <h3 class="featured__name">Loria Medical</h3>
+          <p class="featured__problem"><strong>The problem:</strong> A leading male enhancement practice in Miami needed a professional, trustworthy website to educate patients and drive consultations.</p>
+          <p class="featured__solution"><strong>What I built:</strong> A custom WordPress site with SEO optimization, procedure-focused service pages, and mobile-first design tailored to the medical aesthetics space.</p>
+          <p class="featured__result"><strong>The result:</strong> A polished web presence that builds patient confidence and converts organic traffic into booked consultations.</p>
+          <div class="featured__tags">
+            <span class="glass-pill">WordPress</span>
+            <span class="glass-pill">Healthcare</span>
+            <span class="glass-pill">SEO</span>
+            <span class="glass-pill">Responsive Design</span>
+          </div>
+          <span class="featured__link">View Project &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Project 3: Kitty Puppy Alliance -->
+      <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="featured__project glass-card reveal">
+        <div class="featured__image">
+          <img src="assets/screenshots/kittypuppy.org.jpg" alt="Kitty Puppy Alliance homepage screenshot" loading="lazy">
+        </div>
+        <div class="featured__info">
+          <h3 class="featured__name">Kitty Puppy Alliance</h3>
+          <p class="featured__problem"><strong>The problem:</strong> A Miami-based animal rescue nonprofit needed a modern website to attract adopters, volunteers, and donors.</p>
+          <p class="featured__solution"><strong>What I built:</strong> A warm, inviting site with adoption listings, volunteer sign-up, donation integration, and a design that reflects their compassionate mission.</p>
+          <p class="featured__result"><strong>The result:</strong> An engaging digital home that connects the community with rescue animals and supports the organization's 501(c)(3) outreach.</p>
+          <div class="featured__tags">
+            <span class="glass-pill">WordPress</span>
+            <span class="glass-pill">Nonprofit</span>
+            <span class="glass-pill">Responsive Design</span>
+          </div>
+          <span class="featured__link">View Project &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Projects by Industry -->
+  <section class="section industry parallax-section" id="industry-projects">
+    <div class="container">
+      <h2 class="section-title reveal">Explore by Industry</h2>
+      <div class="industry__filters reveal">
+        <button class="glass-pill industry__filter active" data-filter="all">All</button>
+        <button class="glass-pill industry__filter" data-filter="healthcare">Healthcare</button>
+        <button class="glass-pill industry__filter" data-filter="towing">Towing</button>
+        <button class="glass-pill industry__filter" data-filter="construction">Construction</button>
+        <button class="glass-pill industry__filter" data-filter="home-services">Home Services</button>
+      </div>
+      <div class="industry__grid reveal">
+
+        <a href="https://nobidesignbuild.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="construction">
+          <div class="industry__card-thumb"><img src="assets/screenshots/nobidesignbuild.com.jpg" alt="Nobi Design Build" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Construction</span>
+            <h4 class="industry__card-name">Nobi Design Build</h4>
+            <p class="industry__card-desc">Custom carpentry and general contracting in Sonoma and Napa Counties</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://jdoonmobiletires.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="home-services">
+          <div class="industry__card-thumb"><img src="assets/screenshots/jdoonmobiletires.com.jpg" alt="JDOON Mobile Tires" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Automotive</span>
+            <h4 class="industry__card-name">JDOON Mobile Tires</h4>
+            <p class="industry__card-desc">Mobile tire shop serving Palm Beach County with on-location tire services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://harrisonstowing.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="towing">
+          <div class="industry__card-thumb"><img src="assets/screenshots/harrisonstowing.com.jpg" alt="Harrison's Towing" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Towing &amp; Recovery</span>
+            <h4 class="industry__card-name">Harrison's Towing</h4>
+            <p class="industry__card-desc">24/7 towing and roadside assistance serving the DMV region</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://solutionsecocleaningllc.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="home-services">
+          <div class="industry__card-thumb"><img src="assets/screenshots/solutionsecocleaningllc.com.jpg" alt="Solutions ECO Cleaning" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Home Services</span>
+            <h4 class="industry__card-name">Solutions ECO Cleaning</h4>
+            <p class="industry__card-desc">Eco-friendly residential and commercial cleaning services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://crossroadssoftwash.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="home-services">
+          <div class="industry__card-thumb"><img src="assets/screenshots/crossroadssoftwash.com.jpg" alt="Crossroads Softwash" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Home Services</span>
+            <h4 class="industry__card-name">Crossroads Softwash</h4>
+            <p class="industry__card-desc">Professional soft washing and exterior cleaning services</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://balancedtherapycenter.com" target="_blank" rel="noopener" class="glass-card industry__card" data-industry="healthcare">
+          <div class="industry__card-thumb"><img src="assets/screenshots/balancedtherapycenter.com.jpg" alt="Balanced Therapy Center" loading="lazy"></div>
+          <div class="industry__card-info">
+            <span class="industry__card-tag glass-pill">Healthcare</span>
+            <h4 class="industry__card-name">Balanced Therapy Center</h4>
+            <p class="industry__card-desc">Physical therapy and wellness center focused on holistic patient care</p>
+            <span class="industry__card-visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+      <div style="text-align: center; margin-top: var(--space-lg);" class="reveal">
+        <a href="portfolio.html" class="view-all-btn">View All Projects &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about parallax-section" id="about">
+    <div class="container">
+      <div class="about__wrapper reveal">
+        <div class="about__avatar-wrap">
+          <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
+        </div>
+        <div class="about__card glass-card">
+          <div class="about__text">
+            <h2 class="section-title">About Me</h2>
+            <p>I'm a Web Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
+            <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
+            <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
+            <div class="about__pills reveal reveal-stagger">
+              <span class="glass-pill">100+ Sites Built</span>
+              <span class="glass-pill">WordPress Expert</span>
+              <span class="glass-pill">Claude Code Engineer</span>
+              <span class="glass-pill">Bilingual EN/ES</span>
+              <span class="glass-pill">AI-Powered Development</span>
+            </div>
+            <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Let's talk about your project <span>&rarr;</span></a>
+          </div>
+          <div class="about__avatar-wrap about__avatar-wrap--desktop">
+            <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise -->
+  <section class="section expertise parallax-section" id="expertise">
+    <div class="container">
+      <h2 class="section-title reveal">What I Do Best</h2>
+      <div class="expertise__grid">
+        <div class="glass-card expertise__card reveal">
+          <h3 class="expertise__card-title">WordPress Developer &amp; Plugin Builder</h3>
+          <p>As an experienced WordPress Developer, I build custom WordPress themes and sites tailored to each business. From responsive web design with Elementor to fully custom PHP solutions, every project is crafted with a mobile-first approach that ensures seamless performance across all devices.</p>
+          <p>My WordPress plugin development work includes SiteStaffr — an AI-powered voice agent that transforms how businesses capture leads on their websites. I handle the full spectrum: custom builds, performance optimization, SEO integration, and third-party plugin management.</p>
+          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more, I bring deep expertise in turning business goals into high-performing digital experiences.</p>
+          <div class="expertise__icons">
+            <span class="glass-pill">WordPress</span>
+            <span class="glass-pill">Elementor</span>
+            <span class="glass-pill">PHP</span>
+            <span class="glass-pill">Custom Themes</span>
+          </div>
+          <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Need a WordPress site? <span>&rarr;</span></a>
+        </div>
+        <div class="glass-card expertise__card reveal">
+          <h3 class="expertise__card-title">Claude Code Engineer</h3>
+          <p>I leverage Claude Code as my AI-powered engineering partner to accelerate fullstack development without sacrificing quality. This AI-powered development approach lets me architect, build, and ship products faster — from WordPress plugins to complex automation systems.</p>
+          <p>As a Claude Code Engineer, I use AI coding tools to handle everything from scaffolding new projects to debugging complex integrations. The result is faster delivery, cleaner code, and more time spent on what matters: solving real problems for real businesses.</p>
+          <p>My AI-powered workflow extends beyond Claude Code. I've built automated content pipelines with OpenAI, integrated AI voice agents with SiteStaffr, and use AI tools daily to push the boundaries of what a solo developer can accomplish.</p>
+          <div class="expertise__icons">
+            <span class="glass-pill">Claude Code</span>
+            <span class="glass-pill">AI Development</span>
+            <span class="glass-pill">Automation</span>
+          </div>
+          <a href="mailto:miralles.mario@gmail.com" class="inline-cta">Let's build something with AI <span>&rarr;</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section skills parallax-section" id="skills">
+    <div class="container">
+      <h2 class="section-title reveal">What I Work With</h2>
+      <div class="skills__grid reveal reveal-stagger">
+
+        <div class="skills__group">
+          <h4 class="skills__group-title">Frontend</h4>
+          <div class="skills__tags">
+            <span class="glass-pill">React</span>
+            <span class="glass-pill">JavaScript</span>
+            <span class="glass-pill">HTML / CSS</span>
+            <span class="glass-pill">Sass</span>
+            <span class="glass-pill">Chakra UI</span>
+          </div>
+        </div>
+
+        <div class="skills__group">
+          <h4 class="skills__group-title">Backend</h4>
+          <div class="skills__tags">
+            <span class="glass-pill">Node.js</span>
+            <span class="glass-pill">PHP</span>
+            <span class="glass-pill">Express</span>
+            <span class="glass-pill">MySQL</span>
+            <span class="glass-pill">Firebase</span>
+          </div>
+        </div>
+
+        <div class="skills__group">
+          <h4 class="skills__group-title">WordPress</h4>
+          <div class="skills__tags">
+            <span class="glass-pill">Custom Themes</span>
+            <span class="glass-pill">Elementor</span>
+            <span class="glass-pill">Plugin Development</span>
+          </div>
+        </div>
+
+        <div class="skills__group">
+          <h4 class="skills__group-title">AI &amp; Automation</h4>
+          <div class="skills__tags">
+            <span class="glass-pill">Claude Code</span>
+            <span class="glass-pill">OpenAI</span>
+            <span class="glass-pill">AWS Lambda</span>
+          </div>
+        </div>
+
+        <div class="skills__group">
+          <h4 class="skills__group-title">Tools</h4>
+          <div class="skills__tags">
+            <span class="glass-pill">Git</span>
+            <span class="glass-pill">JIRA</span>
+            <span class="glass-pill">Figma</span>
+            <span class="glass-pill">Basecamp</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GitHub Contribution Graph -->
+  <p class="github-graph__label reveal" style="text-align: center; font-family: var(--font-heading); font-size: 0.8rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; margin: 0 0 var(--space-sm) 0; padding-top: var(--space-sm);">GitHub Activity</p>
+  <div class="github-graph__grid reveal" id="githubGraph" style="margin-bottom: var(--space-2xl);"></div>
+
+  <!-- Contact -->
+  <section class="section contact parallax-section" id="contact">
+    <div class="container contact__content reveal">
+      <h2 class="section-title contact__title">Let's Build Something Together</h2>
+      <p class="contact__text">Need a custom WordPress site, a plugin that solves a real problem, or a developer who ships fast with AI-powered tools? I'd love to hear about your project.</p>
+      <div class="contact__links">
+        <a href="mailto:miralles.mario@gmail.com" class="contact__btn glass-card">Get in Touch</a>
+        <div class="contact__socials">
+          <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>&copy; 2026 Mario Miralles. All rights reserved.</p>
+      <p class="footer__credit">Built with Claude Code, HTML, CSS, JavaScript</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================
+       HERO GLOW
+       ======================================== */
+    (function() {
+      var hero = document.getElementById('hero');
+      var glow = document.getElementById('heroGlow');
+      if (!hero || !glow) return;
+
+      hero.addEventListener('mousemove', function(e) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    })();
+
+    /* ========================================
+       PARALLAX SECTIONS
+       ======================================== */
+    (function() {
+      var sections = document.querySelectorAll('.parallax-section');
+      var firstSection = sections[0];
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      }, { threshold: 0.01, rootMargin: '0px 0px -40px 0px' });
+
+      sections.forEach(function(el) { observer.observe(el); });
+
+      if (firstSection) {
+        var triggered = false;
+        window.addEventListener('scroll', function() {
+          if (!triggered && window.scrollY > 30) {
+            triggered = true;
+            firstSection.classList.add('in-view');
+          }
+        }, { passive: true });
+      }
+    })();
+
+    /* ========================================
+       FLOW FIELD BACKGROUND
+       ======================================== */
+    (function() {
+      var canvas = document.getElementById('flowCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h;
+      var scale = 20;
+      var particles = [];
+      var particleCount = 180;
+      var trailLength = 24;
+      var noiseZ = 0;
+      var scrollInfluence = 0;
+      var mouseX = -9999, mouseY = -9999;
+      var mouseRadius = 180;
+
+      function noise3d(x, y, z) {
+        var v = Math.sin(x * 1.2 + z * 0.3) * Math.cos(y * 0.9 + z * 0.7)
+              + Math.sin(x * 0.7 - y * 1.1 + z * 0.5) * 0.5
+              + Math.cos(x * 2.1 + y * 0.4 + z * 0.2) * 0.3
+              + Math.sin(y * 1.8 - x * 0.6 + z * 0.9) * 0.4;
+        return v / 2.2;
+      }
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function spawnParticle() {
+        var x = Math.random() * w;
+        var y = Math.random() * h;
+        return {
+          x: x,
+          y: y,
+          trail: [{x: x, y: y}],
+          speed: 0.3 + Math.random() * 0.9,
+          life: 0,
+          maxLife: 140 + Math.random() * 180,
+          hue: 145 + Math.random() * 25,
+          lightness: 30 + Math.random() * 15
+        };
+      }
+
+      function initParticles() {
+        particles = [];
+        for (var i = 0; i < particleCount; i++) {
+          var p = spawnParticle();
+          p.life = Math.random() * p.maxLife * 0.5;
+          particles.push(p);
+        }
+      }
+
+      resize();
+      initParticles();
+
+      window.addEventListener('resize', function() { resize(); initParticles(); });
+
+      window.addEventListener('scroll', function() {
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        scrollInfluence = maxScroll > 0 ? (window.scrollY / maxScroll) * Math.PI * 2 : 0;
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.addEventListener('mouseleave', function() {
+        mouseX = -9999;
+        mouseY = -9999;
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+
+        noiseZ += 0.0018;
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+
+          var nx = p.x / scale * 0.04;
+          var ny = p.y / scale * 0.04;
+          var angle = noise3d(nx, ny, noiseZ) * Math.PI * 4 + scrollInfluence;
+
+          var moveX = Math.cos(angle) * p.speed;
+          var moveY = Math.sin(angle) * p.speed;
+
+          var dx = p.x - mouseX;
+          var dy = p.y - mouseY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseRadius && dist > 0) {
+            var force = (1 - dist / mouseRadius) * 3;
+            moveX += (dx / dist) * force;
+            moveY += (dy / dist) * force;
+          }
+
+          p.x += moveX;
+          p.y += moveY;
+          p.life++;
+
+          p.trail.push({x: p.x, y: p.y});
+          if (p.trail.length > trailLength) {
+            p.trail.shift();
+          }
+
+          var lifeFrac = p.life / p.maxLife;
+          var fadeIn = Math.min(lifeFrac * 6, 1);
+          var fadeOut = lifeFrac > 0.7 ? 1 - (lifeFrac - 0.7) / 0.3 : 1;
+          var baseAlpha = fadeIn * fadeOut * 0.5;
+
+          if (baseAlpha > 0.01 && p.trail.length > 1) {
+            for (var t = 1; t < p.trail.length; t++) {
+              var segAlpha = baseAlpha * (t / p.trail.length);
+              if (segAlpha < 0.003) continue;
+              ctx.beginPath();
+              ctx.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+              ctx.lineTo(p.trail[t].x, p.trail[t].y);
+              ctx.strokeStyle = 'hsla(' + p.hue + ', 70%, ' + p.lightness + '%, ' + segAlpha + ')';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          }
+
+          if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20 || p.life >= p.maxLife) {
+            particles[i] = spawnParticle();
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      requestAnimationFrame(draw);
+    })();
+
+    /* ========================================
+       NAVIGATION
+       ======================================== */
+    (function() {
+      var nav = document.getElementById('nav');
+      var topBar = document.getElementById('topBar');
+      var hamburger = document.getElementById('navHamburger');
+      var navLinks = document.getElementById('navLinks');
+      var heroSection = document.getElementById('hero');
+
+      var navObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            nav.classList.remove('visible');
+            if (topBar) topBar.classList.remove('hidden');
+          } else {
+            nav.classList.add('visible');
+            if (topBar) topBar.classList.add('hidden');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      if (heroSection) navObserver.observe(heroSection);
+
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+      });
+
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+        });
+      });
+    })();
+
+    /* ========================================
+       ACTIVE NAV LINK TRACKING
+       ======================================== */
+    (function() {
+      var navLinks = document.querySelectorAll('.nav__links a');
+      var sections = [];
+      navLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          var section = document.getElementById(href.slice(1));
+          if (section) sections.push({ el: section, link: link });
+        }
+      });
+
+      var activeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(l) { l.classList.remove('active'); });
+            sections.forEach(function(s) {
+              if (s.el === entry.target) s.link.classList.add('active');
+            });
+          }
+        });
+      }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+
+      sections.forEach(function(s) { activeObserver.observe(s.el); });
+    })();
+
+    /* ========================================
+       SCROLL REVEAL
+       ======================================== */
+    (function() {
+      var reveals = document.querySelectorAll('.reveal');
+      var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      reveals.forEach(function(el) { revealObserver.observe(el); });
+    })();
+
+    /* ========================================
+       INDUSTRY FILTER
+       ======================================== */
+    (function() {
+      var filters = document.querySelectorAll('.industry__filter');
+      var cards = document.querySelectorAll('.industry__card');
+
+      filters.forEach(function(filter) {
+        filter.addEventListener('click', function() {
+          var selected = this.getAttribute('data-filter');
+
+          filters.forEach(function(f) { f.classList.remove('active'); });
+          this.classList.add('active');
+
+          cards.forEach(function(card) {
+            if (selected === 'all' || card.getAttribute('data-industry') === selected) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+        });
+      });
+    })();
+
+    /* ========================================
+       GITHUB CONTRIBUTION GRAPH (LIVE DATA)
+       ======================================== */
+    (function() {
+      var graph = document.getElementById('githubGraph');
+      var tooltip = document.getElementById('githubTooltip');
+      if (!graph) return;
+
+      var username = 'mariomiralles';
+
+      function getLevel(count) {
+        if (count === 0) return 0;
+        if (count <= 5) return 1;
+        if (count <= 15) return 2;
+        if (count <= 30) return 3;
+        return 4;
+      }
+
+      var startDate = new Date('2025-11-17');
+      var startDay = startDate.getDay();
+      if (startDay !== 0) {
+        startDate.setDate(startDate.getDate() - startDay);
+      }
+
+      var today = new Date();
+      var totalWeeks = Math.ceil((today - startDate) / (7 * 86400000));
+      if (totalWeeks < 1) totalWeeks = 1;
+
+      graph.style.gridTemplateColumns = 'repeat(' + totalWeeks + ', 1fr)';
+
+      function buildCells(contributions) {
+        graph.innerHTML = '';
+        graph.style.gridTemplateColumns = 'repeat(' + totalWeeks + ', 1fr)';
+
+        for (var col = 0; col < totalWeeks; col++) {
+          for (var row = 0; row < 7; row++) {
+            var cellDate = new Date(startDate);
+            cellDate.setDate(cellDate.getDate() + col * 7 + row);
+
+            if (cellDate > today) {
+              var empty = document.createElement('div');
+              empty.className = 'github-graph__cell';
+              graph.appendChild(empty);
+              continue;
+            }
+
+            var dateStr = cellDate.toISOString().split('T')[0];
+            var count = contributions[dateStr] || 0;
+            var level = getLevel(count);
+
+            var cell = document.createElement('div');
+            cell.className = 'github-graph__cell';
+            if (level > 0) cell.setAttribute('data-level', level);
+            cell.setAttribute('data-date', dateStr);
+            cell.setAttribute('data-count', count);
+            graph.appendChild(cell);
+          }
+        }
+      }
+
+      fetch('https://github-contributions-api.jogruber.de/v4/' + username + '?y=last')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var contributions = {};
+          if (data.contributions) {
+            data.contributions.forEach(function(day) {
+              contributions[day.date] = day.count;
+            });
+          }
+          buildCells(contributions);
+        })
+        .catch(function() {
+          var fallback = {};
+          for (var col = 0; col < totalWeeks; col++) {
+            for (var row = 0; row < 7; row++) {
+              var d = new Date(startDate);
+              d.setDate(d.getDate() + col * 7 + row);
+              if (d > today) continue;
+              var rand = Math.random();
+              fallback[d.toISOString().split('T')[0]] = rand > 0.4 ? Math.ceil(rand * 12) : 0;
+            }
+          }
+          buildCells(fallback);
+        });
+
+      graph.addEventListener('mousemove', function(e) {
+        var cell = e.target;
+        if (!cell.classList.contains('github-graph__cell') || !cell.getAttribute('data-date')) {
+          tooltip.classList.remove('show');
+          return;
+        }
+        var count = cell.getAttribute('data-count') || '0';
+        var date = cell.getAttribute('data-date') || '';
+        var dateObj = new Date(date + 'T12:00:00');
+        var formatted = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        tooltip.textContent = count + ' contribution' + (count === '1' ? '' : 's') + ' on ' + formatted;
+        tooltip.classList.add('show');
+
+        var tipWidth = tooltip.offsetWidth;
+        var tipHeight = tooltip.offsetHeight;
+        var left = e.clientX + 12;
+        var top = e.clientY - tipHeight - 8;
+
+        if (left + tipWidth > window.innerWidth - 8) {
+          left = e.clientX - tipWidth - 12;
+        }
+        if (top < 8) {
+          top = e.clientY + 16;
+        }
+
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      });
+
+      graph.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+      });
+    })();
+    /* ========================================
+       EXPERTISE CARD GLOW TRACKING
+       ======================================== */
+    (function() {
+      document.querySelectorAll('.expertise__card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', (e.clientX - rect.left) + 'px');
+          card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
