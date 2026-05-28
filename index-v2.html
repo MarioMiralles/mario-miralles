@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mario Miralles | Web Engineer</title>
+  <meta name="description" content="Mario Miralles — Web Engineer, WordPress Developer, and Claude Code Engineer. 100+ websites built.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #080c0a;
+      --bg-base: #0d110f;
+      --bg-surface: #141a17;
+      --bg-elevated: #1c2420;
+      --bg-code: #0f1412;
+
+      --green: #6b9e7e;
+      --green-dim: rgba(107, 158, 126, 0.12);
+      --green-border: rgba(107, 158, 126, 0.25);
+      --green-glow: rgba(107, 158, 126, 0.06);
+
+      --purple: #b09cda;
+      --purple-bg: rgba(176, 156, 218, 0.1);
+
+      --cream: #e6e1d6;
+      --text-primary: #c4bfb2;
+      --text-secondary: #8a8477;
+      --text-muted: #555049;
+
+      --border: rgba(255, 255, 255, 0.07);
+      --border-hover: rgba(107, 158, 126, 0.3);
+
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-body: 'Outfit', 'Helvetica Neue', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --max-w: 1080px;
+      --radius: 8px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    ::selection {
+      background: var(--green);
+      color: var(--bg-deep);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2.5rem;
+    }
+
+    /* ── FLOW CANVAS BACKGROUND ── */
+    .flow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body > *:not(.flow-canvas):not(.github-tooltip):not(.nav) {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 12, 10, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav__logo {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .nav__center {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav__center a {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav__center a:hover { color: var(--cream); }
+
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .nav__icon svg { width: 15px; height: 15px; }
+    .nav__icon:hover { color: var(--green); }
+
+    .nav__cta {
+      width: auto !important;
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: color 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .nav__cta:hover {
+      color: var(--cream);
+      background: var(--green-dim);
+      border-color: var(--green-border);
+      box-shadow: 0 0 18px rgba(107, 158, 126, 0.15);
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav__hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+    .nav__hamburger.active span:nth-child(2) { opacity: 0; }
+    .nav__hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+    @media (max-width: 960px) {
+      .nav__hamburger { display: flex; }
+      .nav__right { display: none; }
+      .nav__center {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: calc(100vh - 56px);
+        height: calc(100svh - 56px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-deep);
+        padding: 2rem;
+        gap: 2rem;
+      }
+      .nav__center a {
+        font-size: 0.9rem;
+        letter-spacing: 0.18em;
+      }
+      .nav__center.open { display: flex; }
+      .nav__mobile-extras {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+        margin-top: 0.5rem;
+      }
+      .nav__mobile-extras .nav__cta {
+        margin-left: auto;
+      }
+    }
+
+    @media (min-width: 961px) {
+      .nav__mobile-extras { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem 6vh;
+    }
+
+    .hero__label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.2s forwards;
+    }
+
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.4s forwards;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.88rem, 1.5vw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.6s forwards;
+    }
+
+    /* ── HERO STATS ── */
+    .hero__stats {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 0.8s forwards;
+    }
+
+    .hero__stat {
+      padding: 1.4rem 3.5rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      margin-left: -1px;
+    }
+
+    .hero__stat:first-child {
+      border-radius: var(--radius) 0 0 var(--radius);
+      margin-left: 0;
+    }
+
+    .hero__stat:last-child {
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .hero__stat-num {
+      font-family: var(--font-serif);
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero__stat-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .hero__stats { flex-direction: column; }
+      .hero__stat { margin-left: 0; margin-top: -1px; }
+      .hero__stat:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+      .hero__stat:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section__label {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      line-height: 1.2;
+    }
+
+    .section__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .section__intro {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about__text p {
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      color: var(--text-primary);
+    }
+
+    .about__photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      filter: sepia(10%) contrast(1.05);
+      transition: filter 0.5s;
+    }
+
+    .about__photo:hover { filter: sepia(0%) contrast(1); }
+
+    .about__avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--green-border);
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+
+    .about__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .pill {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      padding: 0.3rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.25s;
+    }
+
+    .pill:hover {
+      border-color: var(--green-border);
+      color: var(--green);
+    }
+
+    .about__wrapper {
+      position: relative;
+    }
+
+    .about__avatar-mobile {
+      display: none;
+    }
+
+    .about__legend {
+      display: none;
+    }
+
+    .about__grid {
+      border: none;
+      padding: 0;
+      margin: 0;
+      min-width: 0;
+    }
+
+    @media (max-width: 768px) {
+      .about__wrapper {
+        padding-top: 60px;
+      }
+
+      .about__title-desktop {
+        display: none;
+      }
+
+      .about__legend {
+        display: block;
+        font-family: var(--font-serif);
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        font-weight: 600;
+        color: var(--cream);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.2;
+        padding: 0 0.75rem;
+        margin-left: 0.5rem;
+      }
+
+      .about__avatar-mobile {
+        display: block;
+        position: absolute;
+        bottom: calc(100% - 20px);
+        right: -1px;
+        z-index: 2;
+      }
+
+      .about__photo-wrap {
+        display: none;
+      }
+
+      .about__grid {
+        position: relative;
+        grid-template-columns: 1fr;
+        border: 1px solid var(--green-border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        background: linear-gradient(to bottom, transparent 0%, rgba(20, 26, 23, 0.55) 6%);
+        backdrop-filter: blur(16px) saturate(1.1);
+        -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about__wrapper {
+        padding-top: 50px;
+      }
+
+      .about__avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .about__grid {
+        padding: 1.25rem;
+      }
+    }
+
+    /* ── FEATURED PROJECTS ── */
+    .projects__list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .proj {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      padding: 2rem;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius);
+      background: rgba(20, 26, 23, 0.55);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      align-items: center;
+      color: inherit;
+      transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+    }
+
+    .proj:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 24px var(--green-glow);
+    }
+
+    .proj--reverse { direction: rtl; }
+    .proj--reverse > * { direction: ltr; }
+
+    .proj__img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .proj__tag {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .proj__name {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .proj__desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .proj__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+
+    .proj__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 1.25rem;
+      transition: gap 0.3s, letter-spacing 0.3s;
+    }
+
+    .proj__link:hover { gap: 0.65rem; letter-spacing: 0.1em; }
+
+    .projects__pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .proj--compact {
+      grid-template-columns: 1fr;
+    }
+
+    .proj--compact .proj__img {
+      aspect-ratio: 16/10;
+    }
+
+    .proj--compact .proj__desc {
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .proj, .proj--reverse {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .projects__pair {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── INDUSTRY GRID ── */
+    .industry__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .ind-card {
+      background: rgba(20, 26, 23, 0.55);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      border-right: 1px solid var(--green-border);
+      border-bottom: 1px solid var(--green-border);
+      color: inherit;
+      transition: background 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    .ind-card:hover {
+      background: rgba(28, 36, 32, 0.7);
+      box-shadow: 0 0 20px var(--green-glow);
+    }
+
+    .ind-card:nth-child(3n) { border-right: none; }
+    .ind-card:nth-last-child(-n+3) { border-bottom: none; }
+
+    .ind-card__thumb {
+      width: 100%;
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ind-card__thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.5s;
+    }
+
+    .ind-card:hover .ind-card__thumb img { transform: scale(1.04); }
+
+    .ind-card__body { padding: 1.25rem; }
+
+    .ind-card__cat {
+      font-size: 0.62rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .ind-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .ind-card__desc {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .ind-card__visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .ind-card:hover .ind-card__visit {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1024px) {
+      .industry__grid { grid-template-columns: repeat(2, 1fr); }
+      .ind-card:nth-child(3n) { border-right: 1px solid var(--border); }
+      .ind-card:nth-child(2n) { border-right: none; }
+      .ind-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .ind-card:nth-last-child(-n+2) { border-bottom: none; }
+    }
+
+    @media (max-width: 640px) {
+      .industry__grid { grid-template-columns: 1fr; }
+      .ind-card { border-right: none !important; }
+      .ind-card:last-child { border-bottom: none; }
+      .ind-card__visit { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FILTERS ── */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    .filter-btn.active {
+      background: var(--green);
+      color: var(--bg-deep);
+      border-color: var(--green);
+    }
+
+    /* ── FEATURES / EXPERTISE ── */
+    .features__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .feat {
+      display: block;
+      padding: 2.5rem;
+      border: 1px solid var(--green-border);
+      border-radius: var(--radius);
+      background: rgba(20, 26, 23, 0.55);
+      backdrop-filter: blur(16px) saturate(1.1);
+      -webkit-backdrop-filter: blur(16px) saturate(1.1);
+      transition: background 0.3s, box-shadow 0.35s, border-color 0.35s;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .feat:hover {
+      background: rgba(28, 36, 32, 0.7);
+      box-shadow: 0 0 24px var(--green-glow);
+      border-color: var(--border-hover);
+    }
+
+    .feat__title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      line-height: 1.3;
+    }
+
+    .feat p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .feat__pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+    }
+
+    .feat__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 1rem;
+      transition: gap 0.3s;
+    }
+
+    .feat__cta:hover { gap: 0.65rem; }
+
+    @media (max-width: 768px) {
+      .features__grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── SKILLS ── */
+    .skills__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+
+    .skills__group-title {
+      font-family: var(--font-serif);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .skills__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    @media (max-width: 1024px) {
+      .skills__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .skills__grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .skills__grid > div {
+        position: sticky;
+        top: 56px;
+        padding: 1.5rem;
+        border: 1px solid var(--green-border);
+        border-radius: var(--radius);
+        background: rgba(20, 26, 23, 0.95);
+        backdrop-filter: blur(16px) saturate(1.1);
+        -webkit-backdrop-filter: blur(16px) saturate(1.1);
+        margin-bottom: 1rem;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .skills__grid > div:nth-child(1) { top: 56px; }
+      .skills__grid > div:nth-child(2) { top: 68px; }
+      .skills__grid > div:nth-child(3) { top: 80px; }
+      .skills__grid > div:nth-child(4) { top: 92px; }
+      .skills__grid > div:nth-child(5) { top: 104px; }
+    }
+
+    /* ── GITHUB GRAPH ── */
+    .github-section {
+      text-align: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .github-section__label {
+      font-family: var(--font-body);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0 0 1rem 0;
+      padding: 0;
+    }
+
+    .github-graph {
+      display: grid;
+      grid-template-columns: repeat(52, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      grid-auto-flow: column;
+      gap: 3px;
+      width: 100%;
+    }
+
+    .github-graph__cell {
+      aspect-ratio: 1;
+      background: var(--bg-surface);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+
+    .github-graph__cell:hover {
+      transform: scale(1.6);
+      z-index: 10;
+      box-shadow: 0 0 10px var(--green-glow);
+    }
+
+    .github-graph__cell[data-level="1"] { background: rgba(107, 158, 126, 0.15); }
+    .github-graph__cell[data-level="2"] { background: rgba(107, 158, 126, 0.3); }
+    .github-graph__cell[data-level="3"] { background: rgba(107, 158, 126, 0.5); }
+    .github-graph__cell[data-level="4"] { background: rgba(107, 158, 126, 0.75); }
+
+    .github-tooltip {
+      position: fixed;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.35rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--cream);
+      pointer-events: none;
+      z-index: 200;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .github-tooltip.show { opacity: 1; }
+
+    /* ── CONTACT ── */
+    .contact {
+      text-align: center;
+      padding: 6rem 0;
+    }
+
+    .contact__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact__text {
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+    }
+
+    .contact__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--bg-deep);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--green);
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+    }
+
+    .contact__btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--green-dim);
+    }
+
+    .contact__socials {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact__socials a {
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .contact__socials a:hover { color: var(--green); }
+
+    /* ── VIEW ALL ── */
+    .view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: gap 0.3s, letter-spacing 0.3s;
+    }
+
+    .view-all:hover { gap: 0.65rem; letter-spacing: 0.12em; }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.68rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer__link {
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+
+    .footer__link:hover { color: var(--green); }
+
+    @media (max-width: 640px) {
+      .footer__inner {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.07s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.14s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.21s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.28s; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.35s; }
+
+    .reveal-stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .wrap { padding: 0 1.25rem; }
+      .section { padding: 3.5rem 0; }
+      .contact { padding: 4.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="flow-canvas" id="flowCanvas"></canvas>
+  <div class="github-tooltip" id="githubTooltip"></div>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav__inner wrap">
+      <a href="#" class="nav__logo">Mario<br>Miralles</a>
+      <button class="nav__hamburger" id="navHamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__center" id="navLinks">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+
+        <li><a href="#contact">Contact</a></li>
+        <li class="nav__mobile-extras">
+          <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="mailto:miralles.mario@gmail.com" class="nav__icon nav__cta">Get In Touch</a>
+        </li>
+      </ul>
+      <div class="nav__right">
+        <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn" class="nav__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub" class="nav__icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <span style="width:1px;height:16px;background:var(--border);margin:0 0.25rem;"></span>
+        <a href="mailto:miralles.mario@gmail.com" class="nav__icon nav__cta">Get In Touch</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <p class="hero__label">Web Engineer &bull; WordPress Developer &bull; Claude Code Engineer</p>
+    <h1 class="hero__title">Mario Miralles</h1>
+    <p class="hero__subtitle">Web Engineer, WordPress Developer, and Claude Code Engineer based in South Florida. Over 100 websites built across 34+ industries with clean code and modern design.</p>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-num">100+</div>
+        <div class="hero__stat-label">Sites Built</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">34+</div>
+        <div class="hero__stat-label">Industries</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Featured Projects -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <h2 class="section__label reveal">Featured Work</h2>
+      <div class="projects__list">
+
+        <a href="https://sitestaffr.com" target="_blank" rel="noopener" class="proj reveal">
+          <div>
+            <img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr" class="proj__img" loading="lazy">
+          </div>
+          <div>
+            <p class="proj__tag">WordPress Plugin &bull; SaaS</p>
+            <h3 class="proj__name">SiteStaffr</h3>
+            <p class="proj__desc"><strong>The problem:</strong> Businesses lose website visitors who have questions but can't get immediate answers.</p>
+            <p class="proj__desc"><strong>What I built:</strong> A WordPress plugin that places an AI voice agent on any website, letting visitors speak naturally to get help and leave their contact details 24/7.</p>
+            <p class="proj__desc"><strong>The result:</strong> Automated lead capture with multilingual support across 57+ languages, turning passive visitors into qualified leads.</p>
+            <div class="proj__pills">
+              <span class="pill">WordPress Plugin</span>
+              <span class="pill">AI Voice Agent</span>
+              <span class="pill">PHP</span>
+              <span class="pill">JavaScript</span>
+            </div>
+            <span class="proj__link">View Project &rarr;</span>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="projects__pair reveal">
+        <a href="https://loriamedical.com" target="_blank" rel="noopener" class="proj proj--compact">
+          <div>
+            <img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical" class="proj__img" loading="lazy">
+          </div>
+          <div>
+            <p class="proj__tag">Healthcare</p>
+            <h3 class="proj__name">Loria Medical</h3>
+            <p class="proj__desc">A custom WordPress site with SEO optimization and procedure-focused service pages for a leading medical practice in Miami, converting organic traffic into booked consultations.</p>
+            <div class="proj__pills">
+              <span class="pill">WordPress</span>
+              <span class="pill">Healthcare</span>
+              <span class="pill">SEO</span>
+            </div>
+            <span class="proj__link">View Project &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://kittypuppy.org" target="_blank" rel="noopener" class="proj proj--compact">
+          <div>
+            <img src="assets/screenshots/kittypuppy.org.jpg" alt="Kitty Puppy Alliance" class="proj__img" loading="lazy">
+          </div>
+          <div>
+            <p class="proj__tag">Nonprofit</p>
+            <h3 class="proj__name">Kitty Puppy Alliance</h3>
+            <p class="proj__desc">A warm, inviting site with adoption listings, volunteer sign-up, and donation integration for a Miami-based animal rescue nonprofit and 501(c)(3).</p>
+            <div class="proj__pills">
+              <span class="pill">WordPress</span>
+              <span class="pill">Nonprofit</span>
+              <span class="pill">Responsive Design</span>
+            </div>
+            <span class="proj__link">View Project &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Industry Projects -->
+  <section class="section" id="industry">
+    <div class="wrap">
+      <h2 class="section__label reveal">Explore by Industry</h2>
+
+      <div class="filters reveal" id="industryFilters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="healthcare">Healthcare</button>
+        <button class="filter-btn" data-filter="towing">Towing</button>
+        <button class="filter-btn" data-filter="construction">Construction</button>
+        <button class="filter-btn" data-filter="home-services">Home Services</button>
+      </div>
+
+      <div class="industry__grid reveal-stagger" id="industryGrid">
+        <a href="https://nobidesignbuild.com" target="_blank" rel="noopener" class="ind-card" data-industry="construction">
+          <div class="ind-card__thumb"><img src="assets/screenshots/nobidesignbuild.com.jpg" alt="Nobi Design Build" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Construction</p>
+            <h4 class="ind-card__name">Nobi Design Build</h4>
+            <p class="ind-card__desc">Custom carpentry and general contracting in Sonoma and Napa Counties</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://jdoonmobiletires.com" target="_blank" rel="noopener" class="ind-card" data-industry="home-services">
+          <div class="ind-card__thumb"><img src="assets/screenshots/jdoonmobiletires.com.jpg" alt="JDOON Mobile Tires" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Automotive</p>
+            <h4 class="ind-card__name">JDOON Mobile Tires</h4>
+            <p class="ind-card__desc">Mobile tire shop serving Palm Beach County with on-location services</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://harrisonstowing.com" target="_blank" rel="noopener" class="ind-card" data-industry="towing">
+          <div class="ind-card__thumb"><img src="assets/screenshots/harrisonstowing.com.jpg" alt="Harrison's Towing" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Towing &amp; Recovery</p>
+            <h4 class="ind-card__name">Harrison's Towing</h4>
+            <p class="ind-card__desc">24/7 towing and roadside assistance serving the DMV region</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://solutionsecocleaningllc.com" target="_blank" rel="noopener" class="ind-card" data-industry="home-services">
+          <div class="ind-card__thumb"><img src="assets/screenshots/solutionsecocleaningllc.com.jpg" alt="Solutions ECO Cleaning" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Home Services</p>
+            <h4 class="ind-card__name">Solutions ECO Cleaning</h4>
+            <p class="ind-card__desc">Eco-friendly residential and commercial cleaning services</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://crossroadssoftwash.com" target="_blank" rel="noopener" class="ind-card" data-industry="home-services">
+          <div class="ind-card__thumb"><img src="assets/screenshots/crossroadssoftwash.com.jpg" alt="Crossroads Softwash" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Home Services</p>
+            <h4 class="ind-card__name">Crossroads Softwash</h4>
+            <p class="ind-card__desc">Professional soft washing and exterior cleaning services</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+
+        <a href="https://balancedtherapycenter.com" target="_blank" rel="noopener" class="ind-card" data-industry="healthcare">
+          <div class="ind-card__thumb"><img src="assets/screenshots/balancedtherapycenter.com.jpg" alt="Balanced Therapy Center" loading="lazy"></div>
+          <div class="ind-card__body">
+            <p class="ind-card__cat">Healthcare</p>
+            <h4 class="ind-card__name">Balanced Therapy Center</h4>
+            <p class="ind-card__desc">Physical therapy and wellness center focused on holistic patient care</p>
+            <span class="ind-card__visit">Visit Site &rarr;</span>
+          </div>
+        </a>
+      </div>
+
+      <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+        <a href="portfolio.html" class="view-all">View All Projects &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="about__wrapper reveal">
+        <h2 class="section__label about__title-desktop">About</h2>
+        <fieldset class="about__grid">
+          <legend class="about__legend">About</legend>
+          <div class="about__avatar-mobile">
+            <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
+          </div>
+          <div class="about__text">
+            <p>I'm a Web Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
+            <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
+            <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
+            <div class="about__pills reveal-stagger">
+              <span class="pill">100+ Sites Built</span>
+              <span class="pill">WordPress Expert</span>
+              <span class="pill">Claude Code Engineer</span>
+              <span class="pill">Bilingual EN/ES</span>
+              <span class="pill">AI-Powered Development</span>
+            </div>
+          </div>
+      <div class="about__photo-wrap">
+        <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__photo" loading="lazy">
+      </div>
+    </fieldset>
+      </div>
+
+      <div class="features__grid reveal" id="expertise" style="margin-top: 2.5rem;">
+        <a href="mailto:miralles.mario@gmail.com" class="feat">
+          <h3 class="feat__title">WordPress Developer &amp; Plugin Builder</h3>
+          <p>As an experienced WordPress Developer, I build custom WordPress themes and sites tailored to each business. From responsive web design with Elementor to fully custom PHP solutions, every project is crafted with a mobile-first approach that ensures seamless performance across all devices.</p>
+          <p>My WordPress plugin development work includes SiteStaffr — an AI-powered voice agent that transforms how businesses capture leads on their websites. I handle the full spectrum: custom builds, performance optimization, SEO integration, and third-party plugin management.</p>
+          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more, I bring deep expertise in turning business goals into high-performing digital experiences.</p>
+          <div class="feat__pills">
+            <span class="pill">WordPress</span>
+            <span class="pill">Elementor</span>
+            <span class="pill">PHP</span>
+            <span class="pill">Custom Themes</span>
+          </div>
+          <span class="feat__cta">Need a WordPress site? &rarr;</span>
+        </a>
+
+        <a href="mailto:miralles.mario@gmail.com" class="feat">
+          <h3 class="feat__title">Claude Code Engineer</h3>
+          <p>I leverage Claude Code as my AI-powered engineering partner to accelerate fullstack development without sacrificing quality. This AI-powered development approach lets me architect, build, and ship products faster — from WordPress plugins to complex automation systems.</p>
+          <p>As a Claude Code Engineer, I use AI coding tools to handle everything from scaffolding new projects to debugging complex integrations. The result is faster delivery, cleaner code, and more time spent on what matters: solving real problems for real businesses.</p>
+          <p>My AI-powered workflow extends beyond Claude Code. I've built automated content pipelines with OpenAI, integrated AI voice agents with SiteStaffr, and use AI tools daily to push the boundaries of what a solo developer can accomplish.</p>
+          <div class="feat__pills">
+            <span class="pill">Claude Code</span>
+            <span class="pill">AI Development</span>
+            <span class="pill">Automation</span>
+          </div>
+          <span class="feat__cta">Let's build something with AI &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Skills -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <h2 class="section__label reveal">Stack</h2>
+      <div class="skills__grid reveal reveal-stagger">
+        <div>
+          <p class="skills__group-title">Frontend</p>
+          <div class="skills__tags">
+            <span class="pill">React</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">HTML / CSS</span>
+            <span class="pill">Sass</span>
+            <span class="pill">Chakra UI</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills__group-title">Backend</p>
+          <div class="skills__tags">
+            <span class="pill">Node.js</span>
+            <span class="pill">PHP</span>
+            <span class="pill">Express</span>
+            <span class="pill">MySQL</span>
+            <span class="pill">Firebase</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills__group-title">WordPress</p>
+          <div class="skills__tags">
+            <span class="pill">Custom Themes</span>
+            <span class="pill">Elementor</span>
+            <span class="pill">Plugin Development</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills__group-title">AI &amp; Automation</p>
+          <div class="skills__tags">
+            <span class="pill">Claude Code</span>
+            <span class="pill">OpenAI</span>
+            <span class="pill">AWS Lambda</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills__group-title">Tools</p>
+          <div class="skills__tags">
+            <span class="pill">Git</span>
+            <span class="pill">JIRA</span>
+            <span class="pill">Figma</span>
+            <span class="pill">Basecamp</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GitHub Graph -->
+  <div class="github-section">
+    <p class="github-section__label reveal">GitHub Activity</p>
+    <div class="github-graph reveal" id="githubGraph"></div>
+  </div>
+
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="wrap reveal">
+      <h2 class="contact__heading">Let's Build<br>Something Together</h2>
+      <p class="contact__text">Need a custom WordPress site, a plugin that solves a real problem, or a developer who ships fast with AI-powered tools? I'd love to hear about your project.</p>
+      <a href="mailto:miralles.mario@gmail.com" class="contact__btn">Get in Touch &rarr;</a>
+      <div class="contact__socials">
+        <a href="https://www.linkedin.com/in/mariofmiralles" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/mariomiralles" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span>Mario Miralles &middot; 2026</span>
+      <a href="mailto:miralles.mario@gmail.com" class="footer__link">miralles.mario@gmail.com</a>
+      <span>Built with Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ── FLOW FIELD BACKGROUND ── */
+    (function() {
+      var canvas = document.getElementById('flowCanvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var w, h;
+      var scale = 20;
+      var particles = [];
+      var particleCount = 180;
+      var trailLength = 24;
+      var noiseZ = 0;
+      var scrollInfluence = 0;
+      var mouseX = -9999, mouseY = -9999;
+      var mouseRadius = 180;
+
+      function noise3d(x, y, z) {
+        var v = Math.sin(x * 1.2 + z * 0.3) * Math.cos(y * 0.9 + z * 0.7)
+              + Math.sin(x * 0.7 - y * 1.1 + z * 0.5) * 0.5
+              + Math.cos(x * 2.1 + y * 0.4 + z * 0.2) * 0.3
+              + Math.sin(y * 1.8 - x * 0.6 + z * 0.9) * 0.4;
+        return v / 2.2;
+      }
+
+      function resize() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
+
+      function spawnParticle() {
+        var x = Math.random() * w;
+        var y = Math.random() * h;
+        return {
+          x: x, y: y,
+          trail: [{x: x, y: y}],
+          speed: 0.3 + Math.random() * 0.9,
+          life: 0,
+          maxLife: 140 + Math.random() * 180,
+          hue: 140 + Math.random() * 30,
+          lightness: 30 + Math.random() * 15
+        };
+      }
+
+      function initParticles() {
+        particles = [];
+        for (var i = 0; i < particleCount; i++) {
+          var p = spawnParticle();
+          p.life = Math.random() * p.maxLife * 0.5;
+          particles.push(p);
+        }
+      }
+
+      resize();
+      initParticles();
+
+      window.addEventListener('resize', function() { resize(); initParticles(); });
+
+      window.addEventListener('scroll', function() {
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        scrollInfluence = maxScroll > 0 ? (window.scrollY / maxScroll) * Math.PI * 2 : 0;
+      }, { passive: true });
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      document.addEventListener('mouseleave', function() {
+        mouseX = -9999;
+        mouseY = -9999;
+      });
+
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        noiseZ += 0.0018;
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          var nx = p.x / scale * 0.04;
+          var ny = p.y / scale * 0.04;
+          var angle = noise3d(nx, ny, noiseZ) * Math.PI * 4 + scrollInfluence;
+
+          var moveX = Math.cos(angle) * p.speed;
+          var moveY = Math.sin(angle) * p.speed;
+
+          var dx = p.x - mouseX;
+          var dy = p.y - mouseY;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseRadius && dist > 0) {
+            var force = (1 - dist / mouseRadius) * 3;
+            moveX += (dx / dist) * force;
+            moveY += (dy / dist) * force;
+          }
+
+          p.x += moveX;
+          p.y += moveY;
+          p.life++;
+
+          p.trail.push({x: p.x, y: p.y});
+          if (p.trail.length > trailLength) p.trail.shift();
+
+          var lifeFrac = p.life / p.maxLife;
+          var fadeIn = Math.min(lifeFrac * 6, 1);
+          var fadeOut = lifeFrac > 0.7 ? 1 - (lifeFrac - 0.7) / 0.3 : 1;
+          var baseAlpha = fadeIn * fadeOut * 0.5;
+
+          if (baseAlpha > 0.01 && p.trail.length > 1) {
+            for (var t = 1; t < p.trail.length; t++) {
+              var segAlpha = baseAlpha * (t / p.trail.length);
+              if (segAlpha < 0.003) continue;
+              ctx.beginPath();
+              ctx.moveTo(p.trail[t - 1].x, p.trail[t - 1].y);
+              ctx.lineTo(p.trail[t].x, p.trail[t].y);
+              ctx.strokeStyle = 'hsla(' + p.hue + ', 40%, ' + p.lightness + '%, ' + segAlpha + ')';
+              ctx.lineWidth = 1.2;
+              ctx.stroke();
+            }
+          }
+
+          if (p.x < -20 || p.x > w + 20 || p.y < -20 || p.y > h + 20 || p.life >= p.maxLife) {
+            particles[i] = spawnParticle();
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+    /* ── HAMBURGER ── */
+    (function() {
+      var hamburger = document.getElementById('navHamburger');
+      var navLinks = document.getElementById('navLinks');
+      hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+      });
+      navLinks.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('open');
+        });
+      });
+    })();
+
+    /* ── SCROLL REVEAL ── */
+    (function() {
+      var reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+
+
+    /* ── INDUSTRY FILTER ── */
+    (function() {
+      var filters = document.querySelectorAll('.filter-btn');
+      var cards = document.querySelectorAll('.ind-card');
+      filters.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var val = this.getAttribute('data-filter');
+          filters.forEach(function(f) { f.classList.remove('active'); });
+          this.classList.add('active');
+          cards.forEach(function(card) {
+            card.style.display = (val === 'all' || card.getAttribute('data-industry') === val) ? '' : 'none';
+          });
+        });
+      });
+    })();
+
+    /* ── GITHUB GRAPH ── */
+    (function() {
+      var graph = document.getElementById('githubGraph');
+      var tooltip = document.getElementById('githubTooltip');
+      if (!graph) return;
+
+      function getLevel(count) {
+        if (count === 0) return 0;
+        if (count <= 5) return 1;
+        if (count <= 15) return 2;
+        if (count <= 30) return 3;
+        return 4;
+      }
+
+      var startDate = new Date('2025-11-17');
+      var startDay = startDate.getDay();
+      if (startDay !== 0) startDate.setDate(startDate.getDate() - startDay);
+
+      var today = new Date();
+      var totalWeeks = Math.ceil((today - startDate) / (7 * 86400000));
+      if (totalWeeks < 1) totalWeeks = 1;
+
+      graph.style.gridTemplateColumns = 'repeat(' + totalWeeks + ', 1fr)';
+
+      function buildCells(contributions) {
+        graph.innerHTML = '';
+        graph.style.gridTemplateColumns = 'repeat(' + totalWeeks + ', 1fr)';
+        for (var col = 0; col < totalWeeks; col++) {
+          for (var row = 0; row < 7; row++) {
+            var cellDate = new Date(startDate);
+            cellDate.setDate(cellDate.getDate() + col * 7 + row);
+            if (cellDate > today) {
+              var empty = document.createElement('div');
+              empty.className = 'github-graph__cell';
+              graph.appendChild(empty);
+              continue;
+            }
+            var dateStr = cellDate.toISOString().split('T')[0];
+            var count = contributions[dateStr] || 0;
+            var level = getLevel(count);
+            var cell = document.createElement('div');
+            cell.className = 'github-graph__cell';
+            if (level > 0) cell.setAttribute('data-level', level);
+            cell.setAttribute('data-date', dateStr);
+            cell.setAttribute('data-count', count);
+            graph.appendChild(cell);
+          }
+        }
+      }
+
+      fetch('https://github-contributions-api.jogruber.de/v4/mariomiralles?y=last')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var contributions = {};
+          if (data.contributions) {
+            data.contributions.forEach(function(day) { contributions[day.date] = day.count; });
+          }
+          buildCells(contributions);
+        })
+        .catch(function() {
+          var fallback = {};
+          for (var col = 0; col < totalWeeks; col++) {
+            for (var row = 0; row < 7; row++) {
+              var d = new Date(startDate);
+              d.setDate(d.getDate() + col * 7 + row);
+              if (d > today) continue;
+              var rand = Math.random();
+              fallback[d.toISOString().split('T')[0]] = rand > 0.4 ? Math.ceil(rand * 12) : 0;
+            }
+          }
+          buildCells(fallback);
+        });
+
+      graph.addEventListener('mousemove', function(e) {
+        var cell = e.target;
+        if (!cell.classList.contains('github-graph__cell') || !cell.getAttribute('data-date')) {
+          tooltip.classList.remove('show');
+          return;
+        }
+        var count = cell.getAttribute('data-count') || '0';
+        var date = cell.getAttribute('data-date') || '';
+        var dateObj = new Date(date + 'T12:00:00');
+        var formatted = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        tooltip.textContent = count + ' contribution' + (count === '1' ? '' : 's') + ' on ' + formatted;
+        tooltip.classList.add('show');
+        var left = e.clientX + 12;
+        var top = e.clientY - tooltip.offsetHeight - 8;
+        if (left + tooltip.offsetWidth > window.innerWidth - 8) left = e.clientX - tooltip.offsetWidth - 12;
+        if (top < 8) top = e.clientY + 16;
+        tooltip.style.left = left + 'px';
+        tooltip.style.top = top + 'px';
+      });
+
+      graph.addEventListener('mouseleave', function() { tooltip.classList.remove('show'); });
+    })();
+  </script>
+</body>
+</html>
