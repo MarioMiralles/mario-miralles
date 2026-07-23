@@ -544,9 +544,29 @@
       background: rgba(20, 26, 23, 0.55);
       backdrop-filter: blur(16px) saturate(1.1);
       -webkit-backdrop-filter: blur(16px) saturate(1.1);
-      align-items: start;
+      align-items: stretch;
       color: inherit;
       transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
+    }
+
+    /* Non-compact cards: image fills exactly as much height as the text
+       column ends up needing, instead of a fixed aspect ratio. Absolutely
+       positioning the image keeps its own intrinsic size from feeding back
+       into the grid row's auto height -- a plain height:100% doesn't
+       resolve until the row height is already decided, so without this the
+       image reverts to its native aspect ratio and inflates the row. */
+    .proj:not(.proj--compact) > div:first-child {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .proj:not(.proj--compact) .proj__img {
+      position: absolute;
+      inset: 0;
+      aspect-ratio: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .proj:hover {
@@ -1236,7 +1256,7 @@
 
         <div class="proj reveal">
           <div>
-            <img src="assets/screenshots/ea-system-life.png" alt="Personal AI orchestration platform — Life dashboard" class="proj__img" loading="lazy" style="aspect-ratio: 960 / 2080;">
+            <img src="assets/screenshots/ea-system-life.png" alt="Personal AI orchestration platform — Life dashboard" class="proj__img" loading="lazy">
           </div>
           <div>
             <p class="proj__tag">Personal Project &bull; AI Infrastructure</p>
