@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mario Miralles | Web Engineer</title>
-  <meta name="description" content="Mario Miralles — Web Engineer, WordPress Developer, and Claude Code Engineer. 100+ websites built.">
+  <title>Mario Miralles | Full-Stack Engineer</title>
+  <meta name="description" content="Mario Miralles — Full-stack engineer building AI-native products (voice, RAG, automation) and WordPress systems at scale. 100+ websites built.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -901,6 +901,7 @@
       .skills__grid > div:nth-child(3) { top: 80px; }
       .skills__grid > div:nth-child(4) { top: 92px; }
       .skills__grid > div:nth-child(5) { top: 104px; }
+      .skills__grid > div:nth-child(6) { top: 116px; }
     }
 
     /* ── GITHUB GRAPH ── */
@@ -1167,9 +1168,9 @@
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <p class="hero__label">Web Engineer &bull; WordPress Developer &bull; Claude Code Engineer</p>
+    <p class="hero__label">Full-Stack Engineer &bull; AI-Native Systems &bull; WordPress at Scale</p>
     <h1 class="hero__title">Mario Miralles</h1>
-    <p class="hero__subtitle">Web Engineer, WordPress Developer, and Claude Code Engineer based in South Florida. Over 100 websites built across 34+ industries with clean code and modern design.</p>
+    <p class="hero__subtitle">Full-stack engineer based in South Florida building AI-native products and infrastructure — voice/RAG systems, backend services on Google Cloud, and automation platforms — on top of a foundation of 100+ production websites across 34+ industries.</p>
     <div class="hero__stats">
       <div class="hero__stat">
         <div class="hero__stat-num">100+</div>
@@ -1194,20 +1195,61 @@
             <img src="assets/screenshots/sitestaffr.com.jpg" alt="SiteStaffr" class="proj__img" loading="lazy">
           </div>
           <div>
-            <p class="proj__tag">WordPress Plugin &bull; SaaS</p>
+            <p class="proj__tag">Founder &amp; Full-Stack Engineer &bull; AI SaaS</p>
             <h3 class="proj__name">SiteStaffr</h3>
-            <p class="proj__desc"><strong>The problem:</strong> Businesses lose website visitors who have questions but can't get immediate answers.</p>
-            <p class="proj__desc"><strong>What I built:</strong> A WordPress plugin that places an AI voice agent on any website, letting visitors speak naturally to get help and leave their contact details 24/7.</p>
-            <p class="proj__desc"><strong>The result:</strong> Automated lead capture with multilingual support across 57+ languages, turning passive visitors into qualified leads.</p>
+            <p class="proj__desc"><strong>What it is:</strong> An AI voice and text receptionist for WordPress sites — visitors speak or type naturally and get real answers, 24/7, in 57+ languages.</p>
+            <p class="proj__desc"><strong>What I built:</strong> A two-service architecture — a WordPress plugin talking to a Node/Express middleware on Google Cloud Run, which is the sole boundary to OpenAI's Realtime API (WebRTC voice) and a text chat path. Built a RAG pipeline from scratch — recursive chunking with a tuned overlap, hybrid cosine-similarity + keyword search — so answers are grounded in each site's own content. Stripe billing with a clear commercial-truth hierarchy, HMAC-signed service auth, and circuit breakers around the AI calls.</p>
+            <p class="proj__desc"><strong>Process:</strong> GitHub Actions CI with nightly Playwright smoke tests against live staging, 50+ test files across both repos. I ran a self-initiated HIPAA/PHI audit on the system, found real gaps, and shipped remediation before any healthcare client went live on it. I also built my own multi-agent orchestration tooling — isolated git worktrees per agent, a Kanban task board, human-gated review — to help build and ship the product itself.</p>
             <div class="proj__pills">
-              <span class="pill">WordPress Plugin</span>
-              <span class="pill">AI Voice Agent</span>
-              <span class="pill">PHP</span>
-              <span class="pill">JavaScript</span>
+              <span class="pill">Node.js / Express</span>
+              <span class="pill">Google Cloud Run</span>
+              <span class="pill">OpenAI Realtime API</span>
+              <span class="pill">RAG / Vector Search</span>
+              <span class="pill">Stripe</span>
+              <span class="pill">GitHub Actions CI</span>
             </div>
             <span class="proj__link">View Project &rarr;</span>
           </div>
         </a>
+
+        <div class="proj proj--reverse reveal">
+          <div>
+            <img src="assets/screenshots/urohard.com.jpg" alt="UroHard" class="proj__img" loading="lazy">
+          </div>
+          <div>
+            <p class="proj__tag">Digital Services Director &bull; Owned Engagement</p>
+            <h3 class="proj__name">UroHard</h3>
+            <p class="proj__desc"><strong>What it is:</strong> An ongoing digital-growth engagement I run under my own LLC — I scoped it, priced it, and I'm the one accountable for the results, not just the person executing tickets.</p>
+            <p class="proj__desc"><strong>What I built:</strong> A full performance overhaul (PageSpeed 30 &rarr; 79, Largest Contentful Paint down from 33.2s to 6.5s) including a lazy-loaded booking calendar built with the Intersection Observer API that cut ~400KB off the initial page load. Hand-built JSON-LD structured data for medical/physician schema, and a full accessibility + SEO audit with concrete fixes. Also led several vendor migrations — Cal.com to GoHighLevel, a CRM migration to Zoho, Twilio SMS/A2P compliance.</p>
+            <p class="proj__desc"><strong>Ownership:</strong> I hold the client contract, authored the growth proposal, and deliver monthly executive reporting directly — this is agency-owner-level ownership of scope and vendor decisions, not execution against someone else's spec.</p>
+            <div class="proj__pills">
+              <span class="pill">Performance Engineering</span>
+              <span class="pill">Structured Data / SEO</span>
+              <span class="pill">Systems Integration</span>
+              <span class="pill">Client Ownership</span>
+            </div>
+            <span class="proj__link">View Project &rarr;</span>
+          </div>
+        </div>
+
+        <div class="proj reveal">
+          <div>
+            <img src="assets/screenshots/ea-system-diagram.svg" alt="Personal AI orchestration platform architecture" class="proj__img" loading="lazy" style="object-fit:contain;background:var(--bg-elevated);padding:1.5rem;">
+          </div>
+          <div>
+            <p class="proj__tag">Personal Project &bull; AI Infrastructure</p>
+            <h3 class="proj__name">Personal AI Orchestration Platform</h3>
+            <p class="proj__desc"><strong>What it is:</strong> A self-hosted personal productivity system, built from scratch as a real testbed for treating LLMs as infrastructure rather than just a coding assistant.</p>
+            <p class="proj__desc"><strong>What I built:</strong> A hand-rolled Python HTTP server (not a framework wrapper) with ~20 REST routes, input validation, and TLS handling engineered around real production failure modes I hit and fixed. Systemd-scheduled automation runs headless AI agents on a timer, with cost-aware model selection and graceful degradation when a budget cap is hit. On top of that, a structured multi-agent orchestration layer — agents run in parallel with typed, schema-validated outputs and get composed into pipelines, not just chained prompts.</p>
+            <p class="proj__desc"><strong>Why it matters:</strong> No test suite, single-user by design — it's honestly a solo project, not production-hardened software. But it's the clearest evidence I have of backend systems engineering and LLM-infrastructure design done end-to-end, alone, with real documented bug fixes along the way.</p>
+            <div class="proj__pills">
+              <span class="pill">Python</span>
+              <span class="pill">REST APIs</span>
+              <span class="pill">Multi-Agent Orchestration</span>
+              <span class="pill">systemd Automation</span>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -1217,13 +1259,14 @@
             <img src="assets/screenshots/loriamedical.com.jpg" alt="Loria Medical" class="proj__img" loading="lazy">
           </div>
           <div>
-            <p class="proj__tag">Healthcare</p>
+            <p class="proj__tag">Healthcare &bull; Long-Term Engagement</p>
             <h3 class="proj__name">Loria Medical</h3>
-            <p class="proj__desc">A custom WordPress site with SEO optimization and procedure-focused service pages for a leading medical practice in Miami, converting organic traffic into booked consultations.</p>
+            <p class="proj__desc">I handle essentially all web development for this multi-site medical practice network — beyond the public marketing site (SEO-optimized, procedure-focused, converting organic traffic into booked consultations), I've built a custom e-commerce system, private patient and physician portals, and internal resource libraries, all with the data-handling care healthcare work requires.</p>
             <div class="proj__pills">
               <span class="pill">WordPress</span>
               <span class="pill">Healthcare</span>
-              <span class="pill">SEO</span>
+              <span class="pill">Custom Portals</span>
+              <span class="pill">E-Commerce</span>
             </div>
             <span class="proj__link">View Project &rarr;</span>
           </div>
@@ -1343,15 +1386,15 @@
             <img src="assets/headshot.jpg" alt="Mario Miralles" class="about__avatar" loading="lazy">
           </div>
           <div class="about__text">
-            <p>I'm a Web Engineer and WordPress Developer based in South Florida with over 100 websites built across industries including healthcare, legal, home services, and tech. After earning my BrainStation Software Engineering diploma, I combined my technical skills with a passion for design to help businesses establish powerful digital presences.</p>
-            <p>I specialize in WordPress development, custom plugin building, and AI-powered development using Claude Code. Whether it's a client site, a SaaS product, or an automated content platform, I bring ideas to life with clean code and modern design.</p>
+            <p>I'm a full-stack engineer based in South Florida. My foundation is 100+ production websites built across healthcare, legal, home services, and tech — but my current work is building AI-native products: voice and RAG systems, backend services on Google Cloud, and automation platforms, using Claude Code as a core part of how I build.</p>
+            <p>I founded and run <a href="https://sitestaffr.com" target="_blank" rel="noopener">SiteStaffr</a>, an AI voice/text receptionist SaaS, end-to-end — architecture, billing, security, and CI. I also run a digital-growth engagement for a healthcare client under my own LLC, owning scope and vendor decisions, not just execution.</p>
             <p>Bilingual in English and Spanish, I work with diverse teams and clients to deliver results that drive real business growth.</p>
             <div class="about__pills reveal-stagger">
+              <span class="pill">Full-Stack Engineer</span>
+              <span class="pill">AI Infrastructure</span>
               <span class="pill">100+ Sites Built</span>
-              <span class="pill">WordPress Expert</span>
-              <span class="pill">Claude Code Engineer</span>
               <span class="pill">Bilingual EN/ES</span>
-              <span class="pill">AI-Powered Development</span>
+              <span class="pill">Claude Code</span>
             </div>
           </div>
       <div class="about__photo-wrap">
@@ -1362,10 +1405,22 @@
 
       <div class="features__grid reveal" id="expertise" style="margin-top: 2.5rem;">
         <a href="mailto:miralles.mario@gmail.com" class="feat">
+          <h3 class="feat__title">Full-Stack &amp; AI Infrastructure</h3>
+          <p>I build backend services and AI systems, not just interfaces: Node/Express APIs on Google Cloud Run, RAG pipelines built from scratch, OpenAI's Realtime voice API, Stripe billing, and multi-agent orchestration with schema-validated, typed outputs — the kind of engineering that sits behind an AI product, not just calling an API from the frontend.</p>
+          <p>I hold myself to real process discipline: GitHub Actions CI with automated smoke tests, and a self-initiated security audit on SiteStaffr that found and fixed real gaps before a healthcare client went live on it.</p>
+          <div class="feat__pills">
+            <span class="pill">Node.js</span>
+            <span class="pill">Google Cloud Run</span>
+            <span class="pill">RAG / Vector Search</span>
+            <span class="pill">Multi-Agent Systems</span>
+          </div>
+          <span class="feat__cta">Building something AI-native? &rarr;</span>
+        </a>
+
+        <a href="mailto:miralles.mario@gmail.com" class="feat">
           <h3 class="feat__title">WordPress Developer &amp; Plugin Builder</h3>
-          <p>As an experienced WordPress Developer, I build custom WordPress themes and sites tailored to each business. From responsive web design with Elementor to fully custom PHP solutions, every project is crafted with a mobile-first approach that ensures seamless performance across all devices.</p>
-          <p>My WordPress plugin development work includes SiteStaffr — an AI-powered voice agent that transforms how businesses capture leads on their websites. I handle the full spectrum: custom builds, performance optimization, SEO integration, and third-party plugin management.</p>
-          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more, I bring deep expertise in turning business goals into high-performing digital experiences.</p>
+          <p>As an experienced WordPress Developer, I build custom WordPress themes, plugins, and sites tailored to each business — from responsive design with Elementor to fully custom PHP solutions, every project crafted mobile-first.</p>
+          <p>With over 100 WordPress sites built across healthcare, legal, home services, and more — plus shipped plugin work like SiteStaffr — I bring deep expertise in turning business goals into high-performing digital experiences. I use Claude Code as a core part of how I build, letting me ship faster without cutting corners.</p>
           <div class="feat__pills">
             <span class="pill">WordPress</span>
             <span class="pill">Elementor</span>
@@ -1373,19 +1428,6 @@
             <span class="pill">Custom Themes</span>
           </div>
           <span class="feat__cta">Need a WordPress site? &rarr;</span>
-        </a>
-
-        <a href="mailto:miralles.mario@gmail.com" class="feat">
-          <h3 class="feat__title">Claude Code Engineer</h3>
-          <p>I leverage Claude Code as my AI-powered engineering partner to accelerate fullstack development without sacrificing quality. This AI-powered development approach lets me architect, build, and ship products faster — from WordPress plugins to complex automation systems.</p>
-          <p>As a Claude Code Engineer, I use AI coding tools to handle everything from scaffolding new projects to debugging complex integrations. The result is faster delivery, cleaner code, and more time spent on what matters: solving real problems for real businesses.</p>
-          <p>My AI-powered workflow extends beyond Claude Code. I've built automated content pipelines with OpenAI, integrated AI voice agents with SiteStaffr, and use AI tools daily to push the boundaries of what a solo developer can accomplish.</p>
-          <div class="feat__pills">
-            <span class="pill">Claude Code</span>
-            <span class="pill">AI Development</span>
-            <span class="pill">Automation</span>
-          </div>
-          <span class="feat__cta">Let's build something with AI &rarr;</span>
         </a>
       </div>
     </div>
@@ -1411,9 +1453,11 @@
           <p class="skills__group-title">Backend</p>
           <div class="skills__tags">
             <span class="pill">Node.js</span>
+            <span class="pill">Python</span>
             <span class="pill">PHP</span>
             <span class="pill">Express</span>
             <span class="pill">MySQL</span>
+            <span class="pill">SQLite</span>
             <span class="pill">Firebase</span>
           </div>
         </div>
@@ -1423,14 +1467,29 @@
             <span class="pill">Custom Themes</span>
             <span class="pill">Elementor</span>
             <span class="pill">Plugin Development</span>
+            <span class="pill">WooCommerce</span>
+            <span class="pill">WP-CLI</span>
           </div>
         </div>
         <div>
           <p class="skills__group-title">AI &amp; Automation</p>
           <div class="skills__tags">
             <span class="pill">Claude Code</span>
-            <span class="pill">OpenAI</span>
+            <span class="pill">OpenAI Realtime API</span>
+            <span class="pill">RAG / Vector Search</span>
+            <span class="pill">Multi-Agent Orchestration</span>
+            <span class="pill">Prompt Engineering</span>
+          </div>
+        </div>
+        <div>
+          <p class="skills__group-title">Platform &amp; DevOps</p>
+          <div class="skills__tags">
+            <span class="pill">Google Cloud Run</span>
             <span class="pill">AWS Lambda</span>
+            <span class="pill">Stripe</span>
+            <span class="pill">GitHub Actions CI</span>
+            <span class="pill">Playwright</span>
+            <span class="pill">Cloudflare</span>
           </div>
         </div>
         <div>
