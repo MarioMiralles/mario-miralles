@@ -19,12 +19,14 @@ Founder of [SiteStaffr](https://sitestaffr.com), an AI voice/text receptionist S
 
 | Area | Technologies |
 |------|-------------|
-| **Frontend** | React, JavaScript, HTML5, CSS3, Sass, Chakra UI |
-| **Backend** | Node.js, Python, PHP, Express, MySQL, SQLite, Firebase |
-| **WordPress** | Custom Themes, Elementor, Plugin Development, WooCommerce, WP-CLI |
-| **AI & Automation** | Claude Code, OpenAI Realtime API, RAG / Vector Search, Multi-Agent Orchestration |
-| **Platform & DevOps** | Google Cloud Run, AWS Lambda, Stripe, GitHub Actions CI, Playwright, Cloudflare |
-| **Tools** | Git, GitHub, JIRA, Figma, Basecamp |
+| **Frontend** | React, Next.js, JavaScript, HTML5, CSS3, Sass, DOM APIs, Responsive Design |
+| **Backend** | Node.js, Python, PHP, Express, MySQL, SQLite, Firebase / Firestore |
+| **WordPress** | Custom Themes, Elementor, Plugin Development, WooCommerce, WP-CLI, ACF, JetEngine, Rank Math, Wordfence |
+| **AI & Automation** | Claude Code, OpenAI API, OpenAI Realtime API, RAG / Vector Search, Embeddings, AI Agents, Multi-Agent Orchestration, Prompt Engineering |
+| **Platform & DevOps** | Google Cloud Run, AWS S3 / Lambda, Docker, Stripe, GitHub Actions CI, Playwright, Cloudflare, HMAC Auth |
+| **SEO & Performance** | SEO, Page Speed Optimization, Schema Markup / JSON-LD, Lighthouse / PSI, Google Analytics / GTM |
+| **Integrations & CRM** | SendGrid, Salesforce, GoHighLevel, Cal.com, Twilio (SMS/A2P), Zoho Flow / Bigin |
+| **Tools** | Git, GitHub, JIRA, Figma, Basecamp, Canva |
 
 ---
 
