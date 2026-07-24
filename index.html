@@ -668,6 +668,9 @@
     .proj-more[open] summary { margin-bottom: 0.9rem; }
     .proj-more-body > .proj__desc:last-child { margin-bottom: 0; }
 
+    .proj__links-row { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.25rem; }
+    .proj__links-row .proj__link { margin-top: 0; }
+
     .projects__pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1323,6 +1326,36 @@
               <span class="pill">REST APIs</span>
               <span class="pill">Multi-Agent Orchestration</span>
               <span class="pill">systemd Automation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj proj--reverse reveal">
+          <div>
+            <img src="assets/screenshots/otdnews.jpg" alt="OTDNews" class="proj__img" loading="lazy">
+          </div>
+          <div>
+            <p class="proj__tag">Solo Project &bull; Discontinued 2025</p>
+            <h3 class="proj__name">OTDNews</h3>
+            <p class="proj__desc"><strong>What it is:</strong> An automated AI news platform I built and ran solo for two and a half years — it turned Wikipedia's Current Events feed into a fully AI-written, AI-illustrated news site with zero manual publishing.</p>
+            <details class="proj-more">
+              <summary>More detail</summary>
+              <div class="proj-more-body">
+                <p class="proj__desc"><strong>What I built:</strong> AWS Lambda automation scraping Wikipedia's Current Events portal, enriched via the Brave Search API, then OpenAI-generated titles, content, and categories. Replicate's Flux model generated featured art for every story, with NSFW-detection and automatic retry logic. Everything auto-published to WordPress, archived across Google Sheets, Drive, and S3, and cross-posted to X with Cloudinary-generated social overlays — on a 4-window daily schedule (hourly, plus dedicated morning/evening/midnight passes) with Jaccard-similarity deduplication so the same story never posted twice.</p>
+                <p class="proj__desc"><strong>Why it matters:</strong> Discontinued in late 2025 after ~2.5 years, but it's the clearest evidence I have of designing and running a fully automated, event-driven pipeline solo end to end — including the parts that don't show up in a demo: vendor evaluation, rate limits, retries, and content deduplication.</p>
+              </div>
+            </details>
+            <div class="proj__pills">
+              <span class="pill">AWS Lambda</span>
+              <span class="pill">OpenAI</span>
+              <span class="pill">Replicate</span>
+              <span class="pill">WordPress Publishing</span>
+              <span class="pill">Automation Pipeline</span>
+            </div>
+            <div class="proj__links-row">
+              <a href="https://www.instagram.com/otdnews_official" target="_blank" rel="noopener" class="proj__link">Instagram</a>
+              <a href="https://x.com/onthedai_news" target="_blank" rel="noopener" class="proj__link">X</a>
+              <a href="https://web.archive.org/web/20250301004501/https://onthedai.com/" target="_blank" rel="noopener" class="proj__link">Archived Site &rarr;</a>
             </div>
           </div>
         </div>
