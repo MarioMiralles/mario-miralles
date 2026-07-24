@@ -637,6 +637,32 @@
 
     .proj__link:hover { gap: 0.65rem; letter-spacing: 0.1em; }
 
+    .proj-more { margin-top: 0.9rem; }
+    .proj-more summary {
+      cursor: pointer;
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--green);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: gap 0.3s, letter-spacing 0.3s;
+    }
+    .proj-more summary:hover { gap: 0.65rem; letter-spacing: 0.1em; }
+    .proj-more summary::-webkit-details-marker { display: none; }
+    .proj-more summary::before {
+      content: "+";
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+    .proj-more[open] summary::before { content: "\2212"; }
+    .proj-more[open] summary { margin-bottom: 0.9rem; }
+    .proj-more-body > .proj__desc:last-child { margin-bottom: 0; }
+
     .projects__pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1228,8 +1254,13 @@
             <p class="proj__tag">Founder &amp; Full-Stack Engineer &bull; AI SaaS</p>
             <h3 class="proj__name">SiteStaffr</h3>
             <p class="proj__desc"><strong>What it is:</strong> An AI voice and text receptionist for WordPress sites — visitors speak or type naturally and get real answers, 24/7, in 57+ languages.</p>
-            <p class="proj__desc"><strong>What I built:</strong> A two-service architecture — a WordPress plugin talking to a Node/Express middleware on Google Cloud Run, which is the sole boundary to OpenAI's Realtime API (WebRTC voice) and a text chat path. Built a RAG pipeline from scratch — recursive chunking with a tuned overlap, hybrid cosine-similarity + keyword search — so answers are grounded in each site's own content. Stripe billing with a clear commercial-truth hierarchy, HMAC-signed service auth, and circuit breakers around the AI calls.</p>
-            <p class="proj__desc"><strong>Process:</strong> GitHub Actions CI with nightly Playwright smoke tests against live staging, 50+ test files across both repos. I ran a self-initiated HIPAA/PHI audit on the system, found real gaps, and shipped remediation before any healthcare client went live on it. I also built my own multi-agent orchestration tooling — isolated git worktrees per agent, a Kanban task board, human-gated review — to help build and ship the product itself.</p>
+            <details class="proj-more">
+              <summary>More detail</summary>
+              <div class="proj-more-body">
+                <p class="proj__desc"><strong>What I built:</strong> A two-service architecture — a WordPress plugin talking to a Node/Express middleware on Google Cloud Run, which is the sole boundary to OpenAI's Realtime API (WebRTC voice) and a text chat path. Built a RAG pipeline from scratch — recursive chunking with a tuned overlap, hybrid cosine-similarity + keyword search — so answers are grounded in each site's own content. Stripe billing with a clear commercial-truth hierarchy, HMAC-signed service auth, and circuit breakers around the AI calls.</p>
+                <p class="proj__desc"><strong>Process:</strong> GitHub Actions CI with nightly Playwright smoke tests against live staging, 50+ test files across both repos. I ran a self-initiated HIPAA/PHI audit on the system, found real gaps, and shipped remediation before any healthcare client went live on it. I also built my own multi-agent orchestration tooling — isolated git worktrees per agent, a Kanban task board, human-gated review — to help build and ship the product itself.</p>
+              </div>
+            </details>
             <div class="proj__pills">
               <span class="pill">Node.js / Express</span>
               <span class="pill">Google Cloud Run</span>
@@ -1250,8 +1281,13 @@
             <p class="proj__tag">Healthcare &bull; Long-Term Engagement</p>
             <h3 class="proj__name">Loria Medical</h3>
             <p class="proj__desc"><strong>What it is:</strong> I handle essentially all web development for this multi-site medical practice network — not a one-off build, an ongoing relationship spanning the public marketing site and a set of private, authenticated systems behind it.</p>
-            <p class="proj__desc"><strong>What I built:</strong> Beyond the SEO-optimized, procedure-focused marketing site that converts organic traffic into booked consultations, I've built a custom e-commerce system, private patient and physician portals, and internal resource libraries — real authenticated systems handling sensitive data, not just brochure pages.</p>
-            <p class="proj__desc"><strong>Trust:</strong> Most of that work is intentionally kept out of public view — healthcare data handling means the details can't be shown here — which is exactly the kind of trust this client has placed in me as effectively their sole web developer over a long-standing engagement.</p>
+            <details class="proj-more">
+              <summary>More detail</summary>
+              <div class="proj-more-body">
+                <p class="proj__desc"><strong>What I built:</strong> Beyond the SEO-optimized, procedure-focused marketing site that converts organic traffic into booked consultations, I've built a custom e-commerce system, private patient and physician portals, and internal resource libraries — real authenticated systems handling sensitive data, not just brochure pages.</p>
+                <p class="proj__desc"><strong>Trust:</strong> Most of that work is intentionally kept out of public view — healthcare data handling means the details can't be shown here — which is exactly the kind of trust this client has placed in me as effectively their sole web developer over a long-standing engagement.</p>
+              </div>
+            </details>
             <div class="proj__pills">
               <span class="pill">WordPress</span>
               <span class="pill">Healthcare</span>
@@ -1270,8 +1306,13 @@
             <p class="proj__tag">Personal Project &bull; AI Infrastructure</p>
             <h3 class="proj__name">Personal AI Orchestration Platform</h3>
             <p class="proj__desc"><strong>What it is:</strong> A self-hosted personal productivity system, built from scratch as a real testbed for treating LLMs as infrastructure rather than just a coding assistant.</p>
-            <p class="proj__desc"><strong>What I built:</strong> A hand-rolled Python HTTP server (not a framework wrapper) with ~20 REST routes, input validation, and TLS handling engineered around real production failure modes I hit and fixed. Systemd-scheduled automation runs headless AI agents on a timer, with cost-aware model selection and graceful degradation when a budget cap is hit. On top of that, a structured multi-agent orchestration layer — agents run in parallel with typed, schema-validated outputs and get composed into pipelines, not just chained prompts.</p>
-            <p class="proj__desc"><strong>Why it matters:</strong> No test suite, single-user by design — it's honestly a solo project, not production-hardened software. But it's the clearest evidence I have of backend systems engineering and LLM-infrastructure design done end-to-end, alone, with real documented bug fixes along the way.</p>
+            <details class="proj-more">
+              <summary>More detail</summary>
+              <div class="proj-more-body">
+                <p class="proj__desc"><strong>What I built:</strong> A hand-rolled Python HTTP server (not a framework wrapper) with ~20 REST routes, input validation, and TLS handling engineered around real production failure modes I hit and fixed. Systemd-scheduled automation runs headless AI agents on a timer, with cost-aware model selection and graceful degradation when a budget cap is hit. On top of that, a structured multi-agent orchestration layer — agents run in parallel with typed, schema-validated outputs and get composed into pipelines, not just chained prompts.</p>
+                <p class="proj__desc"><strong>Why it matters:</strong> No test suite, single-user by design — it's honestly a solo project, not production-hardened software. But it's the clearest evidence I have of backend systems engineering and LLM-infrastructure design done end-to-end, alone, with real documented bug fixes along the way.</p>
+              </div>
+            </details>
             <div class="proj__pills">
               <span class="pill">Python</span>
               <span class="pill">REST APIs</span>
