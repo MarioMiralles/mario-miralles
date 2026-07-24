@@ -664,6 +664,14 @@
       .projects__pair {
         grid-template-columns: 1fr;
       }
+      /* Stacked layout: image and text are no longer in the same grid row,
+         so the "stretch to match text height" trick has nothing to stretch
+         to (the absolutely-positioned image contributes zero height on its
+         own, collapsing its row to nothing). Give it a normal aspect ratio
+         instead now that it's just a full-width block above the text. */
+      .proj:not(.proj--compact) > div:first-child {
+        aspect-ratio: 16 / 10;
+      }
     }
 
     /* ── INDUSTRY GRID ── */
